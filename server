@@ -1,0 +1,62 @@
+import socket, threading
+
+
+class ClientThread(threading.Thread):
+    def __init__(self, clientAddress, clientsocket):
+        threading.Thread.__init__(self)
+        self.csocket = clientsocket
+        print("New connection added: ", clientAddress)
+    def parshMSG(self,msg,URI):
+        item = msg.split('/')
+        URI.append(item[0])
+        URI.append(item[1])
+        parameter = None
+        if len(item) == 3:
+            URI.append(item[2].split('?'))
+        print(URI)
+
+    #워커
+    def run(self):
+        print("Connection from : ", clientAddress)
+        data = self.csocket.recv(2048)
+        msg = data.decode()
+        URI=[]
+        self.parshMSG(msg,URI)
+        if URI[0]=="POST":
+            if URI[1]=="voice":
+                self.csocket.send(bytes("you can speak to your pet", 'UTF-8'))
+            elif URI[1] == "feed":
+                if len(URI) is 3 and len(URI[2]) is 1:
+                    self.csocket.send(bytes("your pet get food from you", 'UTF-8'))
+                else:
+                    self.csocket.send(bytes("plz, send requst like POST/feed/kind=x", 'UTF-8'))
+            elif URI[1] == "door":
+                if len(URI) is 3 and len(URI[2]) is 2:
+                    self.csocket.send(bytes("your open/close door", 'UTF-8'))
+            else:
+                self.csocket.send(bytes("plz, send requst like POST/door/kind=x?speed=y", 'UTF-8'))
+
+        elif URI[0]=="GET":
+            print("get");
+        else:
+            self.csocket.send(bytes("Not Define Method", 'UTF-8'))
+
+            print("from client", msg)
+
+            self.csocket.send(bytes(msg, 'UTF-8'))
+        print("Client at ", clientAddress, " disconnected...")
+
+#main함수 내용
+LOCALHOST = "127.0.0.1"
+PORT = 8080
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind((LOCALHOST, PORT))
+print("Server started")
+print("Waiting for client request..")
+
+while True:
+    server.listen(1)
+    clientsock, clientAddress = server.accept()  #커넥션
+    newthread = ClientThread(clientAddress, clientsock) #새로운 스레드 생성
+    newthread.start()# 실행
