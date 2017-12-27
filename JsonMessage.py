@@ -1,8 +1,16 @@
+from compare import UsecaseList
 #
 # This module uses to Server module for managing json data.
 # Specially, This module manage json data that use to send or recieve kakao server.
 # ** Json data usually use HTTP Protocol's body part.
 #
+usecase = UsecaseList()
+usecase.setUsecae("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 50)
+usecase.setUsecae("feed", ["밥", "먹", "사료", "간식", "식사"], ["배식", "급여", "주다", "먹"], 50)
+usecase.setUsecae("open", ["문", "입구"], ["열", "오픈", "개방"], 100)
+usecase.setUsecae("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
+
+
 
 class MessageClass :
     # This member function initialize kakao's keyboard setting.
@@ -22,37 +30,42 @@ class MessageClass :
         # And this components will make String 'result'.
         # String;result is important component to devide int 'if - else' sentence.
 
-        result = message
+        result = usecase.analyzeSentence(message)
 
         ##########################################################################
+        print(result)
+        # Don't support command.
 
-        if result == 'feed':
-            sendMSG = '우리 애완용에게 먹이를 주고 있어요.'
+        sendMSG = '현재 지원되지 않는 기능이예요...'
+        if 'feed'in result:
+            sendMSG = "펫에게 먹이를 주고 있어요.\n"
 
             ##   Part1   ########################################################
             # Need to control RaspberryPi Sensor.                               #
             # This part need source code/module to control motor sensor.        #
             #####################################################################
 
-        elif result == 'water':
-            sendMSG = '우리 애완용에게 물을 주고 있어요.'
+        if 'water'in result:
+            sendMSG += "펫에게 물을 주고 있어요.\n"
 
             ##   Part2   ########################################################
             # Need to control RaspberryPi Sensor.                               #
             # This part need source code/module to control motor sensor.        #
             #####################################################################
 
-        elif result == 'door':
-            sendMSG = '우리 애완용 집 문을 열어줍니다 :)'
+        if 'open'in result:
+            sendMSG += "펫 하우스를 개방합니다.\n"
 
             ##   Part3   ########################################################
             # Need to control RaspberryPi Sensor.                               #
             # This part need source code/module to control motor sensor.        #
             #####################################################################
 
+
+
         ## This sentence is composed multimedia data;Photo.
         ## Therefore, this part only have return sentence.
-        elif result == 'camera':
+        if 'camera'in result:
             ##   Part4   ########################################################
             # Need to control PiCamera module.                                  #
             #####################################################################
@@ -69,9 +82,7 @@ class MessageClass :
             }
             return cameraMessage
 
-        # Don't support command.
-        else :
-            sendMSG = '현재 지원되지 않는 기능이예요...'
+
 
         # Parsing and reunit message return to Server module.
         postBodyMessage = {
@@ -83,6 +94,5 @@ class MessageClass :
                 }
             }
         return postBodyMessage
-
 
 
