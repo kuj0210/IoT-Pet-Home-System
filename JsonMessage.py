@@ -4,10 +4,15 @@ from compare import UsecaseList
 # Specially, This module manage json data that use to send or recieve kakao server.
 # ** Json data usually use HTTP Protocol's body part.
 #
+
+# 동사, 명사중 아무거나 만족 : 50
+# 명사 반드시 만족 : 60
+# 모두 만족: 100
+
 usecase = UsecaseList()
-usecase.setUsecae("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 50)
-usecase.setUsecae("feed", ["밥", "먹", "사료", "간식", "식사"], ["배식", "급여", "주다", "먹"], 50)
-usecase.setUsecae("open", ["문", "입구"], ["열", "오픈", "개방"], 100)
+usecase.setUsecae("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
+usecase.setUsecae("feed", ["밥", "먹", "사료", "간식", "식사"], ["배식", "급여", "주다", "먹"], 60)
+usecase.setUsecae("open", ["문", "입구"], ["열", "오픈", "개방"], 50)
 usecase.setUsecae("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
 
 
