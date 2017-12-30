@@ -1,3 +1,6 @@
+#-*-coding: utf-8-*-
+
+import requests, json
 from compare import UsecaseList
 #
 # This module uses to Server module for managing json data.
@@ -15,6 +18,12 @@ usecase.setUsecae("feed", ["밥", "먹", "사료", "간식", "식사"], ["배식
 usecase.setUsecae("open", ["문", "입구"], ["열", "오픈", "개방"], 50)
 usecase.setUsecae("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
 
+def postPiOperation(operation):
+    param = {'type':'test'}
+    url = 'http://localhost:8888/' + operation
+    header={'Content-Type': 'application/json; charset=utf-8'}
+    response = requests.post(url=url, headers = header, data=json.dumps(param))
+    return response
 
 
 class MessageClass :
@@ -43,61 +52,52 @@ class MessageClass :
 
         sendMSG = '현재 지원되지 않는 기능이예요...'
         if 'feed'in result:
-            sendMSG = "펫에게 먹이를 주고 있어요.\n"
+            response = postPiOperation("feed")
+            message = response.json()
+            sendMSG = message['message']['text']
 
-            ##   Part1   ########################################################
-            # Need to control RaspberryPi Sensor.                               #
-            # This part need source code/module to control motor sensor.        #
-            #####################################################################
 
         if 'water'in result:
-            sendMSG += "펫에게 물을 주고 있어요.\n"
-
-            ##   Part2   ########################################################
-            # Need to control RaspberryPi Sensor.                               #
-            # This part need source code/module to control motor sensor.        #
-            #####################################################################
+            response = postPiOperation("water")
+            message = response.json()
+            sendMSG = message['message']['text']
 
         if 'open'in result:
-            sendMSG += "펫 하우스를 개방합니다.\n"
-
-            ##   Part3   ########################################################
-            # Need to control RaspberryPi Sensor.                               #
-            # This part need source code/module to control motor sensor.        #
-            #####################################################################
-
+            response = postPiOperation("door")
+            message = response.json()
+            sendMSG = message['message']['text']
 
 
         ## This sentence is composed multimedia data;Photo.
         ## Therefore, this part only have return sentence.
         if 'camera'in result:
-            ##   Part4   ########################################################
-            # Need to control PiCamera module.                                  #
-            #####################################################################
-            cameraMessage = {
+            response = postPiOperation("camera")
+            message = response.json()
+            sendMSG = message['message']['text']
+            postBodyMessage = {
                 'message': {
-                    'text': '사진을 찍었어요!',
-                    'photo': '/photo/pet.png',
-                    'width': 640,
-                    'height': 480
+                    'text': sendMSG,
+                    'photo': {
+                        "url": "://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+                        'width': 640,
+                        'height': 640
+                    }
                 },
                 'keyboard': {
                     'type': 'text'
                 }
             }
-            return cameraMessage
+            return postBodyMessage
 
 
-
-        # Parsing and reunit message return to Server module.
-        postBodyMessage = {
-                'message': {
-                    'text': sendMSG
-                },
-                'keyboard': {
-                    'type': 'text'
+        else :
+            # Parsing and reunit message return to Server module.
+            postBodyMessage = {
+                    'message': {
+                        'text': sendMSG
+                    },
+                    'keyboard': {
+                        'type': 'text'
+                    }
                 }
-            }
-        return postBodyMessage
-
-
+            return postBodyMessage
