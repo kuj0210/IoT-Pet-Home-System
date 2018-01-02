@@ -27,7 +27,7 @@ def setWater():
     if flag["isWater"] == False:
         flag["isWater"] = True
         water = WaterOperation()
-        result = water.start()
+        result, flag["isWater"] = water.start()
         #with picamera.PiCamera() as camera:
         #    now = time.localtime()
         #    camera.start_preview()
@@ -36,8 +36,6 @@ def setWater():
         #    now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
         #    camera.capture(path)
         #    camera.stop_preview()
-
-        flag["isWater"] = False
 
         if result is "success" :
             return jsonify(message.getSuccessWaterMessage()), 200
