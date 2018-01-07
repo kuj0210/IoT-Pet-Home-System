@@ -12,7 +12,7 @@ class WaterOperation(threading.Thread):
         #self.p = GPIO.PWM(self.pin, 50)
 
     def run(self):
-        self.p.start(0)
+        #self.p.start(0)
         try:
             #self.p.ChangeDutyCycle(18)
             time.sleep(1)
@@ -22,7 +22,7 @@ class WaterOperation(threading.Thread):
             #time.sleep(4)
             #self.p.stop()
         except KeyboardInterrupt:
-            self.p.stop()
+            #self.p.stop()
             return "fail", False
 
         #GPIO.cleanup()

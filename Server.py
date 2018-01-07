@@ -3,10 +3,10 @@
 from flask import Flask,request,jsonify
 from JsonMessage import MessageClass
 
-
 ## json 타입들 초기화
 
 mMessage = MessageClass()
+
 app = Flask(__name__)
 ## Flask 키는 소스
 
@@ -20,8 +20,9 @@ def keyboard():
 def message():
     data = request.get_json()   ## 요청메세지로부터 json 데이터를 가져옴
                                 ## 게다가 딕셔너리 형태로 반환해줌
+    user_key = data['user_key']
     message = data['content']
-    return jsonify(mMessage.postTextMessage(message=message)),200
+    return jsonify(mMessage.postTextMessage(user_key,message)),200
 ## 메세지를 보냈을 때 처리
 
 @app.route("/friend",methods=["POST"])
@@ -39,6 +40,15 @@ def friendDelete(user_key):
 def chat_roomOut(user_key):
     return "HTTP/1.1 200 OK"
 ## 채팅방에서 나갔을 때
+
+@app.route("/pi_regist", methods=["POST"])
+def settingPi():
+    data = request.get_json()
+    PiKey = data["PiKey"]
+    userList = data["userList"]
+    url = data["url"]
+
+    return jsonify(mMessage.updatePiData(PiKey, userList, url)), 200
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug = True)

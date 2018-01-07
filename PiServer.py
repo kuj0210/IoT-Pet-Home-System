@@ -1,9 +1,14 @@
 from flask import Flask,jsonify
+from PiInitSetting import PiSetting
 from PiMessage import PiMessage
 from WaterOperation import WaterOperation
 #import picamera
 
 message = PiMessage()
+
+mPiSetting = PiSetting()
+mPiSetting.ReadConfigFile()
+resultByServer = mPiSetting.sendPiSettingData()
 
 flag = {
     "isWater": False,
@@ -11,9 +16,15 @@ flag = {
     "isDoor": False
 }
 
+feedOperationURL = "/" + mPiSetting.getPiKey() + "/feed"
+waterOperationURL = "/" + mPiSetting.getPiKey() + "/water"
+doorOperationURL = "/" + mPiSetting.getPiKey() + "/door"
+
+#cameraOperationURL = "/" + mPiSetting.getPiKey() + "/camera"
+
 app = Flask(__name__)
 
-@app.route("/feed",methods=["POST"])
+@app.route(feedOperationURL,methods=["POST"])
 def setFeed():
     #
     # It it requeired to input Threadig function.
@@ -22,7 +33,7 @@ def setFeed():
     #
     return jsonify(message.getSuccessFeedMessage()), 200
 
-@app.route("/water", methods=["POST"])
+@app.route(waterOperationURL, methods=["POST"])
 def setWater():
     if flag["isWater"] == False:
         flag["isWater"] = True
@@ -45,7 +56,7 @@ def setWater():
     else : # if flag["isWater"] == True:
         return jsonify(message.getContinueWaterMessage()), 200
 
-@app.route("/door", methods=["POST"])
+@app.route(doorOperationURL, methods=["POST"])
 def setDoor():
     #
     # It it requeired to input Threadig function.
@@ -55,10 +66,13 @@ def setDoor():
     return jsonify(message.getSuccessDoorMessage()), 200
 
 
-@app.route("/camera", methods=["POST"])
-def captureCamera():
-
-    return jsonify(message.getSuccessCameraMessage()), 200
+#@app.route(cameraOperationURL, methods=["POST"])
+#def captureCamera():
+#
+#    return jsonify(message.getSuccessCameraMessage()), 200
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8888, debug = True)
+    if resultByServer == "ok":
+        app.run(host='0.0.0.0', port=8888, debug = True)
+    else:
+        print("RaspberryPi connection with server is denied or disconnected")

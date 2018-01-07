@@ -1,4 +1,5 @@
-import socket
+#-*-coding: utf-8-*-
+
 import json
 import requests
 
@@ -7,7 +8,8 @@ PORT = 8080
 
 def attachSendProtocol(message):
     param = {'user_key':'test', 'content':message, 'type':'text'}
-    url = 'http://localhost:8080/message'
+    #url = 'http://ec2-13-125-111-212.ap-northeast-2.compute.amazonaws.com:8080/message'
+    url = "http://localhost:8080/message"
     header={'Content-Type': 'application/json; charset=utf-8'}
     response = requests.post(url=url, headers = header, data=json.dumps(param))
     return response

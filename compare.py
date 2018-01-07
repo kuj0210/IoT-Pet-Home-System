@@ -1,3 +1,5 @@
+#-*-coding: utf-8-*-
+
 class KeyWord:
     def __init__(self,word):
         self.keyWord=word
@@ -23,7 +25,7 @@ class KeyWord:
                 count+=60
         return count
 
-    def print(self):
+    def _print(self):
         print("키워드 명칭: "+self.keyWord)
         print(self.n)
         print(self.v)
@@ -33,14 +35,14 @@ class UsecaseList:
     def __init__(self):
         self.usecase=[]
 
-    def setUsecae(self,name,nList,vList,cp):
+    def setUsecase(self,name,nList,vList,cp):
         self.usecase.append(KeyWord(name))
         self.usecase[len(self.usecase)-1].setNouns(nList)
         self.usecase[len(self.usecase)-1].setVerbs(vList)
         self.usecase[len(self.usecase) - 1].setCp(cp)
     def printList(self):
         for item in self.usecase:
-            item.print()
+            item._print()
 
 
     def analyzeSentence(self,sentence):
@@ -50,8 +52,3 @@ class UsecaseList:
 
                 request.append(item.keyWord)
         return request
-
-
-
-
-
