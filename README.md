@@ -24,8 +24,8 @@
  - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
  
  **Installation**
- **1) Server side**
  
+ **1) Server side**
   - Install MySQL.
   
   `sudo apt-get update
