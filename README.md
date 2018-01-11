@@ -50,4 +50,5 @@
   - Install flask, requests modules.
   
   `sudo pip3 install flask`
-  ` sudo pip3 install requests`
+  
+  `sudo pip3 install requests`
