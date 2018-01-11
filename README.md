@@ -28,7 +28,7 @@
  **1) Server side**
   - Install MySQL.
   
-  `sudo apt-get update\n
+  `sudo apt-get update\r\n
   sudo apt-get install mysql-server`
   
   - Install python3 modules; requests, flask, pymysql 
