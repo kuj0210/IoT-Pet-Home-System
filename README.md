@@ -25,6 +25,7 @@
  
  **Installation**
  **1) Server side**
+ 
   - Install MySQL.
   
   `sudo apt-get update
