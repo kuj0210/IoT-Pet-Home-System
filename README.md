@@ -1,5 +1,5 @@
 # Pet House System
-## Pet House System is a tool that allows you to manage through Messenger.
+### Pet House System is a tool that allows you to manage through Messenger.
 
 ## **Features**
  - Usage through Messenger
@@ -43,5 +43,6 @@
    sudo apt-get install python-rpi.gpio`
    
   - Install flask, requests modules.
+  
   `sudo pip3 install flask
    sudo pip3 install requests`
