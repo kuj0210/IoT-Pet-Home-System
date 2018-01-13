@@ -51,3 +51,49 @@
   sudo pip3 install flask
   sudo pip3 install requests
   ```
+
+## **Pet House Structure**
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/Pet_House_Structure.png)
+
+Manage the doors, feeds and water using three motors
+
+## **Motor operation structure** 
+
+### Food
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_food.png)
+
+Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance
+
+### Water
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_water.png)
+
+Water is given by folding or unfolding the tube with the motor
+
+### Door
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png)
+
+Open the door by pulling the thread by the rotation of the motor
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png)
+
+When the motor stops, the door is closed by the resilience of the weight.
+
+## **Client & Server Structure**
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png)
+
+## **How to use**
+
+1) Add Official account of Messanger(Pet House System)
+
+2) Enter chat in the format “[등록]/e-mail/Product”
+
+     ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Insert_User.png)
+
+3) Enter chats that associated with food, water and door opening
+
+     ![](https://github.com/kuj0210/opensourceproject/blob/master/README/How_to_use.png)
