@@ -53,3 +53,4 @@ class PiMessage :
 
     def getContinueCameraMessage(self):
         return self.continueCameraMessage
+    
