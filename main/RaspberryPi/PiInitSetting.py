@@ -11,7 +11,6 @@ class PiSetting:
 
         # First line is PiKey.
         self.PiKey = fp.readline().split("\n")[0]
-        print("Setting >> PiKey = %s" %(self.PiKey))
 
         # Another lines is user list(email).
         while True:
@@ -20,7 +19,6 @@ class PiSetting:
             email = line.split("\n")[0]
             self.userList.append(email)
 
-        print("Setting >> User list...")
         fp.close()
 
     def getPiKey(self):
@@ -30,7 +28,10 @@ class PiSetting:
         return self.userList
 
     def sendPiSettingData(self):
-        url = "http://" + socket.gethostbyname(socket.gethostname()) + ":8888"
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 1))
+        ipAddress = s.getsockname()[0]
+        url = "http://" + ipAddress + ":8888"
         postMessage = {
             "PiKey" : self.PiKey,
             "userList": self.userList,
@@ -39,8 +40,6 @@ class PiSetting:
         SERVER_URL = "http://ec2-13-125-111-212.ap-northeast-2.compute.amazonaws.com:8080/pi_regist"
         HEADER = {'Content-Type': 'application/json; charset=utf-8'}
         response = requests.post(url=SERVER_URL, headers=HEADER, data=json.dumps(postMessage))
-
-        print("Setting >> Sending Pi settings to server...")
 
         message = response.json()
         result = message["result"]
