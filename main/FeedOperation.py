@@ -25,3 +25,4 @@ class FeedOperation(threading.Thread):
 
     def setPin(self, p):
         self.motor = p
+        
