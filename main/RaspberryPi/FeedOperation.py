@@ -7,7 +7,7 @@ class FeedOperation(threading.Thread):
         self.motor = 0
         self.OPEN_TERM = 0.4
         self.CLOSE_TERM = 1
-
+        threading.Thread.__init__(self)
 
     def run(self):
         self.motor.start(0)
