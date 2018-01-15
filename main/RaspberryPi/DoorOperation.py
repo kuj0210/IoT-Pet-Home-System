@@ -23,3 +23,4 @@ class DoorOperation(threading.Thread):
 
     def setPin(self, p):
         self.motor = p
+        
