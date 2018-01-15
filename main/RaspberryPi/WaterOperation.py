@@ -8,11 +8,12 @@ class WaterOperation(threading.Thread):
         self.OPEN_TERM = 0.2
         self.STOP_TERM = 3
         self.CLOSE_TERM = 0.2
-        threading.Tread.__init__(self)
+        threading.Thread.__init__(self)
 
     def run(self):
         #self.p.start(0)
         try:
+            print("Water 시작!")
             self.motor.ChangeDutyCycle(8)
             time.sleep(self.OPEN_TERM)
             self.motor.ChangeDutyCycle(6.8)
