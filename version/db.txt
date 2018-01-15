@@ -1,0 +1,33 @@
+DROP DATABASE USERdata;
+create database USERdata DEFAULT CHARACTER SET utf8 collate utf8_general_ci;
+use USERdata;
+set names utf8;
+
+create table user ( 
+userKey varchar(50),
+Email varchar(50),
+primary key (userKey)
+) ENGINE=InnoDB default character set utf8 collate utf8_general_ci;
+
+create table homeSystem( 
+URL varchar(50),
+Email varchar(50),
+primary key (URL)
+) ENGINE=InnoDB default character set utf8 collate utf8_general_ci;
+
+
+insert into user values ("a1234","on_11@naver.com");
+insert into user values ("b1234","on_11@daum.net");
+insert into user values ("c1234","on_11@nate.com");
+
+insert into homeSystem values ("www.myhome/naver","on_11@naver.com");
+insert into homeSystem values ("www.myhome/daum","on_11@daum.net");
+insert into homeSystem values ("www.myhome/nate","on_11@nate.com");
+
+select * from user ;
+select * from homeSystem; 
+
+
+select URLs from user join homeSystem on user.Email=homeSystem.Email where user.userKey = "a1234";
+
+
