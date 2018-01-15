@@ -36,7 +36,7 @@ class PiSetting:
             "userList": self.userList,
             "url": url
         }
-        SERVER_URL = "http://localhost:8080/pi_regist"
+        SERVER_URL = "http://ec2-13-125-111-212.ap-northeast-2.compute.amazonaws.com:8080/pi_regist"
         HEADER = {'Content-Type': 'application/json; charset=utf-8'}
         response = requests.post(url=SERVER_URL, headers=HEADER, data=json.dumps(postMessage))
 
@@ -45,5 +45,3 @@ class PiSetting:
         message = response.json()
         result = message["result"]
         return result
-
-#"http://ec2-13-125-111-212.ap-northeast-2.compute.amazonaws.com:8080/pi_regist"
