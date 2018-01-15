@@ -1,54 +1,100 @@
-#-*-coding: utf-8-*-
+import socket, threading
 
-from flask import Flask,request,jsonify
-from JsonMessage import MessageClass
 
-## json 타입들 초기화
+class ClientThread(threading.Thread):
+    def __init__(self, clientAddress, clientsocket):
+        threading.Thread.__init__(self)
+        self.csocket = clientsocket
+        self.clientAddress=clientAddress
+        self.URI = []
+        self.argsCount= -1
+        self.URICount= -1
 
-mMessage = MessageClass()
+    def detachHeader(self,msg):
+        print("[받은메세지]")
+        print(msg)
+        print("[/받은메세지]")
+        txt=msg.split("\n\n")[1]
+        print("["+txt+"]")
+        return txt
 
-app = Flask(__name__)
-## Flask 키는 소스
+    def attachHeader(self,type,body):
+        httpString="HTTP / 1.1 200 OK\n"
+        httpString+="Host: PetHouse: 8080\n"
+        httpString+='''Accept: /
+User - Agent: KakaoTalk / Bot2.0
+Via: 1.1ghost491(squid / 3.1.23)
+X - Forwarded - For: unknown
+Cache - Control: max - age = 259200\n'''
+        httpString+="Content-Length: %d\n"%(len(body))
+        httpString+="Content-Type: %s\n"%(type)
+        httpString+="Connection: keep - alive\n\n"
+        httpString +=body
+        return httpString
 
-@app.route("/keyboard",methods =["GET"])
-def keyboard():
-    return jsonify(mMessage.getBaseKeyboard()),200
 
-## 키보드 정보 가져옴
 
-@app.route("/message",methods=["POST"])
-def message():
-    data = request.get_json()   ## 요청메세지로부터 json 데이터를 가져옴
-                                ## 게다가 딕셔너리 형태로 반환해줌
-    user_key = data['user_key']
-    message = data['content']
-    return jsonify(mMessage.postTextMessage(user_key,message)),200
-## 메세지를 보냈을 때 처리
+    def parshMSG(self,msg,URI):
+        item = msg.split('/')
+        URI.append(item[0])
+        URI.append(item[1])
+        parameter = None
+        if len(item) == 3:
+            URI.append(item[2].split('?'))
+            self.argsCount = len(self.URI[2])
+        self.URICount = len(self.URI)
+        print(URI)
 
-@app.route("/friend",methods=["POST"])
-def friendAdd():
-    message = request.get_json()
-    return "HTTP/1.1 200 OK"
-## 친구 추가했을 때
+    def processPOST(self):
+        txt=""
+        if self.URICount is 3:
+            if self.argsCount is 1 and self.URI[1] is "feed":
+                txt="your pet get food from you"
+            elif self.argsCount is 2 and self.URI[1] is "door":
+                txt="your door open/close"
+            else:  # ERR
+                txt="Can not match argument"
+        elif self.URI[1] == "voice":
+            txt="you can speak to your pet"
+        else:
+            txt="plz, send requst like POST/requset/parameter=x?...."
 
-@app.route("/friend/<user_key>", methods=["DELETE"])
-def friendDelete(user_key):
-    return "HTTP/1.1 200 OK"
-## 친구 삭제했을 때
+        self.csocket.send(bytes(self.attachHeader("text/html",txt), 'UTF-8'))
 
-@app.route("/chat_room/<user_key>",methods=["DELETE"])
-def chat_roomOut(user_key):
-    return "HTTP/1.1 200 OK"
-## 채팅방에서 나갔을 때
+    def processGET(self):
+        if self.URI[1] is "vedio":
+            self.csocket.send(bytes("you can see your pet", 'UTF-8'))
 
-@app.route("/pi_regist", methods=["POST"])
-def settingPi():
-    data = request.get_json()
-    PiKey = data["PiKey"]
-    userList = data["userList"]
-    url = data["url"]
+    #워커
+    def run(self):
+        print("Connection from : ", clientAddress)
+        data = self.csocket.recv(2048)
+        msg = data.decode()
+        try:
+            self.parshMSG(self.detachHeader(msg),self.URI)
+            if self.URI[0]=="POST":
+                self.processPOST()
+            elif self.URI[0]=="GET":
+                self.processGET()
+            else:
+                self.csocket.send(bytes(self.attachHeader("text/html","Not Define Method"), 'UTF-8'))
+        except:
+            self.csocket.send(bytes("ERR!! plz, send requst like Method/requset/parameter=x?....", 'UTF-8'))
 
-    return jsonify(mMessage.updatePiData(PiKey, userList, url)), 200
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug = True)
+
+#main함수 내용
+LOCALHOST = "127.0.0.1"
+PORT = 8080
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind((LOCALHOST, PORT))
+print("Server started")
+print("Waiting for client request..")
+
+
+while True:
+    server.listen(5)
+    clientsock, clientAddress = server.accept()  #커넥션
+    newthread = ClientThread(clientAddress, clientsock) #새로운 스레드 생성
+    newthread.start()# 실행
