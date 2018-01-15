@@ -3,6 +3,7 @@
 import requests, json
 from compare import UsecaseList
 from RegistUser import RegistUser
+import time
 #
 # This module uses to Server module for managing json data.
 # Specially, This module manage json data that use to send or recieve kakao server.
@@ -14,6 +15,7 @@ from RegistUser import RegistUser
 # 모두 만족: 100
 
 mRegistUser = RegistUser()
+SERVER_URL = "http://59.151.215.29:8080/download/"
 
 usecase = UsecaseList()
 usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
@@ -36,11 +38,12 @@ def postPiOperation(user_key,operation):
 
 def getImageFileFromPiServer(user_key):
     URL, PiKey =  mRegistUser.findURLandPiKey(user_key)
-    url = URL + "/" + PiKey + "/upload"
+    url = URL + "/" + PiKey + "/get_image"
     print("Send to pi >> " + url)
-    requests.post(url=url)
+    response = requests.get(url=url, stream=True)
 
     mRegistUser.closeDatabase()
+    return response
 
 
 class MessageClass :
@@ -156,7 +159,28 @@ https://github.com/kuj0210/opensourceproject
                 if isCamera == True:
                     mRegistUser.openDatabase()
                     print("이미지 파일 받는중...")
-                    getImageFileFromPiServer(user_key=user_key)
+                    response = getImageFileFromPiServer(user_key=user_key)
+                    now = time.localtime()
+
+                    PATH = "uploaded/"
+                    IMAGENAME = "Screenshot_%04d-%02d-%02d_%02d-%02d-%02d.jpg" %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
+
+                    with open(PATH+IMAGENAME, 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=2048):
+                            if chunk: f.write(chunk)
+                    f.close()
+
+                    print("image making success. %s" %(PATH+IMAGENAME))
+
+                    postBodyMessage = {
+                        'message': {
+                            'text': sendMSG + SERVER_URL + PATH + IMAGENAME
+                        },
+                        'keyboard': {
+                            'type': 'text'
+                        }
+                    }
+                    return postBodyMessage
 
                 postBodyMessage = {
                     'message': {
