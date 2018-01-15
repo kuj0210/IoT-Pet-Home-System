@@ -132,3 +132,4 @@ class RegistUser:
 
     def closeDatabase(self):
         self.conn.close()
+        
