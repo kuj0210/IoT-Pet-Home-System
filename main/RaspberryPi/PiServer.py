@@ -1,8 +1,6 @@
-import os
 from flask import Flask,jsonify,request, send_from_directory
 from PiInitSetting import PiSetting
 from PiMessage import PiMessage
-import RPi.GPIO as GPIO
 from FeedOperation import FeedOperation
 from WaterOperation import WaterOperation
 from DoorOperation import DoorOperation
@@ -26,35 +24,34 @@ flag = {
     "isCamera" : False
 }
 operationURL = "/" + mPiSetting.getPiKey() + "/operation"
-operationCameraUploadURL = "/" + mPiSetting.getPiKey() + "/upload"
-AWS_DOWNLOAD_URL = "http://localhost:8080/download/"
+operationCameraUploadURL = "/" + mPiSetting.getPiKey() + "/get_image"
+NOT_SUPPORT = "현재 지원하지 않는 기능입니다 :("
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='image')
 
 @app.route(operationURL, methods=["POST"])
 def getOperationByServer():
     data = request.get_json()
     operation = data["operation"]
-    sendMSG = ""
+    sendMSG = NOT_SUPPORT
     if "feed" in operation:
         if flag["isFeed"] is False:
             flag["isFeed"] = True
-
             result, flag["isFeed"] = feedOperation.run()
             flag["isFeed"] = False
 
             if result == "success":
-                if sendMSG == "":
-                    sendMSG += message.getSuccessFeedMessage()
+                if sendMSG == NOT_SUPPORT:
+                    sendMSG = message.getSuccessFeedMessage()
                 else: #sendMSG is not None:
                     sendMSG += "\n" + message.getSuccessFeedMessage()
             else: #flag["isFeed"] is "fail":
-                if sendMSG == "":
+                if sendMSG == NOT_SUPPORT:
                     sendMSG += message.getFailFeedMessage()
                 else: #sendMSG is not None:
                     sendMSG += "\n" + message.getFailFeedMessage()
         else:  # flag["isFeed"] is True
-            if sendMSG == "":
+            if sendMSG == NOT_SUPPORT:
                 sendMSG += message.getContinueFeedMessage()
             else:  # sendMSG is not None:
                 sendMSG += "\n" + message.getContinueFeedMessage()
@@ -63,69 +60,62 @@ def getOperationByServer():
     if "water" in operation:
         if flag["isWater"] is False:
             flag["isWater"] = True
-
             result, flag["isWater"] = waterOperation.run()
             flag["isWater"] = False
 
             if result == "success":
-                if sendMSG == "":
-                    sendMSG += message.getSuccessWaterMessage()
+                if sendMSG == NOT_SUPPORT:
+                    sendMSG = message.getSuccessWaterMessage()
                 else: #sendMSG is not None:
                     sendMSG += "\n" + message.getSuccessWaterMessage()
             else: #flag["isWater"] is "fail":
-                if sendMSG == "":
-                    sendMSG += message.getFailWaterMessage()
+                if sendMSG == NOT_SUPPORT:
+                    sendMSG = message.getFailWaterMessage()
                 else: #sendMSG is not None:
                     sendMSG += "\n" + message.getFailWaterMessage()
         else:  # flag["isWater"] is True
-            if sendMSG == "":
-                sendMSG += message.getContinueWaterMessage()
+            if sendMSG == NOT_SUPPORT:
+                sendMSG = message.getContinueWaterMessage()
             else:  # sendMSG is not None:
                 sendMSG += "\n" + message.getContinueWaterMessage()
 
     if "open" in operation:
         if flag["isDoor"] is False:
             flag["isDoor"] = True
-
-            result, flag["isDoor"] = doorOperation.run()
+            doorOperation.run()
             flag["isDoor"] = False
 
-            if result == "success":
-                if sendMSG == "":
-                    sendMSG += message.getSuccessDoorMessage()
-                else:  # sendMSG is not None:
-                    sendMSG += "\n" + message.getSuccessDoorMessage()
-            else:  # flag["isDoor"] is "fail":
-                if sendMSG == "":
-                    sendMSG += message.getFailDoorMessage()
-                else:  # sendMSG is not None:
-                    sendMSG += "\n" + message.getFailDoorMessage()
-        else:  # flag["isDoor"] is True
-            if sendMSG == "":
-                sendMSG += message.getContinueDoorMessage()
+            if sendMSG == NOT_SUPPORT:
+                sendMSG = message.getContinueDoorMessage()
             else:  # sendMSG is not None:
                 sendMSG += "\n" + message.getContinueDoorMessage()
+
+        else:  # flag["isDoor"] is True
+            if sendMSG == NOT_SUPPORT:
+                sendMSG = message.getFailDoorMessage()
+            else:  # sendMSG is not None:
+                sendMSG += "\n" + message.getFailMessage()
 
     if "camera" in operation:
         if flag["isCamera"] is False:
             flag["isCamera"] = True
             result, flag["isCamera"] = cameraOperation.run()
             flag["isCamera"] = False
-            imagePath = cameraOperation.getFilename()
+            imagePath = "upload/" + cameraOperation.getFilename()
 
             if result == "success":
-                if sendMSG == "":
-                    sendMSG += message.getSuccessCameraMessage(imageURL=AWS_DOWNLOAD_URL + imagePath)
+                if sendMSG == NOT_SUPPORT:
+                    sendMSG = message.getSuccessCameraMessage()
                 else:  # sendMSG is not None:
-                    sendMSG += "\n" + message.getSuccessCameraMessage(imageURL=AWS_DOWNLOAD_URL + imagePath)
+                    sendMSG += "\n" + message.getSuccessCameraMessage()
             else:  # flag["isDoor"] is "fail":
-                if sendMSG == "":
-                    sendMSG += message.getFailCameraMessage()
+                if sendMSG == NOT_SUPPORT:
+                    sendMSG = message.getFailCameraMessage()
                 else:  # sendMSG is not None:
                     sendMSG += "\n" + message.getFailCameraMessage()
         else:  # flag["isDoor"] is True
-            if sendMSG == "":
-                sendMSG += message.getContinueCameraMessage()
+            if sendMSG == NOT_SUPPORT:
+                sendMSG = message.getContinueCameraMessage()
             else:  # sendMSG is not None:
                 sendMSG += "\n" + message.getContinueCameraMessage()
 
@@ -136,20 +126,18 @@ def getOperationByServer():
         postToServerMessage = {"message": {"text": sendMSG ,"camera":False} }
         return jsonify(postToServerMessage)
 
-@app.route(operationCameraUploadURL, methods=['POST'])
+@app.route(operationCameraUploadURL, methods=['GET'])
 def send_file():
-    print("upload...")
     filename = cameraOperation.getFilename()
-    upload = os.path.join(path="image")
-    return send_from_directory(path=upload, filename = filename, as_attachment=True)
+    return send_from_directory(app.static_folder, filename)
 
 if __name__ == "__main__":
     if resultByServer == "ok":
-        water_pin = 12  # PWM pin num 32
+        water_pin = 12
         feed_pin = 19
         door_pin = 18
 
-        GPIO.setmode(GPIO.BCM)
+       GPIO.setmode(GPIO.BCM)
 
         try:
             GPIO.setup(water_pin, GPIO.OUT)
