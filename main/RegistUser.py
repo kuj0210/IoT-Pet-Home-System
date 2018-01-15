@@ -7,7 +7,7 @@ class RegistUser:
         self.PiKey = None
 
     def openDatabase(self):
-        self.conn = pymysql.connect(host="localhost", user="root", password="apmsetup", charset="utf8")
+        self.conn = pymysql.connect(host="localhost", user="root", password="root", charset="utf8")
         self.curs = self.conn.cursor()
 
         try:
