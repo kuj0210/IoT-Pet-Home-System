@@ -15,7 +15,7 @@ import time
 # 모두 만족: 100
 
 mRegistUser = RegistUser()
-SERVER_URL = "http://59.151.215.29:8080/download/"
+SERVER_URL = "http://ec2-13-125-111-212.ap-northeast-2.compute.amazonaws.com/download/"
 
 usecase = UsecaseList()
 usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
