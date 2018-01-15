@@ -150,13 +150,27 @@ if __name__ == "__main__":
         door_pin = 18
 
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(water_pin, GPIO.OUT)
-        GPIO.setup(feed_pin, GPIO.OUT)
-        GPIO.setup(door_pin, GPIO.OUT)
 
-        wp = GPIO.PWM(water_pin, 50)
-        fp = GPIO.PWM(feed_pin, 50)
-        dp = GPIO.PWM(door_pin, 50)
+        try:
+            GPIO.setup(water_pin, GPIO.OUT)
+            wp = GPIO.PWM(water_pin, 50)
+            print("Water Operation Setting complete.")
+        except:
+            print("Error : In Water Operation")
+
+        try:
+            GPIO.setup(feed_pin, GPIO.OUT)
+            fp = GPIO.PWM(feed_pin, 50)
+            print("Feed Operation Setting complete.")
+        except:
+            print("Error : In Feed Operation")
+
+        try:
+            GPIO.setup(door_pin, GPIO.OUT)
+            dp = GPIO.PWM(door_pin, 50)
+            print("Door Operation Setting complete.")
+        except:
+            print("Error : In Door Operation")
 
         waterOperation.setPin(wp)
         feedOperation.setPin(fp)
@@ -165,4 +179,3 @@ if __name__ == "__main__":
         app.run(host='0.0.0.0', port=8888, debug = True)
     else:
         print("RaspberryPi connection with server is denied or disconnected")
-        
