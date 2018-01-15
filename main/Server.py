@@ -1,13 +1,14 @@
 #-*-coding: utf-8-*-
-import os
-from flask import Flask,request,jsonify,send_from_directory,make_response
+from flask import Flask,request,jsonify,send_from_directory
 from ServerManager import MessageClass
 
 ## json 타입들 초기화
 
 mMessage = MessageClass()
 
-app = Flask(__name__, static_folder='.')
+UPLOAD_FOLDER = 'uploaded'
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ## Flask 키는 소스
 
 @app.route("/keyboard",methods =["GET"])
@@ -49,9 +50,9 @@ def settingPi():
 
     return jsonify(mMessage.updatePiData(PiKey, userList, url)), 200
 
-@app.route('/download/<path:filename>', methods=['GET', 'POST'])
+@app.route('/download/<filename>', methods=['GET'])
 def send_file(filename):
-    return send_from_directory(app.static_folder, filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename=filename)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug = True)
