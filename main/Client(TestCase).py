@@ -25,3 +25,4 @@ while True:
     message = input("User >> ")
     response = attachSendProtocol(message)
     recvFromServer(response)
+    
