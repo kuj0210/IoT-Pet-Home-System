@@ -28,3 +28,4 @@ class WaterOperation(threading.Thread):
 
     def setPin(self, p):
         self.motor = p
+        
