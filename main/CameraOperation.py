@@ -41,3 +41,4 @@ class CameraOperation(threading.Thread):
             os.remove(self.path)
         except:
             print("%s : is not directory or in this directory." %(self.path))
+             
