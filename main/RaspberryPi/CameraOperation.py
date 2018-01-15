@@ -5,19 +5,19 @@ import os
 
 class CameraOperation(threading.Thread):
     def __init__(self):
-        self.filename = None
-        self.path = None
+        self.filename = "pet_Image.jpg"
+        self.path = ""
 
     def run(self):
         dir = "image/"
         if not os.path.isdir(dir):
             os.mkdir(dir)
-        try:
-             now = time.localtime()
-             self.filename = "Screenshot (%04d-%02d-%02d %02d:%02d:%02d).png"  \
-                             %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
 
-            #self.filename = "camera.jpg"
+        try:
+            now = time.localtime()
+            self.filename = "Screenshot (%04d-%02d-%02d %02d:%02d:%02d).png"  \
+                            %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
+
             self.path = dir + self.filename
 
             camera.start_preview()
