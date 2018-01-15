@@ -23,10 +23,8 @@ class DoorOperation(threading.Thread):
             self.motor.stop()
 
         except KeyboardInterrupt:
+            print("Door operation interrupt")
             self.motor.stop()
-            return "fail", False
-
-        return "success", False
 
     def setPin(self, p):
         self.motor = p
