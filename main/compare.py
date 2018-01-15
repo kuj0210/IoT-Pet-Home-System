@@ -52,3 +52,4 @@ class UsecaseList:
 
                 request.append(item.keyWord)
         return request
+    
