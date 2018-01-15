@@ -13,7 +13,6 @@ class WaterOperation(threading.Thread):
     def run(self):
         #self.p.start(0)
         try:
-            print("Water 시작!")
             self.motor.ChangeDutyCycle(8)
             time.sleep(self.OPEN_TERM)
             self.motor.ChangeDutyCycle(6.8)
