@@ -137,7 +137,7 @@ if __name__ == "__main__":
         feed_pin = 19
         door_pin = 18
 
-       GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
 
         try:
             GPIO.setup(water_pin, GPIO.OUT)
