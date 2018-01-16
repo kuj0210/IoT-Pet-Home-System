@@ -101,6 +101,6 @@ When the motor stops, the door is closed by the resilience of the weight.
      
  ## **Notes**
  
-    - In issue#36 :: 참고용 PPT 및 동영상
+ - In issue#36 :: 참고용 PPT 및 동영상
  
-      https://github.com/kuj0210/opensourceproject/issues/36
+   https://github.com/kuj0210/opensourceproject/issues/36
