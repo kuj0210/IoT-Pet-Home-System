@@ -97,3 +97,10 @@ When the motor stops, the door is closed by the resilience of the weight.
 3) Enter chats that associated with food, water and door opening
 
      ![](https://github.com/kuj0210/opensourceproject/blob/master/README/How_to_use.png)
+     
+     
+ ## **Notes**
+ 
+    - In issue#36 :: 참고용 PPT 및 동영상
+ 
+      https://github.com/kuj0210/opensourceproject/issues/36
