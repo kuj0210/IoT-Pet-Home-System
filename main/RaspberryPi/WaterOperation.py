@@ -11,7 +11,7 @@ class WaterOperation(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        #self.p.start(0)
+        self.p.start(0)
         try:
             self.motor.ChangeDutyCycle(8)
             time.sleep(self.OPEN_TERM)
