@@ -17,12 +17,6 @@ feedOperation = FeedOperation()
 waterOperation = WaterOperation()
 doorOperation = DoorOperation()
 
-flag = {
-    "isWater": False,
-    "isFeed": False,
-    "isDoor": False,
-    "isCamera" : False
-}
 operationURL = "/" + mPiSetting.getPiKey() + "/operation"
 operationCameraUploadURL = "/" + mPiSetting.getPiKey() + "/get_image"
 NOT_SUPPORT = "현재 지원하지 않는 기능입니다 :("
@@ -34,92 +28,84 @@ def getOperationByServer():
     data = request.get_json()
     operation = data["operation"]
     sendMSG = NOT_SUPPORT
-    if "feed" in operation:
-        if flag["isFeed"] is False:
-            flag["isFeed"] = True
-            result, flag["isFeed"] = feedOperation.run()
-            flag["isFeed"] = False
 
-            if result == "success":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG = message.getSuccessFeedMessage()
-                else: #sendMSG is not None:
-                    sendMSG += "\n" + message.getSuccessFeedMessage()
-            else: #flag["isFeed"] is "fail":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG += message.getFailFeedMessage()
-                else: #sendMSG is not None:
-                    sendMSG += "\n" + message.getFailFeedMessage()
-        else:  # flag["isFeed"] is True
-            if sendMSG == NOT_SUPPORT:
-                sendMSG += message.getContinueFeedMessage()
-            else:  # sendMSG is not None:
+    if "feed" in operation:
+        if not feedOperation.isFeedOnUnlock():
+            feedOperation.setFeedOperation()
+            if sendMSG == NOT_SUPPORT :
+                sendMSG = message.getContinueFeedMessage()
+            else :
                 sendMSG += "\n" + message.getContinueFeedMessage()
 
+        else:
+            if sendMSG == NOT_SUPPORT :
+                sendMSG = message.getFailFeedMessage()
+            else :
+                sendMSG += "\n" + message.getFailFeedMessage()
 
     if "water" in operation:
-        if flag["isWater"] is False:
-            flag["isWater"] = True
-            result, flag["isWater"] = waterOperation.run()
-            flag["isWater"] = False
-
-            if result == "success":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG = message.getSuccessWaterMessage()
-                else: #sendMSG is not None:
-                    sendMSG += "\n" + message.getSuccessWaterMessage()
-            else: #flag["isWater"] is "fail":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG = message.getFailWaterMessage()
-                else: #sendMSG is not None:
-                    sendMSG += "\n" + message.getFailWaterMessage()
-        else:  # flag["isWater"] is True
-            if sendMSG == NOT_SUPPORT:
+        if not waterOperation.isWaterOnUnlock():
+            waterOperation.setWaterOperation()
+            if sendMSG == NOT_SUPPORT :
                 sendMSG = message.getContinueWaterMessage()
-            else:  # sendMSG is not None:
+            else :
                 sendMSG += "\n" + message.getContinueWaterMessage()
 
-    if "open" in operation:
-        if flag["isDoor"] is False:
-            flag["isDoor"] = True
-            doorOperation.run()
-            flag["isDoor"] = False
+        else:
+            if sendMSG == NOT_SUPPORT :
+                sendMSG = message.getFailWaterMessage()
+            else :
+                sendMSG += "\n" + message.getFailWaterMessage()
 
-            if sendMSG == NOT_SUPPORT:
+    if "open" in operation:
+        if not doorOperation.isDoorOnUnlock():
+            doorOperation.setDoorOperation()
+            if sendMSG == NOT_SUPPORT :
                 sendMSG = message.getContinueDoorMessage()
-            else:  # sendMSG is not None:
+            else :
                 sendMSG += "\n" + message.getContinueDoorMessage()
 
-        else:  # flag["isDoor"] is True
-            if sendMSG == NOT_SUPPORT:
+        else:
+            if sendMSG == NOT_SUPPORT :
                 sendMSG = message.getFailDoorMessage()
-            else:  # sendMSG is not None:
-                sendMSG += "\n" + message.getFailMessage()
+            else :
+                sendMSG += "\n" + message.getFailDoorMessage()
 
     if "camera" in operation:
-        if flag["isCamera"] is False:
-            flag["isCamera"] = True
-            result, flag["isCamera"] = cameraOperation.run()
-            flag["isCamera"] = False
-            imagePath = "upload/" + cameraOperation.getFilename()
+        imagePath = "upload/" + cameraOperation.getFilename()
+        postToServerMessage = {"message": {"text": None, "camera": True}}
+
+        if not doorOperation.isDoorOnUnlock():
+            cameraOperation.setCameraOperation()
+            result = cameraOperation.run()
+            cameraOperation.join()
 
             if result == "success":
                 if sendMSG == NOT_SUPPORT:
                     sendMSG = message.getSuccessCameraMessage()
                 else:  # sendMSG is not None:
                     sendMSG += "\n" + message.getSuccessCameraMessage()
+
+                postToServerMessage["message"]["text"] = sendMSG
+
             else:  # flag["isDoor"] is "fail":
                 if sendMSG == NOT_SUPPORT:
                     sendMSG = message.getFailCameraMessage()
                 else:  # sendMSG is not None:
                     sendMSG += "\n" + message.getFailCameraMessage()
-        else:  # flag["isDoor"] is True
-            if sendMSG == NOT_SUPPORT:
-                sendMSG = message.getContinueCameraMessage()
-            else:  # sendMSG is not None:
-                sendMSG += "\n" + message.getContinueCameraMessage()
 
-        postToServerMessage = {"message": {"text": sendMSG, "camera": True}}
+                postToServerMessage["message"]["text"] = sendMSG
+                postToServerMessage["message"]["camera"] = False
+
+        else:  # flag["isDoor"] is "fail":
+            if sendMSG == NOT_SUPPORT:
+                sendMSG = message.getFailCameraMessage()
+            else:  # sendMSG is not None:
+                sendMSG += "\n" + message.getFailCameraMessage()
+
+            postToServerMessage["message"]["text"] = sendMSG
+            postToServerMessage["message"]["camera"] = False
+
         return jsonify(postToServerMessage)
 
     else:
@@ -137,32 +123,36 @@ if __name__ == "__main__":
         feed_pin = 19
         door_pin = 18
 
-        GPIO.setmode(GPIO.BCM)
+       #GPIO.setmode(GPIO.BCM)
 
         try:
-            GPIO.setup(water_pin, GPIO.OUT)
-            wp = GPIO.PWM(water_pin, 50)
+        #    GPIO.setup(water_pin, GPIO.OUT)
+        #   wp = GPIO.PWM(water_pin, 50)
             print("Water Operation Setting complete.")
         except:
             print("Error : In Water Operation")
 
         try:
-            GPIO.setup(feed_pin, GPIO.OUT)
-            fp = GPIO.PWM(feed_pin, 50)
+        #    GPIO.setup(feed_pin, GPIO.OUT)
+        #    fp = GPIO.PWM(feed_pin, 50)
             print("Feed Operation Setting complete.")
         except:
             print("Error : In Feed Operation")
 
         try:
-            GPIO.setup(door_pin, GPIO.OUT)
-            dp = GPIO.PWM(door_pin, 50)
+        #    GPIO.setup(door_pin, GPIO.OUT)
+        #    dp = GPIO.PWM(door_pin, 50)
             print("Door Operation Setting complete.")
         except:
             print("Error : In Door Operation")
 
-        waterOperation.setPin(wp)
-        feedOperation.setPin(fp)
-        doorOperation.setPin(dp)
+        #waterOperation.setPin(wp)
+        #feedOperation.setPin(fp)
+        #doorOperation.setPin(dp)
+
+        waterOperation.start()
+        feedOperation.start()
+        doorOperation.start()
 
         app.run(host='0.0.0.0', port=8888, debug = True)
     else:
