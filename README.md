@@ -84,7 +84,7 @@ When the motor stops, the door is closed by the resilience of the weight.
 
 ## **Client & Server Structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client%26Server_Structure.png)
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png?raw=true)
 
 ## **How to use**
 
