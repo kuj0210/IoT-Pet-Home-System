@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -8,20 +8,33 @@ class FeedOperation(threading.Thread):
         self.OPEN_TERM = 0.4
         self.CLOSE_TERM = 1
         threading.Thread.__init__(self)
+        self.feedEvent = threading.Event()
 
     def run(self):
-        self.motor.start(0)
-        try:
-            self.motor.ChangeDutyCycle(3)
-            time.sleep(self.OPEN_TERM)
-            self.motor.ChangeDutyCycle(6)
-            time.sleep(self.CLOSE_TERM)
-            self.motor.stop()
-        except KeyboardInterrupt:
-            self.motor.stop()
-            return "fail", False
+        #self.motor.start(0)
+        while not self.feedEvent.isSet():
+            try:
+                self.feedEvent.wait()
+                print("Feed 시작!")
+                #self.motor.ChangeDutyCycle(3)
+                time.sleep(self.OPEN_TERM)
+                #self.motor.ChangeDutyCycle(6)
+                time.sleep(self.CLOSE_TERM)
+                #self.motor.stop()
+                print("Feed 완료")
+                self.feedEvent.clear()
 
-        return "success", False
+            except KeyboardInterrupt:
+                print("Feed operation interrupt")
+                self.feedEvent.clear()
+                #self.motor.stop()
 
     def setPin(self, p):
         self.motor = p
+
+    def isFeedOnUnlock(self):
+        return self.feedEvent.isSet()
+
+    def setFeedOperation(self):
+        self.feedEvent.set()
+
