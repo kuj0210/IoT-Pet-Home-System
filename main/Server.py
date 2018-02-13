@@ -55,5 +55,8 @@ def send_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename=filename)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug = True)
+    ssl_cert = '/etc/letsencrypt/live/pethome.ga/fullchain.pem'
+    ssl_key =  '/etc/letsencrypt/live/pethome.ga/privkey.pem'
+    contextSSL =  (ssl_cert, ssl_key)
+    app.run(host='0.0.0.0', port=8080, debug = True, ssl_context = contextSSL)
     
