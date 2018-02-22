@@ -2,12 +2,24 @@
 ### Pet House System is a tool that allows you to manage through Messenger.
 
 ## Index
-* [Features](#Features)
-
-
-<br>
-<br>
-
+* [Features](#features)
+* [Requirement](#requirement)
+* [Settings & Installation](#settings--installation)
+  * [Settings](#settings)
+  * [Installation](#installation)
+* [Pet House Structure](#pet-house-structure)
+* [Motor operation structure](#motor-operation-structure)
+  * [Food](#food)
+  * [Water](#food)
+  * [Door](#food)
+* [Client & Server Structure](#client--server-structure)
+* [How to use](#how-to-use)
+* [Notes](#notes)
+* [How to connect motor wires](#how-to-connect-motor-wires)
+  * [Food Motor](#food-motor)
+  * [Water Motor](#water-motor)
+  * [Door Motor](#door-motor)
+ 
 ## **Features**
  - Usage through Messenger
  - Raspberry Pi with chat-bot based System
@@ -15,8 +27,7 @@
  - Using 2 flask servers.(Main Server(in aws), PiServer(in raspberryPi))
  - You can check the status of your pet with PiCamera
  - You can manage meal and to give water to your pet(s).
-<br>
-<br>
+
 
 ## **Requirement**
  - Raspnerry Pi 3 module B (used in Pi Server)
@@ -26,13 +37,13 @@
 
 ## **Settings & Installation**
 
- **Setting** 
+### **Settings** 
  - Using 2 static ip address.
  - Main server is in AWS.(This server manage chat-bot API.)
  - PiServer is in RaspberryPi (This server manage RaspberryPi)
  - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
  
- **Installation**
+### **Installation**
  
  **1) Server side**
   - Install MySQL.
