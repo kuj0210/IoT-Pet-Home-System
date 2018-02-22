@@ -17,13 +17,13 @@
 
 ## **Settings & Installation**
 
-  ## **Setting** 
+ **Setting** 
  - Using 2 static ip address.
  - Main server is in AWS.(This server manage chat-bot API.)
  - PiServer is in RaspberryPi (This server manage RaspberryPi)
  - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
  
- ## **Installation**
+ **Installation**
  
  **1) Server side**
   - Install MySQL.
@@ -109,8 +109,6 @@ When the motor stops, the door is closed by the resilience of the weight.
  
    https://www.raspberrypi.org/documentation/installation/installing-images/
    
-## **How to connect motor wires**
-
 ## **How to connect motor wires**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/raspberry-pi-pinout.png)
