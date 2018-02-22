@@ -15,7 +15,7 @@
  - Computer or Notebook(used to chat-bot API Server)
  - Smart Phone for using chat-bot(used in client)
 
-## **Installation & Settings**
+## **Settings & Installation**
 
  [Setting](../master/README/Setting.md)
  
