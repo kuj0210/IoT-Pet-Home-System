@@ -15,7 +15,9 @@
  - Using 2 flask servers.(Main Server(in aws), PiServer(in raspberryPi))
  - You can check the status of your pet with PiCamera
  - You can manage meal and to give water to your pet(s).
- 
+<br>
+<br>
+
 ## **Requirement**
  - Raspnerry Pi 3 module B (used in Pi Server)
  - 3 servo-motors(for meal,water,door) and PiCamera
