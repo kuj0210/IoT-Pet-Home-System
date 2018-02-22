@@ -17,40 +17,11 @@
 
 ## **Installation & Settings**
 
- **Setting**
- - Using 2 static ip address.
- - Main server is in AWS.(This server manage chat-bot API.)
- - PiServer is in RaspberryPi (This server manage RaspberryPi)
- - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
+ [Setting](../master/README/Setting.md)
  
  **Installation**
  
- **1) Server side**
-  - Install MySQL.
-  ```
-  sudo apt-get update
-  sudo apt-get install mysql-server
-  ```
-  
-  - Install python3 modules; requests, flask, pymysql 
-  ```
-  sudo pip3 install requests
-  sudo pip3 install flask
-  sudo pip3 install pymsql
-  ```
-   
- **2) PiServer side**
-  - Install GPIO modules.
-  ```
-  sudo apt-get install python-dev
-  sudo apt-get install python-rpi.gpio
-  ```
-   
-  - Install flask, requests modules.
-  ```
-  sudo pip3 install flask
-  sudo pip3 install requests
-  ```
+[Installation](../master/README/installation.md)
 
 ## **Pet House Structure**
 
