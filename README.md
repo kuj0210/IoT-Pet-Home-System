@@ -19,9 +19,7 @@
 
  [Setting](../master/README/Setting.md)
  
- **Installation**
- 
-[Installation](../master/README/installation.md)
+ [Installation](../master/README/installation.md)
 
 ## **Pet House Structure**
 
