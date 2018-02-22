@@ -111,4 +111,4 @@ When the motor stops, the door is closed by the resilience of the weight.
    
 ## **How to connect motor wires**
 
-See the [How to connect motor wires](../master/docs/motor_wires.md)
+See the [How to connect motor wires](../master/README/motor_wires.md)
