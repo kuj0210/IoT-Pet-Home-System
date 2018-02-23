@@ -1,6 +1,7 @@
 #import RPi.GPIO as GPIO
 import time
 import threading
+import os
 
 class WaterOperation(threading.Thread):
     def __init__(self):
@@ -8,8 +9,10 @@ class WaterOperation(threading.Thread):
         self.OPEN_TERM = 0.2
         self.STOP_TERM = 3
         self.CLOSE_TERM = 0.2
+        self.WATER_DONE = "WATER_DONE"
         threading.Thread.__init__(self)
         self.waterEvent = threading.Event()
+        self.sem = threading.Semaphore(1)
 
     def run(self):
         #self.p.start(0)
@@ -24,7 +27,13 @@ class WaterOperation(threading.Thread):
                 #self.motor.ChangeDutyCycle(5)
                 time.sleep(self.CLOSE_TERM)
                 #self.motor.stop()
-                print("Water 완료")
+                print("Water Complete")
+
+                if os.path.exists("fifo"):
+                    fifo = open("fifo", "w")
+                    print("send message to fifo.")
+                    fifo.write(self.WATER_DONE)
+
                 self.waterEvent.clear()
 
             except KeyboardInterrupt:

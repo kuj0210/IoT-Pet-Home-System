@@ -1,14 +1,17 @@
 #import RPi.GPIO as GPIO
 import time
 import threading
+import os
 
 class FeedOperation(threading.Thread):
     def __init__(self):
         self.motor = 0
         self.OPEN_TERM = 0.4
         self.CLOSE_TERM = 1
+        self.FEED_DONE = "FEED_DONE"
         threading.Thread.__init__(self)
         self.feedEvent = threading.Event()
+        self.sem = threading.Semaphore(1)
 
     def run(self):
         #self.motor.start(0)
@@ -21,7 +24,13 @@ class FeedOperation(threading.Thread):
                 #self.motor.ChangeDutyCycle(6)
                 time.sleep(self.CLOSE_TERM)
                 #self.motor.stop()
-                print("Feed 완료")
+                print("Feed Complete")
+
+                if os.path.exists("fifo"):
+                    fifo = open("fifo", "w")
+                    print("send message to fifo.")
+                    fifo.write(self.FEED_DONE)
+
                 self.feedEvent.clear()
 
             except KeyboardInterrupt:

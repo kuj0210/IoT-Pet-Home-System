@@ -1,25 +1,26 @@
 from flask import Flask,jsonify,request, send_from_directory
 from PiInitSetting import PiSetting
-from PiMessage import PiMessage
 from FeedOperation import FeedOperation
 from WaterOperation import WaterOperation
 from DoorOperation import DoorOperation
 from CameraOperation import CameraOperation
-
-message = PiMessage()
+from PiPushThread import PiPushThread
+import os
 
 mPiSetting = PiSetting()
 mPiSetting.ReadConfigFile()
 resultByServer = mPiSetting.sendPiSettingData()
-cameraOperation = CameraOperation()
+PiKey = mPiSetting.getPiKey()
 
+cameraOperation = CameraOperation()
 feedOperation = FeedOperation()
 waterOperation = WaterOperation()
 doorOperation = DoorOperation()
 
+pushThread = PiPushThread(PiKey=PiKey)
+
 operationURL = "/" + mPiSetting.getPiKey() + "/operation"
 operationCameraUploadURL = "/" + mPiSetting.getPiKey() + "/get_image"
-NOT_SUPPORT = "현재 지원하지 않는 기능입니다 :("
 
 app = Flask(__name__, static_folder='image')
 
@@ -27,90 +28,56 @@ app = Flask(__name__, static_folder='image')
 def getOperationByServer():
     data = request.get_json()
     operation = data["operation"]
-    sendMSG = NOT_SUPPORT
+    postStatusToServer = {
+        "camera": "unuse",
+        "feed": "unuse",
+        "water": "unuse",
+        "door": "unuse"
+    }
 
     if "feed" in operation:
         if not feedOperation.isFeedOnUnlock():
             feedOperation.setFeedOperation()
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getContinueFeedMessage()
-            else :
-                sendMSG += "\n" + message.getContinueFeedMessage()
+            postStatusToServer["feed"] = "use"
 
         else:
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getFailFeedMessage()
-            else :
-                sendMSG += "\n" + message.getFailFeedMessage()
+            postStatusToServer["feed"] = "using"
 
     if "water" in operation:
         if not waterOperation.isWaterOnUnlock():
             waterOperation.setWaterOperation()
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getContinueWaterMessage()
-            else :
-                sendMSG += "\n" + message.getContinueWaterMessage()
+            postStatusToServer["water"] = "use"
 
         else:
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getFailWaterMessage()
-            else :
-                sendMSG += "\n" + message.getFailWaterMessage()
+            postStatusToServer["water"] = "using"
 
-    if "open" in operation:
+    if "door" in operation:
         if not doorOperation.isDoorOnUnlock():
             doorOperation.setDoorOperation()
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getContinueDoorMessage()
-            else :
-                sendMSG += "\n" + message.getContinueDoorMessage()
+            postStatusToServer["door"] = "use"
 
         else:
-            if sendMSG == NOT_SUPPORT :
-                sendMSG = message.getFailDoorMessage()
-            else :
-                sendMSG += "\n" + message.getFailDoorMessage()
+            postStatusToServer["door"] = "using"
 
     if "camera" in operation:
-        imagePath = "upload/" + cameraOperation.getFilename()
-        postToServerMessage = {"message": {"text": None, "camera": True}}
+        #imagePath = "upload/" + cameraOperation.getFilename()
 
-        if not doorOperation.isDoorOnUnlock():
-            cameraOperation.setCameraOperation()
-            result = cameraOperation.run()
-            cameraOperation.join()
+        if not cameraOperation.isCameraOnUnlock():
+            #result = cameraOperation.setCameraOperation()
+            postStatusToServer["camera"] = "use"
+            #if result == "success":
 
-            if result == "success":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG = message.getSuccessCameraMessage()
-                else:  # sendMSG is not None:
-                    sendMSG += "\n" + message.getSuccessCameraMessage()
 
-                postToServerMessage["message"]["text"] = sendMSG
+            #else:
+             #   postStatusToServer["camera"] = False
 
-            else:  # flag["isDoor"] is "fail":
-                if sendMSG == NOT_SUPPORT:
-                    sendMSG = message.getFailCameraMessage()
-                else:  # sendMSG is not None:
-                    sendMSG += "\n" + message.getFailCameraMessage()
+              #  postStatusToServer["message"]["text"] = sendMSG
+              #  postStatusToServer["message"]["camera"] = False
 
-                postToServerMessage["message"]["text"] = sendMSG
-                postToServerMessage["message"]["camera"] = False
+        else:  # flag["isCamera"] is "fail":
+            postStatusToServer["camera"] = "using"
 
-        else:  # flag["isDoor"] is "fail":
-            if sendMSG == NOT_SUPPORT:
-                sendMSG = message.getFailCameraMessage()
-            else:  # sendMSG is not None:
-                sendMSG += "\n" + message.getFailCameraMessage()
-
-            postToServerMessage["message"]["text"] = sendMSG
-            postToServerMessage["message"]["camera"] = False
-
-        return jsonify(postToServerMessage)
-
-    else:
-        postToServerMessage = {"message": {"text": sendMSG ,"camera":False} }
-        return jsonify(postToServerMessage)
+    return jsonify(postStatusToServer)
 
 @app.route(operationCameraUploadURL, methods=['GET'])
 def send_file():
@@ -154,6 +121,20 @@ if __name__ == "__main__":
         feedOperation.start()
         doorOperation.start()
 
-        app.run(host='0.0.0.0', port=8888, debug = True)
+        try:
+            if not os.path.exists("fifo"):
+                os.mkfifo("fifo")
+                pushThread.start()
+
+            else :
+                print("Already named pipe exist ...")
+                os.remove("fifo")
+                os.mkfifo("fifo")
+                pushThread.start()
+
+        except:
+                print("Don't make named pipe.\n**Therefore it can't support push service.")
+
+        app.run(host='0.0.0.0', port=8888)
     else:
         print("RaspberryPi connection with server is denied or disconnected")

@@ -24,7 +24,7 @@ class DoorOperation(threading.Thread):
                 #self.motor.ChangeDutyCycle(5)
                 time.sleep(self.CLOSE_TERM)
                 #self.motor.stop()
-                print("Door 완료")
+                print("Door Complete")
                 self.doorEvent.clear()
 
             except KeyboardInterrupt:
