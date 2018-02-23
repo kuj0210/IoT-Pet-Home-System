@@ -1,10 +1,12 @@
-import pymysql, requests
+import pymysql
 
 class RegistUser:
     def __init__(self):
         self.conn = None
         self.curs = None
         self.PiKey = None
+        self.KAKAO_TALK = "kakao-talk"
+        self.NAVER_TALK = "naver-talk"
 
     def openDatabase(self):
         self.conn = pymysql.connect(host="localhost", user="root", password="root", charset="utf8")
@@ -27,11 +29,26 @@ class RegistUser:
             #check table user
             try:
                 with self.conn.cursor() as self.curs:
-                    query = "select * from user;"
+                    query = "select * from kakaoUser;"
                     self.curs.execute(query)
             except:
                 with self.conn.cursor() as self.curs:
-                    query = """create table user(
+                    query = """create table kakaoUser(
+                            user_key varchar(50),
+                            Email varchar(50),
+                            PiKey varchar(50),
+                            primary key (Email)
+                            ) ENGINE=InnoDB default character set utf8 collate utf8_general_ci;"""
+                    self.curs.execute(query)
+            self.conn.commit()
+
+            try:
+                with self.conn.cursor() as self.curs:
+                    query = "select * from naverUser;"
+                    self.curs.execute(query)
+            except:
+                with self.conn.cursor() as self.curs:
+                    query = """create table naverUser(
                             user_key varchar(50),
                             Email varchar(50),
                             PiKey varchar(50),
@@ -49,13 +66,14 @@ class RegistUser:
                 with self.conn.cursor() as self.curs:
                     query = """create table homeSystem(
                             PiKey varchar(50),
+                            Platform varchar(30),
                             Email varchar(50),
                             url varchar(50)
                             ) ENGINE=InnoDB default character set utf8 collate utf8_general_ci;"""
                     self.curs.execute(query)
                 self.conn.commit()
 
-    def updatePiSetting(self, PiKey, userList, url):
+    def updatePiSetting(self, PiKey, kakaoUserList, naverUserList, url):
         try:
             with self.conn.cursor() as self.curs:
                 query = "delete from homeSystem where PiKey=%s;"
@@ -63,72 +81,152 @@ class RegistUser:
             self.conn.commit()
 
             with self.conn.cursor() as self.curs:
-                for i in userList:
-                    query = "insert into homeSystem values (%s, %s, %s);"
-                    self.curs.execute(query, (PiKey, userList[i], url))
+                for email in kakaoUserList:
+                    query = "insert into homeSystem values (%s, %s, %s, %s);"
+                    self.curs.execute(query, (PiKey, self.KAKAO_TALK, email, url))
+            self.conn.commit()
+
+            with self.conn.cursor() as self.curs:
+                for email in naverUserList:
+                    query = "insert into homeSystem values (%s, %s, %s, %s);"
+                    self.curs.execute(query, (PiKey, self.NAVER_TALK, email, url))
             self.conn.commit()
 
         except:
             with self.conn.cursor() as self.curs:
-                for email in userList:
-                    query = "insert into homeSystem values (%s, %s, %s);"
-                    self.curs.execute(query, (PiKey, email, url))
+                for email in naverUserList:
+                    query = "insert into homeSystem values (%s, %s, %s, %s);"
+                    self.curs.execute(query, (PiKey, self.KAKAO_TALK, email, url))
             self.conn.commit()
 
-    def insertUserData(self, user_key, email, PiKey):
-        with self.conn.cursor() as self.curs:
-            query = "select * from user where user.email = %s;"
-            self.curs.execute(query, email)
-            rows = self.curs.fetchall()
+            with self.conn.cursor() as self.curs:
+                for email in naverUserList:
+                    query = "insert into homeSystem values (%s, %s, %s, %s);"
+                    self.curs.execute(query, (PiKey, self.NAVER_TALK, email, url))
+            self.conn.commit()
 
-            if len(rows) > 0 :
-                message = "등록된 유저"
-                return message
-            try:
-                with self.conn.cursor() as self.curs:
-                    query = "select * from user where user.email=%s and user.PiKey=%s;"
-                    self.curs.execute(query, (email,PiKey))
+    def insertUserData(self, platform, user_key, email, PiKey):
+        if platform == "kakao-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select * from kakaoUser where kakaoUser.email = %s;"
+                self.curs.execute(query, email)
+                rows = self.curs.fetchall()
 
-                    query = "insert into user values (%s, %s, %s);"
-                    self.curs.execute(query, (user_key, email, PiKey))
-                    self.conn.commit()
-                message = "등록 완료"
-                return message
+                if len(rows) > 0 :
+                    message = "등록된 유저"
+                    return message
+                try:
+                    with self.conn.cursor() as self.curs:
+                        query = "select * from kakaoUser where kakaoUser.email=%s and kakaoUser.PiKey=%s;"
+                        self.curs.execute(query, (email,PiKey))
 
-            except:
-                message = "등록되지 않은 키"
-                return message
+                        query = "insert into kakaoUser values (%s, %s, %s);"
+                        self.curs.execute(query, (user_key, email, PiKey))
+                        self.conn.commit()
+                    message = "등록 완료"
+                    return message
 
-    def findURLandPiKey(self, user_key):
-        with self.conn.cursor() as self.curs:
-            query = "select url,user.PiKey from user join homeSystem on user.Email=homeSystem.Email where user.user_key=%s;"
-            self.curs.execute(query, user_key)
+                except:
+                    message = "등록되지 않은 키"
+                    return message
+        else: # if platform == "naver-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select * from naverUser where naverUser.email = %s;"
+                self.curs.execute(query, email)
+                rows = self.curs.fetchall()
+
+                if len(rows) > 0:
+                    message = "등록된 유저"
+                    return message
+                try:
+                    with self.conn.cursor() as self.curs:
+                        query = "select * from naverUser where naverUser.email=%s and naverUser.PiKey=%s;"
+                        self.curs.execute(query, (email, PiKey))
+
+                        query = "insert into naverUser values (%s, %s, %s);"
+                        self.curs.execute(query, (user_key, email, PiKey))
+                        self.conn.commit()
+                    message = "등록 완료"
+                    return message
+
+                except:
+                    message = "등록되지 않은 키"
+                    return message
+
+
+    def findURLandPiKey(self, platform, user_key):
+        if platform == "kakao-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select url,kakaoUser.PiKey from kakaoUser join homeSystem on kakaoUser.Email=homeSystem.Email where kakaoUser.user_key=%s;"
+                self.curs.execute(query, user_key)
+        else:  # if platform == "naver-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select url,naverUser.PiKey from naverUser join homeSystem on naverUser.Email=homeSystem.Email where naverUser.user_key=%s;"
+                self.curs.execute(query, user_key)
 
         rows = self.curs.fetchall()
         url = rows[0][0]
         PiKey = rows[0][1]
         return url, PiKey
 
-    def checkRegistedUser(self, user_key):
+    def checkRegistedUser(self, platform, user_key):
+        if platform == "kakao-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select email from kakaoUser where kakaoUser.user_key=%s;"
+                self.curs.execute(query, user_key)
+                rows = self.curs.fetchall()
+                if len(rows) > 0: return True
+                else : return False
+
+        else: # if platform == "naver-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select email from naverUser where naverUser.user_key=%s;"
+                self.curs.execute(query, user_key)
+                rows = self.curs.fetchall()
+                if len(rows) > 0:
+                    return True
+                else:
+                    return False
+
+    def findUserEmail(self, platform, user_key):
+        if platform == "kakao-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select email from kakaoUser where kakaoUser.user_key=%s;"
+                self.curs.execute(query,user_key)
+                rows = self.curs.fetchall()
+                if len(rows) > 0:
+                    message = "회원님의 E-mail은 아래와 같습니다\n %s" % (rows[0])
+                    return message
+                else:
+                    return "등록되지 않은 유저입니다. 등록부터 진행해주세요."
+
+        else: # if platform == "naver-talk":
+            with self.conn.cursor() as self.curs:
+                query = "select email from naverUser where naverUser.user_key=%s;"
+                self.curs.execute(query,user_key)
+                rows = self.curs.fetchall()
+                if len(rows) > 0:
+                    message = "회원님의 E-mail은 아래와 같습니다\n %s" % (rows[0])
+                    return message
+                else:
+                    return "등록되지 않은 유저입니다. 등록부터 진행해주세요."
+
+    def getUserlist(self, PiKey):
+        """
+        Unfortunately, kakao platform don't support push service.
+        Therefore naver-talk only support push service, and find users to use naver platform...
+        """
         with self.conn.cursor() as self.curs:
-            query = "select email from user where user.user_key=%s;"
-            self.curs.execute(query, user_key)
-
+            query = "select naverUser.user_key from naverUser join homeSystem " \
+                    "on naverUser.Email=homeSystem.Email where homeSystem.PiKey=%s;"
+            self.curs.execute(query, PiKey)
+            userlist = []
             rows = self.curs.fetchall()
-            if len(rows) > 0: return True
-            else : return False
+            
+            for row in rows:
+                userlist.append(row)
 
-    def findUserEmail(self, user_key):
-        with self.conn.cursor() as self.curs:
-            query = "select email from user where user.user_key=%s;"
-            self.curs.execute(query,user_key)
-            rows = self.curs.fetchall()
-
-        if len(rows) > 0:
-            message = "회원님의 E-mail은 아래와 같습니다\n %s" %(rows[0])
-            return message
-        else :
-            return "등록되지 않은 유저입니다. 등록부터 진행해주세요."
+            return userlist
 
     def closeDatabase(self):
         self.conn.close()
