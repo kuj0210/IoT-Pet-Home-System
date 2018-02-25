@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.3"
+  - "3.6"
+  - "3.6.3"
+  
+addons:
+  ssh_known_hosts: pethome.ga:443
+  
+install:
+  - pip install requests
+  - pip install flask
+  
+script: pytest
+
+branches:
+  only:
+  - master
