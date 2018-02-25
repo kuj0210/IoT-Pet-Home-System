@@ -100,9 +100,36 @@ And you can see the pet directly through the Pi Camera.
 **Door(open)** | **Door(close)**
 |![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png) <br> When the motor stops, the door is closed by the resilience of the weight. |
 
+
+
 ## **Client & Server Structure**
 
+# **Full server structure**
+
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png?raw=true)
+
+
+- Client: The client represents a user using messanger application.
+- Server(Main Server): This server is main of full structure. It manage chatbot and commands for controlling PiServer.
+- PiServer(RaspberryPi): This server manage to control motors, camera and push thread.
+
+
+# **Client & Main server structure**
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_client&mainserver.png?raw=true)
+
+
+ Client will order various commands. (regist user, control to pet-home etc) And the main-server get this commands. Before main-server get this commands, messages go to API server and API server give the data to main-server.(data:json type) After main-server get this type's data, it'll parse this data and make operation list for ordering to PiServer. The main-server send operation list to PiServer and make reply-message for sending to user.<br>
+ But if a user don't regist to server or don't registed in PiServer's userlist, this user can't use this chatbot. Main-server use database for managing user-data and registed Pi-servers. Below inform main-server and pi-server structure.
+
+
+# **Main server & Pi-server structure**
+
+![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_mainserver&piserver.png?raw=true)
+
+
+This structure is main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
+
 
 ## **How to use**
 
@@ -148,6 +175,7 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
      
 
 
+
 ## **How to connect motor wires**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/raspberry-pi-pinout.png)
@@ -175,8 +203,8 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 
  ## **Notes**
  
- - In issue#36 :: Reference PPT and video(참고용 PPT 및 동영상)
+ - In issue#36 :: Reference PPT and video(참고용 PPT 및 동영상)<br>
    https://github.com/kuj0210/opensourceproject/issues/36
    
- - Installation method of Rasbian
+ - Installation method of Rasbian<br>
    https://www.raspberrypi.org/documentation/installation/installing-images/
