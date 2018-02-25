@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import threading
 import os
@@ -14,29 +14,25 @@ class FeedOperation(threading.Thread):
         self.sem = threading.Semaphore(1)
 
     def run(self):
-        #self.motor.start(0)
+        self.motor.start(0)
         while not self.feedEvent.isSet():
             try:
                 self.feedEvent.wait()
                 print("Feed 시작!")
-                #self.motor.ChangeDutyCycle(3)
+                self.motor.ChangeDutyCycle(3)
                 time.sleep(self.OPEN_TERM)
-                #self.motor.ChangeDutyCycle(6)
+                self.motor.ChangeDutyCycle(6)
                 time.sleep(self.CLOSE_TERM)
-                #self.motor.stop()
+                self.motor.stop()
                 print("Feed Complete")
-
-                if os.path.exists("fifo"):
-                    fifo = open("fifo", "w")
-                    print("send message to fifo.")
-                    fifo.write(self.FEED_DONE)
+                os.environ["PUSH"] = "FEED"
 
                 self.feedEvent.clear()
 
             except KeyboardInterrupt:
                 print("Feed operation interrupt")
                 self.feedEvent.clear()
-                #self.motor.stop()
+                self.motor.stop()
 
     def setPin(self, p):
         self.motor = p

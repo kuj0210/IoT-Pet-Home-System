@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -12,25 +12,25 @@ class DoorOperation(threading.Thread):
         self.doorEvent = threading.Event()
 
     def run(self):
-        #self.motor.start(0)
+        self.motor.start(0)
         while not self.doorEvent.isSet():
             try:
                 self.doorEvent.wait()
                 print("Door 시작!")
-                #self.motor.ChangeDutyCycle(17)
+                self.motor.ChangeDutyCycle(17)
                 time.sleep(self.OPEN_TERM)
-                #self.motor.ChangeDutyCycle(7)
+                self.motor.ChangeDutyCycle(7)
                 time.sleep(self.STOP_TERM)
-                #self.motor.ChangeDutyCycle(5)
+                self.motor.ChangeDutyCycle(5)
                 time.sleep(self.CLOSE_TERM)
-                #self.motor.stop()
+                self.motor.stop()
                 print("Door Complete")
                 self.doorEvent.clear()
 
             except KeyboardInterrupt:
                 print("Door operation interrupt")
                 self.doorEvent.clear()
-                #self.motor.stop()
+                self.motor.stop()
 
     def setPin(self, p):
         self.motor = p

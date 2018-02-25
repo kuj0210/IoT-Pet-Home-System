@@ -16,8 +16,8 @@ cameraOperation = CameraOperation()
 feedOperation = FeedOperation()
 waterOperation = WaterOperation()
 doorOperation = DoorOperation()
-
-pushThread = PiPushThread(PiKey=PiKey)
+pushThread = PiPushThread()
+os.environ["PUSH"] = "NONE"
 
 operationURL = "/" + mPiSetting.getPiKey() + "/operation"
 operationCameraUploadURL = "/" + mPiSetting.getPiKey() + "/get_image"
@@ -60,19 +60,9 @@ def getOperationByServer():
             postStatusToServer["door"] = "using"
 
     if "camera" in operation:
-        #imagePath = "upload/" + cameraOperation.getFilename()
-
         if not cameraOperation.isCameraOnUnlock():
-            #result = cameraOperation.setCameraOperation()
+            cameraOperation.setCameraOperation()
             postStatusToServer["camera"] = "use"
-            #if result == "success":
-
-
-            #else:
-             #   postStatusToServer["camera"] = False
-
-              #  postStatusToServer["message"]["text"] = sendMSG
-              #  postStatusToServer["message"]["camera"] = False
 
         else:  # flag["isCamera"] is "fail":
             postStatusToServer["camera"] = "using"
@@ -90,50 +80,43 @@ if __name__ == "__main__":
         feed_pin = 19
         door_pin = 18
 
-       #GPIO.setmode(GPIO.BCM)
+       GPIO.setmode(GPIO.BCM)
 
         try:
-        #    GPIO.setup(water_pin, GPIO.OUT)
-        #   wp = GPIO.PWM(water_pin, 50)
+            GPIO.setup(water_pin, GPIO.OUT)
+            wp = GPIO.PWM(water_pin, 50)
             print("Water Operation Setting complete.")
         except:
             print("Error : In Water Operation")
 
         try:
-        #    GPIO.setup(feed_pin, GPIO.OUT)
-        #    fp = GPIO.PWM(feed_pin, 50)
+            GPIO.setup(feed_pin, GPIO.OUT)
+            fp = GPIO.PWM(feed_pin, 50)
             print("Feed Operation Setting complete.")
         except:
             print("Error : In Feed Operation")
 
         try:
-        #    GPIO.setup(door_pin, GPIO.OUT)
-        #    dp = GPIO.PWM(door_pin, 50)
+            GPIO.setup(door_pin, GPIO.OUT)
+            dp = GPIO.PWM(door_pin, 50)
             print("Door Operation Setting complete.")
         except:
             print("Error : In Door Operation")
 
-        #waterOperation.setPin(wp)
-        #feedOperation.setPin(fp)
-        #doorOperation.setPin(dp)
+        waterOperation.setPin(wp)
+        feedOperation.setPin(fp)
+        doorOperation.setPin(dp)
+
+        waterOperation.daemon = True
+        feedOperation.daemon = True
+        doorOperation.daemon = True
 
         waterOperation.start()
         feedOperation.start()
         doorOperation.start()
 
-        try:
-            if not os.path.exists("fifo"):
-                os.mkfifo("fifo")
-                pushThread.start()
-
-            else :
-                print("Already named pipe exist ...")
-                os.remove("fifo")
-                os.mkfifo("fifo")
-                pushThread.start()
-
-        except:
-                print("Don't make named pipe.\n**Therefore it can't support push service.")
+        pushThread.getPiKey(PiKey=PiKey)
+        pushThread.start()
 
         app.run(host='0.0.0.0', port=8888)
     else:
