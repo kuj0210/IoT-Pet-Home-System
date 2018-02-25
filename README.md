@@ -87,27 +87,14 @@ Manage the doors, feeds and water using three motors
 
 ## **Motor operation structure** 
 
-### Food
+| Food | Water |
+| :----: | :----: |
+|![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_food.png) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  |  ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_water.png) <br> Water is given by folding or unfolding the tube with the motor |
+**Door(open)** | **Door(close)**
+|![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png) <br> When the motor stops, the door is closed by the resilience of the weight. |
+
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_food.png)
-
-Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance
-
-### Water
-
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_water.png)
-
-Water is given by folding or unfolding the tube with the motor
-
-### Door
-
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png)
-
-Open the door by pulling the thread by the rotation of the motor
-
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png)
-
-When the motor stops, the door is closed by the resilience of the weight.
 
 ## **Client & Server Structure**
 
