@@ -1,8 +1,6 @@
 language: python3
 
 install: 
-- sudo apt-get update
-- sudo apt-get install mysql-server
 - sudo pip3 install requests
 - sudo pip3 install flask
 - sudo pip3 install pymsql
