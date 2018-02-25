@@ -3,7 +3,7 @@
 from compare import UsecaseList
 from ResponseMessage import Message
 from ServerUtility import ServerUtility
-import time
+from ScreenshotThread import ScreenshotThread
 
 # 동사, 명사중 아무거나 만족 : 50
 # 명사 반드시 만족 : 60
@@ -11,7 +11,11 @@ import time
 
 mServerUtility = ServerUtility()
 responseMessage = Message()
-SERVER_URL = "http://localhost:8080/download/"
+
+mScreenshotThread = ScreenshotThread()
+mScreenshotThread.daemon = True
+mScreenshotThread.setServerUtilityReference(mServerUtility)
+mScreenshotThread.start()
 
 usecase = UsecaseList()
 usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
@@ -174,25 +178,16 @@ class NaverMessageClass :
                         sendMSG += "\n" + responseMessage.getFailDoorMessage()
 
                 if getResultByPiServer["camera"] == "use":
-                    # mRegistUser.openDatabase()
-                    # print("이미지 파일 받는중...")
-                    # response = getImageFileFromPiServer(user_key=user_key)
-                    # now = time.localtime()
+                    mScreenshotThread.setUserKey(user_key=user)
+                    if not mScreenshotThread.isScreenshotThreadOnUnlock():
+                        mScreenshotThread.setScreenshotThreadOperation()
 
-                    # PATH = "upload/"
-                    # IMAGENAME = "Screenshot_%04d-%02d-%02d_%02d-%02d-%02d.jpg" %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
-
-                    # with open(PATH+IMAGENAME, 'wb') as f:
-                    #    for chunk in response.iter_content(chunk_size=2048):
-                    #        if chunk: f.write(chunk)
-                    # f.close()
-
-                    # print("image making success. %s" %(PATH+IMAGENAME))
                     if sendMSG == "None":
                         sendMSG = responseMessage.getSuccessCameraMessage()
+                        sendMSG += "사진을 업로드해드릴게요! 잠시만 기다려주세요 :)"
                     else:
                         sendMSG += responseMessage.getSuccessCameraMessage()
-                        sendMSG += SERVER_URL + "upload/Screenshot_2018-01-16_02-37-14.jpg"
+                        sendMSG += "사진을 업로드해드릴게요! 잠시만 기다려주세요 :)"
 
                 elif getResultByPiServer["camera"] == "using":
                     if sendMSG == "None":

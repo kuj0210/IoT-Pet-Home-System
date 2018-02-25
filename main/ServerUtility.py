@@ -25,9 +25,9 @@ class ServerUtility:
         self.mRegistUser.closeDatabase()
         return response
 
-    def getImageFileFromPiServer(self, user_key):
-        URL, PiKey = self.mRegistUser.findURLandPiKey(user_key)
-        url = URL + "/" + PiKey + "/upload"
+    def getImageFileFromPiServer(self, platform, user_key):
+        URL, PiKey = self.mRegistUser.findURLandPiKey(platform=platform, user_key=user_key)
+        url = URL + "/" + PiKey + "/get_image"
         print("Send to pi >> " + url)
         response = requests.get(url=url, stream=True)
 
