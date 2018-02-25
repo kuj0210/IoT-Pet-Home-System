@@ -4,9 +4,21 @@ python:
   - "3.6"
   - "3.6.3"
   - "3.7"
+  
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
+
+before_install:
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade
+  - sudo service mysql restart
 
 install: 
-- sudo apt-get install mysql-server
 - pip install requests
 - pip install flask
 - pip install pymsql
