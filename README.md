@@ -16,16 +16,16 @@
 * [Pet House Structure](#pet-house-structure)
 * [Motor operation structure](#motor-operation-structure)
 * [Client & Server Structure](#client--server-structure)
-  * Full server structure
-  * Client & Main server structure
-  * Main server & Pi-server structure
+  * [Full server structure](#full-server-structure)
+  * [Client & Main server structure](#client--main-server-structure)
+  * [Main server & Pi-server structure](#main-server--pi-server-structure)
 * [How to use](#how-to-use)
 * [How to connect motor wires](#how-to-connect-motor-wires)
   * [Food Motor](#food-motor)
   * [Water Motor](#water-motor)
   * [Door Motor](#door-motor)
 * [Notes](#notes)
-* [LICENSE](#LICENSE)
+* [LICENSE](#license)
 
 ## Introduction
 
