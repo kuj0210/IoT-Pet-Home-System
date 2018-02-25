@@ -1,8 +1,8 @@
 language: python3
 
 install: 
-- sudo pip3 install requests
-- sudo pip3 install flask
-- sudo pip3 install pymsql
+- pip3 install requests
+- pip3 install flask
+- pip3 install pymsql
 - sudo apt-get install python-dev
 - sudo apt-get install python-rpi.gpio
