@@ -88,7 +88,7 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Pet_House_Structure.png)
 
-Three motors are operated by messenger, and manage feeds, water and door. 
+Three motors are operated by messenger, and manage feeds, water and door.<br>
 And you can see the pet directly through the Pi Camera.
 
 
@@ -108,12 +108,14 @@ And you can see the pet directly through the Pi Camera.
 
 
 **1) Add Official account of Messanger(IoT Pet House System)**
+
  kakao-talk platform: @guineapighome (IoT 펫홈 관리 시스템), naver-talktalk platform: IoT 펫홈 시스템
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_first.PNG)
 
 
 **2) Enter chat in the format “[등록]/e-mail/Product-Key”**
+
  Check your device's product-key, and regist your email and product-key to chatbot-server.
  If you don't regist, chatbot-server don't support your command. 
  
@@ -121,6 +123,7 @@ And you can see the pet directly through the Pi Camera.
 
 
 **3) Enter chats that associated with food, water and door opening.**
+
 If you're a registed user, you can do chatting with IoT pet-home system!
 Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot.
 
@@ -129,9 +132,8 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 
 **4) If you don't know how to use or need to remind your account, please enter the command below.**
 
-"[사용법]" : This command will inform how to use this chatbot.
-
-"[정보]" : This command will inform your account that you registed at this chatbot-server.
+- "[사용법]" : This command will inform how to use this chatbot.<br>
+- "[정보]" : This command will inform your account that you registed at this chatbot-server.
      
      
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_etc.PNG)
