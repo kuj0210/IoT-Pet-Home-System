@@ -2,8 +2,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <img src="https://img.shields.io/badge/python-%3E%3D3-brightgreen.svg">
 <img src="https://img.shields.io/badge/release-v1.0.0-blue.svg">
-
 ### Pet House System is a tool that enables you to manage pets through Messenger.
+
 
 
 ## Index
@@ -17,11 +17,12 @@
 * [Motor operation structure](#motor-operation-structure)
 * [Client & Server Structure](#client--server-structure)
 * [How to use](#how-to-use)
-* [Notes](#notes)
 * [How to connect motor wires](#how-to-connect-motor-wires)
   * [Food Motor](#food-motor)
   * [Water Motor](#water-motor)
   * [Door Motor](#door-motor)
+* [Notes](#notes)
+* [LICENSE](#LICENSE)
 
 ## Introduction
 
@@ -208,6 +209,7 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
    
  - Installation method of Rasbian<br>
    https://www.raspberrypi.org/documentation/installation/installing-images/
+
 
 
  ## **LICENSE**
