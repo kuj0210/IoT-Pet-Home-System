@@ -1,7 +1,5 @@
 # <img src="https://github.com/kuj0210/opensourceproject/blob/master/README/pet_Image.jpg" width="64">Pet House System
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/kuj0210/IoT-Pet-Home-System.svg?branch=master)](https://github.com/kuj0210/IoT-Pet-Home-System)
-<br>
 
 ### Pet House System is a tool that enables you to manage pets through Messenger.
 
