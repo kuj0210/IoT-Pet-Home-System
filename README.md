@@ -1,7 +1,9 @@
 # <img src="https://github.com/kuj0210/opensourceproject/blob/master/README/pet_Image.jpg" width="64">Pet House System
-### Pet House System is a tool that allows you to manage through Messenger.
+
+
 
 ## Index
+* [Introduction](#introduction)
 * [Features](#features)
 * [Requirement](#requirement)
 * [Settings & Installation](#settings--installation)
@@ -19,7 +21,12 @@
   * [Food Motor](#food-motor)
   * [Water Motor](#water-motor)
   * [Door Motor](#door-motor)
- 
+
+## Introduction
+Pet House System is a tool that enables you to manage pets through Messenger.
+
+It's very simple to use because it uses a messenger. and Pet House system can help reduce pet worries because it is easy to manage pets when you are away on long trips or on sudden appointments.
+
 ## **Features**
  - Usage through Messenger
  - Raspberry Pi with chat-bot based System
