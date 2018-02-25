@@ -104,7 +104,7 @@ And you can see the pet directly through the Pi Camera.
 
 ## **Client & Server Structure**
 
-# **Full server structure**
+### **Full server structure**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png?raw=true)
 
@@ -114,7 +114,7 @@ And you can see the pet directly through the Pi Camera.
 - PiServer(RaspberryPi): This server manage to control motors, camera and push thread.
 
 
-# **Client & Main server structure**
+### **Client & Main server structure**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_client&mainserver.png?raw=true)
 
@@ -123,7 +123,7 @@ And you can see the pet directly through the Pi Camera.
  But if a user don't regist to server or don't registed in PiServer's userlist, this user can't use this chatbot. Main-server use database for managing user-data and registed Pi-servers. Below inform main-server and pi-server structure.
 
 
-# **Main server & Pi-server structure**
+### **Main server & Pi-server structure**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_mainserver&piserver.png?raw=true)
 
