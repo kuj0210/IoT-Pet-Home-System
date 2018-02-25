@@ -2,6 +2,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <img src="https://img.shields.io/badge/python-%3E%3D3-brightgreen.svg">
 [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/kuj0210/IoT-Pet-Home-System)
+[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=plastic&logo=github&label=Stars)](https://github.com/kuj0210/IoT-Pet-Home-System)
+
 
 
 
