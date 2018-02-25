@@ -90,9 +90,6 @@ Manage the doors, feeds and water using three motors
 **Door(open)** | **Door(close)**
 |![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png) <br> When the motor stops, the door is closed by the resilience of the weight. |
 
-
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_food.png)
-
 ## **Client & Server Structure**
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png?raw=true)
