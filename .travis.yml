@@ -1,0 +1,26 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+env: PUSH=NONE
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install mysql-server
+  
+install:
+  - pip install flask
+  - pip install coveralls
+  - pip install requests
+script: 
+  - sudo python3 /main/Server.py
+  - sudo python3 /main/RaspberryPi/PiServer.py
+
+after_success:
+  coveralls
+
+# safelist
+branches:
+  only:
+  - master
