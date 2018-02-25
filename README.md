@@ -120,17 +120,20 @@ And you can see the pet directly through the Pi Camera.
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_regist.PNG)
 
 
-**3) Enter chats that associated with food, water and door opening**
+**3) Enter chats that associated with food, water and door opening.**
 If you're a registed user, you can do chatting with IoT pet-home system!
 Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot.
 
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_operation.PNG)
 
 
-**4) If you don't know how to use or need to remind your account, please enter the command below**
+**4) If you don't know how to use or need to remind your account, please enter the command below.**
+
 "[사용법]" : This command will inform how to use this chatbot.
+
 "[정보]" : This command will inform your account that you registed at this chatbot-server.
      
+     
 ![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_etc.PNG)
 
 
@@ -156,6 +159,7 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 - Orange wired: connects to pin 12
 - Red wired: connects to 3v3 or 5v pin(one of pin 1, 2, 4, 17)
 - Brown wired: connects to GND pin(one of pin 6, 9, 14, 20, 25, 30, 34, 39)
+
 
 
  ## **Notes**
