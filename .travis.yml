@@ -6,6 +6,7 @@ python:
   - "3.7"
 
 install: 
+- sudo apt-get install mysql-server
 - pip install requests
 - pip install flask
 - pip install pymsql
