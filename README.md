@@ -1,6 +1,6 @@
 # <img src="https://github.com/kuj0210/opensourceproject/blob/master/README/pet_Image.jpg" width="64">Pet House System
 
-###Pet House System is a tool that enables you to manage pets through Messenger.
+### Pet House System is a tool that enables you to manage pets through Messenger.
 
 
 ## Index
