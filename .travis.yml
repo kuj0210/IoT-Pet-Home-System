@@ -1,15 +1,15 @@
 language: python
 python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
+  - "3.6.3"
+  - "3.7"
 env: PUSH=NONE
 before_install:
   - sudo apt-get update
-  - sudo apt-get install mysql-server
+  - sudo apt-get install python-dev
+  - sudo apt-get install python-rpi.gpio
   
 install:
+  - pip install pysql
   - pip install flask
   - pip install coveralls
   - pip install requests
