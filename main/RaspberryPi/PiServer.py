@@ -110,11 +110,13 @@ if __name__ == "__main__":
         waterOperation.daemon = True
         feedOperation.daemon = True
         doorOperation.daemon = True
+        cameraOperation.daemon = True
 
         waterOperation.start()
         feedOperation.start()
         doorOperation.start()
-
+        cameraOperation.start()
+        
         pushThread.getPiKey(PiKey=PiKey)
         pushThread.start()
 
