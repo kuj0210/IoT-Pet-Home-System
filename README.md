@@ -1,4 +1,4 @@
-# <img src="https://github.com/kuj0210/opensourceproject/blob/master/README/pet_Image.jpg" width="64">Pet House System
+# <img src="https://github.com/kuj0210/opensourceproject/blob/master/.README/pet_Image.jpg" width="64">Pet House System
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <img src="https://img.shields.io/badge/python-%3E%3D3-brightgreen.svg">
 <img src="https://img.shields.io/badge/release-v1.0.0-blue.svg">
@@ -90,7 +90,7 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 ## **Pet House Structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/Pet_House_Structure.png)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Pet_House_Structure.png)
 
 Three motors are operated by messenger, and manage feeds, water and door.<br>
 And you can see the pet directly through the Pi Camera.
@@ -100,9 +100,9 @@ And you can see the pet directly through the Pi Camera.
 
 | Food | Water |
 | :----: | :----: |
-|![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_food.png) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  |  ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_water.png) <br> Water is given by folding or unfolding the tube with the motor |
+|![](https://github.com/kuj0210/opensourceproject/blob/master/.README/motor_food.png) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  |  ![](https://github.com/kuj0210/opensourceproject/blob/master/.README/motor_water.png) <br> Water is given by folding or unfolding the tube with the motor |
 **Door(open)** | **Door(close)**
-|![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_open.png) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/opensourceproject/blob/master/README/motor_close.png) <br> When the motor stops, the door is closed by the resilience of the weight. |
+|![](https://github.com/kuj0210/opensourceproject/blob/master/.README/motor_open.png) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/opensourceproject/blob/master/.README/motor_close.png) <br> When the motor stops, the door is closed by the resilience of the weight. |
 
 
 
@@ -110,7 +110,7 @@ And you can see the pet directly through the Pi Camera.
 
 ### **Full server structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/Client&Server_Structure.png?raw=true)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Client&Server_Structure.png?raw=true)
 
 
 - Client: The client represents a user using messanger application.
@@ -120,7 +120,7 @@ And you can see the pet directly through the Pi Camera.
 
 ### **Client & Main server structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_client&mainserver.png?raw=true)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Structure_client&mainserver.png?raw=true)
 
 
  Client will order various commands. (regist user, control to pet-home etc) And the main-server get this commands. Before main-server get this commands, messages go to API server and API server give the data to main-server.(data:json type) After main-server get this type's data, it'll parse this data and make operation list for ordering to PiServer. The main-server send operation list to PiServer and make reply-message for sending to user.<br>
@@ -129,7 +129,7 @@ And you can see the pet directly through the Pi Camera.
 
 ### **Main server & Pi-server structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/Structure_mainserver&piserver.png?raw=true)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Structure_mainserver&piserver.png?raw=true)
 
 
 This structure is main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
@@ -143,7 +143,7 @@ This structure is main-server and pi-server(in RaspberryPi using flask framework
  - kakao-talk platform: @guineapighome (IoT 펫홈 관리 시스템)<br> 
  - naver-talktalk platform: IoT 펫홈 시스템
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_first.PNG)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/chatbot_first.PNG)
 
 
 **2) Enter chat in the format “[등록]/e-mail/Product-Key”**
@@ -151,7 +151,7 @@ This structure is main-server and pi-server(in RaspberryPi using flask framework
  Check your device's product-key, and regist your email and product-key to chatbot-server.<br>
  If you don't regist, chatbot-server don't support your command. 
  
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_regist.PNG)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/chatbot_regist.PNG)
 
 
 **3) Enter chats that associated with food, water and door opening.**
@@ -159,7 +159,7 @@ This structure is main-server and pi-server(in RaspberryPi using flask framework
 If you're a registed user, you can do chatting with IoT pet-home system!<br>
 Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot.
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_operation.PNG)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/chatbot_operation.PNG)
 
 
 **4) If you don't know how to use or need to remind your account, please enter the command below.**
@@ -167,7 +167,7 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 - "[사용법]" : This command will inform how to use this chatbot.<br>
 - "[정보]" : This command will inform your account that you registed at this chatbot-server.
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_etc.PNG)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/chatbot_etc.PNG)
 
 
 **5) If you forget to feed or set water to your pet, chatbot's push service support you!**
@@ -175,14 +175,14 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 - If you don't set feed or water to your pet, push alarm inform to you once an hour.
 - But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/chatbot_push.PNG)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/chatbot_push.PNG)
      
 
 
 
 ## **How to connect motor wires**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/README/raspberry-pi-pinout.png)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/raspberry-pi-pinout.png)
 
 
 ### Food Motor
