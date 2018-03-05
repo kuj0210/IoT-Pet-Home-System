@@ -1,30 +1,80 @@
 #-*-coding: utf-8-*-
+'''
+Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
+LICENSE : GPL v3 LICENSE
+
+- Description : https://github.com/kuj0210/IoT-Pet-Home-System
+- If you want to contact us, please send mail "beta1360@naver.com"
+'''
+
+from konlpy.tag import Kkma
+
+GRAVITY_N = 60  # if it meet N list, think true
+GRAVITY_ANY = 40  # if it meet N or V list  think true
+GRAVITY_ALL = 100  # if it meet N or V list  think true
 
 class KeyWord:
     def __init__(self,word):
         self.keyWord=word
         self.n=[]
         self.v=[]
-        self.cp=0
-
+        self.gravity=0
     def setNouns(self,list):
         self.n=list
     def setVerbs(self,list):
         self.v=list
-    def setCp(self,cp):
-        self.cp=cp
-
-    def isMine(self,sentence):
+    def setGravity(self,gravity):
+        self.gravity=gravity
+    def isMe(self,sentence,originLIST):
         count =0
-        for verb in self.v:
-            if verb in sentence:
-                count+=50
+        i=0
+        index = -1
 
         for noun in self.n:
-            if noun in sentence:
-                count+=60
-        return count
+            for i in range(len(sentence)):
+                if noun == sentence[i]:
+                    #sprint(noun)
+                    count+=GRAVITY_N
+                    break
+            if count>=GRAVITY_N:
+                break
+        first = count
+        for verb in self.v:
+            for j in range(i+1,len(sentence)):
+                if verb == sentence[j]:
+                    #print(verb)
+                    count+=GRAVITY_ANY
+                    break
+            if count>first:
+                break
 
+        flag = -1
+        if '고' in sentence:
+            index = sentence.index('고')
+            flag = 1
+        elif '이랑' in sentence:
+            index = sentence.index('이랑')
+            flag = 2
+        if index !=-1 and 'N' in originLIST[index-1][1]and 'N' in originLIST[index+1][1]:
+            flag*=10
+
+
+
+        if self.gravity<=count:
+            if noun in sentence:
+                sentence.remove(noun)
+            if verb in sentence and flag <10:
+                sentence.remove(verb)
+
+            if flag == 10:
+                sentence.remove("고")
+            elif flag == 20:
+                sentence.remove("이랑")
+
+            return True
+
+
+        return False
     def _print(self):
         print("키워드 명칭: "+self.keyWord)
         print(self.n)
@@ -32,24 +82,42 @@ class KeyWord:
         print("")
 
 class UsecaseList:
+    ##don't Touch
     def __init__(self):
+        self.kkma = Kkma()
+        self.kkma.pos(u'성능을 위한 더미 데이터')  # this is dummy for performance
         self.usecase=[]
+        self.parsingNVLIST =[]
+        self.parsingLIST = []
+    def getNV(self,sentence):
+        self.parsingNVLIST=[]
+        self.parsingLIST=[]
+        data =self.kkma.pos(sentence)
+        for list in data:
+            if 'N' in list[1] or list[1].count('V')>1 or'C' in list[1] :
+                self.parsingNVLIST.append(list[0])
+                self.parsingLIST.append(list)
+        #print(NVList)
+    ##don't Touch
 
-    def setUsecase(self,name,nList,vList,cp):
-        self.usecase.append(KeyWord(name))
-        self.usecase[len(self.usecase)-1].setNouns(nList)
-        self.usecase[len(self.usecase)-1].setVerbs(vList)
-        self.usecase[len(self.usecase) - 1].setCp(cp)
+
     def printList(self):
         for item in self.usecase:
             item._print()
 
-
+    # if you call that it return requestList from sentence
     def analyzeSentence(self,sentence):
         request =[]
+        self.getNV(sentence)
         for item in self.usecase:
-            if item.isMine(sentence)>=item.cp:
-
+            if item.isMe(self.parsingNVLIST,self.parsingLIST)==True:
                 request.append(item.keyWord)
+        print(request)
         return request
-    
+    #it can set your UseCase
+    def setUsecase(self, name, nList, vList, gravity):
+        self.usecase.append(KeyWord(name))
+        keyword = self.usecase[len(self.usecase) - 1]
+        keyword.setNouns(nList)
+        keyword.setGravity(gravity)
+        keyword.setVerbs(vList)

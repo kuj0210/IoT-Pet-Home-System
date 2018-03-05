@@ -1,9 +1,15 @@
+'''
+Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
+LICENSE : GPL v3 LICENSE
+
+- Description : https://github.com/kuj0210/IoT-Pet-Home-System
+- If you want to contact us, please send mail "beta1360@naver.com"
+'''
 #-*-coding: utf-8-*-
 
-from compare import UsecaseList
-from ResponseMessage import Message
-from ServerUtility import ServerUtility
 from ScreenshotThread import ScreenshotThread
+from ServerUtility import ServerUtility
+from ResponseMessage import Message
 
 # 동사, 명사중 아무거나 만족 : 50
 # 명사 반드시 만족 : 60
@@ -17,14 +23,6 @@ mScreenshotThread.daemon = True
 mScreenshotThread.setServerUtilityReference(mServerUtility)
 mScreenshotThread.start()
 
-usecase = UsecaseList()
-usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
-usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
-usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
-usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
-usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
-usecase.setUsecase("information",["[정보]"],["[정보]"],50)
-usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
 
 def parsingPushData(message):
     """Push data type
@@ -97,42 +95,20 @@ class NaverMessageClass :
     def leaveEvent(self):
         return self.leaveMSG
 
-    def sendEvent(self, user, message):
+    def sendEvent(self, user, message, usecase):
 
         result = usecase.analyzeSentence(message)
         print(result)
 
         if "howToUse" in result:
-            return self.howToUse
+            return responseMessage.inform_howToUse_Message()
 
         elif 'regist' in result:
-            try:
-                data = message.split("/")
-                email = data[1]
-                PiKey = data[2]
-
-            except:
-                return self.registErrorMSG
-
-            mServerUtility.openDB()
-            regist_result = mServerUtility.getDatabase().insertUserData(platform="naver-talk", user_key=user, email=email, PiKey=PiKey)
-            mServerUtility.closeDB()
-
-            if regist_result == "등록된 유저":
-                return self.registedUserMSG
-
-            elif regist_result == "등록되지 않은 키":
-                return self.unregistKeyMSG
-
-            else:  # regist_result == "등록 완료"
-                return self.successToRegistMSG
+            return responseMessage.regist_userMessage(
+                message=message, user_key=user, mServerUtility=mServerUtility)
 
         elif "information" in result:
-            mServerUtility.openDB()
-            resultToFindUserEmail = mServerUtility.getDatabase().findUserEmail(platform="naver-talk", user_key=user)
-            mServerUtility.openDB()
-
-            return resultToFindUserEmail
+            return responseMessage.inform_userInformation_Message(user_key=user,mServerUtility=mServerUtility)
 
         else:  # elif 'regist' not in result:
             mServerUtility.openDB()
@@ -142,68 +118,16 @@ class NaverMessageClass :
                 operation["operation"] = result
                 response = mServerUtility.postPiOperation(platform="naver-talk", user_key=user, operation=operation)
                 getResultByPiServer = response.json()
-                sendMSG = "None"
 
-                if getResultByPiServer["water"] == "use":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getContinueWaterMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getContinueWaterMessage()
-                elif getResultByPiServer["water"] == "using":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getFailWaterMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getFailWaterMessage()
-
-                if getResultByPiServer["feed"] == "use":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getContinueFeedMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getContinueFeedMessage()
-                elif getResultByPiServer["feed"] == "using":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getFailFeedMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getFailFeedMessage()
-
-                if getResultByPiServer["door"] == "use":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getContinueDoorMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getContinueDoorMessage()
-                elif getResultByPiServer["door"] == "using":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getFailDoorMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getFailDoorMessage()
-
-                if getResultByPiServer["camera"] == "use":
-                    mScreenshotThread.setUserKey(user_key=user)
-                    if not mScreenshotThread.isScreenshotThreadOnUnlock():
-                        mScreenshotThread.setScreenshotThreadOperation()
-
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getSuccessCameraMessage()
-                        sendMSG += "사진을 업로드해드릴게요! 잠시만 기다려주세요 :)"
-                    else:
-                        sendMSG += responseMessage.getSuccessCameraMessage()
-                        sendMSG += "사진을 업로드해드릴게요! 잠시만 기다려주세요 :)"
-
-                elif getResultByPiServer["camera"] == "using":
-                    if sendMSG == "None":
-                        sendMSG = responseMessage.getFailCameraMessage()
-                    else:
-                        sendMSG += "\n" + responseMessage.getFailCameraMessage()
-
-                if sendMSG == "None":
-                    sendMSG = "현재 지원하지 않는 기능이예요 :("
+                sendMSG = responseMessage.operation_result_Message(
+                    getResultByPiServer=getResultByPiServer, ServerUtility=ServerUtility, user_key=user)
 
                 return sendMSG
 
             else:  # elif isRegistedUser is False
                 return self.unregistedUserMSG
 
-    def manageEvent(self, data):
+    def manageEvent(self, data, usecase):
         sendMSG = "None"
         user = data["user"]
 
@@ -216,7 +140,7 @@ class NaverMessageClass :
         elif data["event"] == "send":
             message = data["textContent"]["text"]
             if data["textContent"]["inputType"] == "typing":
-                sendMSG = self.sendEvent(user=user,message=message)
+                sendMSG = self.sendEvent(user=user,message=message,usecase=usecase)
             else:
                 sendMSG = "현재 지원하지 않는 타입의 메세지예요 ㅠㅠ"
 
@@ -237,15 +161,14 @@ class NaverMessageClass :
 
         sendMSG = parsingPushData(message)
 
-        for user in userlist:
-            print(userlist)
-            for u in user:
-                postPushMessage = {
-                    "event": "send",
-                    "user": u,
-                    "textContent": {
-                        "text" : sendMSG
-                    }
+        print(userlist[0])
+        for user in userlist[0]:
+            postPushMessage = {
+                "event": "send",
+                "user": user,
+                "textContent": {
+                    "text" : sendMSG
                 }
-                print(postPushMessage)
-                mServerUtility.postToNaverTalk(body=postPushMessage)
+            }
+            print(postPushMessage)
+            mServerUtility.postToNaverTalk(body=postPushMessage)

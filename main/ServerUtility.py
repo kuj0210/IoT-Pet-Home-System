@@ -1,5 +1,13 @@
+'''
+Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
+LICENSE : GPL v3 LICENSE
+
+- Description : https://github.com/kuj0210/IoT-Pet-Home-System
+- If you want to contact us, please send mail "beta1360@naver.com"
+'''
+import json
+import requests
 from RegistUser import RegistUser
-import requests, json
 
 class ServerUtility:
     def __init__(self):
@@ -31,8 +39,13 @@ class ServerUtility:
         print("Send to pi >> " + url)
         response = requests.get(url=url, stream=True)
 
-        self.mRegistUser.closeDatabase()
         return response
+
+    def imageReciever(self, response, filename):
+        with open(filename, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=2048):
+                if chunk: f.write(chunk)
+        f.close()
 
     def updatePiData(self, PiKey, kakaoUserList, naverUserList, url):
         self.mRegistUser.openDatabase()
