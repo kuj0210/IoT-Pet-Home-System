@@ -217,7 +217,7 @@ Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot
 
  ## **LICENSE**
  
- IoT-Pet-Home-System is licensed under [![the GNU GENERAL PUBLIC LICENSE v3]](#https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE).
+ IoT-Pet-Home-System is licensed under [![the GNU GENERAL PUBLIC LICENSE v3](#https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE)].
  
  ```
  Copyright (C) 2017-present, kuj0210, KeonHeeLee, seok8418
