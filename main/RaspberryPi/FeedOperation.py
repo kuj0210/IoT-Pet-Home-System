@@ -1,4 +1,11 @@
-import RPi.GPIO as GPIO
+'''
+Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
+LICENSE : GPL v3 LICENSE
+
+- Description : https://github.com/kuj0210/IoT-Pet-Home-System
+- If you want to contact us, please send mail "beta1360@naver.com"
+'''
+#import RPi.GPIO as GPIO
 import time
 import threading
 import os
@@ -14,16 +21,17 @@ class FeedOperation(threading.Thread):
         self.sem = threading.Semaphore(1)
 
     def run(self):
-        self.motor.start(0)
+
         while not self.feedEvent.isSet():
             try:
                 self.feedEvent.wait()
                 print("Feed 시작!")
-                self.motor.ChangeDutyCycle(3)
+                #self.motor.start(0)
+                #self.motor.ChangeDutyCycle(3)
                 time.sleep(self.OPEN_TERM)
-                self.motor.ChangeDutyCycle(6)
+                #self.motor.ChangeDutyCycle(6)
                 time.sleep(self.CLOSE_TERM)
-                self.motor.stop()
+                #self.motor.stop()
                 print("Feed Complete")
                 os.environ["PUSH"] = "FEED"
 
@@ -32,7 +40,7 @@ class FeedOperation(threading.Thread):
             except KeyboardInterrupt:
                 print("Feed operation interrupt")
                 self.feedEvent.clear()
-                self.motor.stop()
+                #self.motor.stop()
 
     def setPin(self, p):
         self.motor = p
