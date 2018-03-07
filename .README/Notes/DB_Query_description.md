@@ -3,7 +3,9 @@
 Our system uses MySQL to handle information from pet homes and user registrations.<br/>
 To do so, we handle the two DB tables and the detailed query are as follows :
 
-## 1. Create or Use Database<br/>
+
+## 1. Create or Use Database <br/>
+
 
 **if USERdata database is existed**
 ```
