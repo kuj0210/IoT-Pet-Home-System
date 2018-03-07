@@ -1,9 +1,9 @@
-<H1> DB Query description (MySQL)
+# DB Query description (MySQL)
 
-<H5>Our system uses MySQL to handle information from pet homes and user registrations.<br/>
+Our system uses MySQL to handle information from pet homes and user registrations.<br/>
 To do so, we handle the two DB tables and the detailed query are as follows :
 
-<H2> 1. Create or Use Database<br/>
+## 1. Create or Use Database<br/>
 
 **if USERdata database is existed**
 ```
@@ -22,9 +22,9 @@ collate utf8_general_ci;
 <**Why use utf8?**    Because it could handle Hangul, we set it as utf-8.>
 
 
-<H2> 2. Create or Use Tables<br/>
+## 2. Create or Use Tables<br/>
 
-<H3> 2-1. homeSystem table<br/>
+### 2-1. homeSystem table<br/>
 
 First, we must check whether the homeSystem table exists. Therefore use the query below.<br/>
 
@@ -50,8 +50,8 @@ create table homeSystem(
   to the absence of a registered device.
   
   
-<H3> 2-2. %%%%%User<br/>
-<H6>(%%%%% is platform's name. not NULL(NaN))<br/>
+### 2-2. %%%%%User<br/>
+(%%%%% is platform's name. not NULL(NaN))<br/>
 
 First, we must check whether the tables exist. Therefore use the querys below.
 
