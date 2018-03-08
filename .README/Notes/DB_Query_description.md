@@ -55,7 +55,7 @@ create table homeSystem(
 ### 2-2. %%%%%User<br/>
 (%%%%% is platform's name. not NULL(NaN))<br/>
 
-First, we must check whether the tables exist. Therefore use the querys below.
+First, we must check whether the tables exist. Therefore use the queries below.
 
 ```
 select * from kakaoUser; # This query is used to kakao-talk platform.
@@ -92,7 +92,7 @@ create table naverUser(
 ```
 select * from homeSystem;
 
-# Please use the querys for each platform.
+# Please use the queries for each platform.
 select * from kakaoUser;
 select * from naverUser;
 ```
@@ -100,3 +100,12 @@ select * from naverUser;
 Since we created the table earlier, we have to use it now. To use the table, please use the query above.<br/>
 After looking at the table, please refer o the server's "RegistUser.py" source code to handle the data in detail.
 
+
+## 3. Example of Using
+
+First use database;USERdata. 
+```
+use USERdata;
+```
+
+<Continue>
