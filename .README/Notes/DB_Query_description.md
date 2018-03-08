@@ -83,5 +83,20 @@ create table naverUser(
        # Naver-talk-talk platform.
 ```
 
+- The tables above contain user information for each Chatbot platform. <br/>
+- When the user registers with the user, the "INSERT query" is placed in the table above to fit each platform.
 
-< Continue... >
+
+### 2-3. Use these tables.<br/>
+
+```
+select * from homeSystem;
+
+# Please use the querys for each platform.
+select * from kakaoUser;
+select * from naverUser;
+```
+
+Since we created the table earlier, we have to use it now. To use the table, please use the query above.<br/>
+After looking at the table, please refer o the server's "RegistUser.py" source code to handle the data in detail.
+
