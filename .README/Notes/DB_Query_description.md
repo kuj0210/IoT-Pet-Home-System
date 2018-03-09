@@ -124,7 +124,7 @@ insert into naverUser values ("user-key","email","naver-talk");
 ```
 
 For each platform, use the above SQL statement. <br/>
-When a user uses the command "[등록]",they use this SQL statement.
+When a user uses the command "[등록]", this SQL statement is used.
 
 
 ## 4. Examples of Using <br/>
