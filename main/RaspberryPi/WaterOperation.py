@@ -1,4 +1,11 @@
-import RPi.GPIO as GPIO
+'''
+Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
+LICENSE : GPL v3 LICENSE
+
+- Description : https://github.com/kuj0210/IoT-Pet-Home-System
+- If you want to contact us, please send mail "beta1360@naver.com"
+'''
+#import RPi.GPIO as GPIO
 import time
 import threading
 import os
@@ -14,18 +21,19 @@ class WaterOperation(threading.Thread):
         self.waterEvent = threading.Event()
 
     def run(self):
-        self.p.start(0)
+
         while not self.waterEvent.isSet():
             try:
-                self.waterEvent.wait()
+                #self.waterEvent.wait()
                 print("Water 시작!")
-                self.motor.ChangeDutyCycle(8)
+                # self.p.start(0)
+                #self.motor.ChangeDutyCycle(8)
                 time.sleep(self.OPEN_TERM)
-                self.motor.ChangeDutyCycle(6.8)
+                #self.motor.ChangeDutyCycle(6.8)
                 time.sleep(self.STOP_TERM)
-                self.motor.ChangeDutyCycle(5)
+                #self.motor.ChangeDutyCycle(5)
                 time.sleep(self.CLOSE_TERM)
-                self.motor.stop()
+                #self.motor.stop()
                 print("Water Complete")
 
                 os.environ["PUSH"] = "WATER"
@@ -34,7 +42,7 @@ class WaterOperation(threading.Thread):
             except KeyboardInterrupt:
                 print("Water operation interrupt")
                 self.waterEvent.clear()
-                self.motor.stop()
+                #self.motor.stop()
 
     def setPin(self, p):
         self.motor = p

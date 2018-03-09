@@ -82,8 +82,8 @@ def push_alarm():
     return "HTTPS/1.1 200 OK"
 
 if __name__ == "__main__":
-    #ssl_cert = '/etc/letsencrypt/live/pethome.ga/fullchain.pem'
-    #ssl_key =  '/etc/letsencrypt/live/pethome.ga/privkey.pem'
-    #contextSSL =  (ssl_cert, ssl_key)
-    app.run(host='0.0.0.0', port=443, debug = True)#, ssl_context = contextSSL)
+    ssl_cert = '/etc/letsencrypt/live/pethome.ga/fullchain.pem'
+    ssl_key =  '/etc/letsencrypt/live/pethome.ga/privkey.pem'
+    contextSSL =  (ssl_cert, ssl_key)
+    app.run(host='0.0.0.0', port=443, debug = True, ssl_context = contextSSL)
 
