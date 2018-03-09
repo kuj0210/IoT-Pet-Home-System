@@ -129,9 +129,84 @@ When a user uses the command "[등록]", this SQL statement is used.
 
 ## 4. Examples of Using <br/>
 
-**First** use database;USERdata. 
+**Common point** use database;USERdata. 
+
 ```
 use USERdata;
 ```
 
-**Second** 
+### 4-1. Check registed user
+
+```
+# if platform is "kakao-talk":
+select email from kakaoUser where kakaoUser.user_key=user_key;
+
+# else (if platform is "naver-talk")
+select email from naverUser where naverUser.user_key=user_key;
+```
+
+- This query sentence is used to determine whether the user using the Chatbot is a registered user on the server.
+
+
+### 4-2. Find URL and PiKey
+
+```
+# if platform is "kakao-talk":
+select url,kakaoUser.PiKey 
+from kakaoUser join homeSystem on kakaoUser.Email=homeSystem.Email 
+where kakaoUser.user_key=user_key;
+
+# else (if platform is "naver-talk")
+select url,naverUser.PiKey 
+from naverUser join homeSystem on naverUser.Email=homeSystem.Email 
+where naverUser.user_key=%s;
+```
+
+- This query sentence is usually used when connecting to a device.
+
+
+### 4-3. Get userlist
+
+```
+select naverUser.user_key 
+from naverUser join homeSystem on naverUser.Email=homeSystem.Email 
+where homeSystem.PiKey=PiKey;
+```
+
+- Use this query sentence when using the push alarm function, but at this time, <br/>
+  the push alarm function is only supported with naver-talk-talk, so use the sentence above.
+  
+  
+### 4-4. Find user e-mail
+
+```
+# if platform is "kakao-talk":
+select email from kakaoUser where kakaoUser.user_key=user_key;
+
+# else (if platform is "naver-talk")
+select email from naverUser where naverUser.user_key=user_key;
+```
+
+- Use this query sentence if the user forgets his account.
+- It is a query sentence that is called using the command "[정보]".
+
+
+### 4-5. Update homeSystem table.
+
+```
+delete from homeSystem where PiKey="PiKey";
+
+# for user in userlist :
+#    if email in kakaoUserList :
+        insert into homeSystem values ("PiKey", "kakao-talk", "your@email", "url");
+        
+#    if email in naverUserList :
+        insert into homeSystem values ("PiKey", "naver-talk", "your@email", "url");
+```
+
+- These query sentences are used when the device connects to the server. (Operates when the device is switched on.)<br/>
+
+
+If you think of a better query sentence and want to get the Country View, thank you for the Pull requests!
+
+### Go to [main page](https://github.com/kuj0210/IoT-Pet-Home-System).
