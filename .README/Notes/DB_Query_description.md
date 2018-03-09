@@ -208,6 +208,9 @@ delete from homeSystem where PiKey="PiKey";
 
 
 
+
+
+
 ## Finally..
 If you think of a better query sentence and want to get the Country View, thank you for the Pull requests!
 ### Go to [main page](https://github.com/kuj0210/IoT-Pet-Home-System).
