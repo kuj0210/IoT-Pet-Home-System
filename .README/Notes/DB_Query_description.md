@@ -101,11 +101,37 @@ Since we created the table earlier, we have to use it now. To use the table, ple
 After looking at the table, please refer o the server's "RegistUser.py" source code to handle the data in detail.
 
 
-## 3. Example of Using
+## 3. Insert tuple into table <br/>
 
-First use database;USERdata. 
+### 3-1. insert tuple into homeSystem table.
+
+```
+insert into homeSystem values ("PiKey","Platform","Email","url");
+```
+
+The example above is the SQL setence where the tuple is inserted into the homesystem table.<br/>
+The SQL statement is not used consciously, but only runs if the device is turned on.<br/>
+
+
+### 3-2. insert tuple into each platform's table.
+
+```
+#If platform is "kakao-talk"
+insert into kakaoUser values ("user-key","email","kakao-talk");
+
+#else (if platform is "naver-talk")
+insert into naverUser values ("user-key","email","naver-talk");
+```
+
+For each platform, use the above SQL statement. <br/>
+When a user uses the command "[등록]",they use this SQL statement.
+
+
+## 4. Examples of Using <br/>
+
+**First** use database;USERdata. 
 ```
 use USERdata;
 ```
 
-<Continue>
+**Second** 
