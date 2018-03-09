@@ -206,9 +206,7 @@ delete from homeSystem where PiKey="PiKey";
 
 - These query sentences are used when the device connects to the server. (Operates when the device is switched on.)<br/>
 
-
-
-
+<br/><br/>
 
 
 ## Finally..
