@@ -156,8 +156,8 @@ This structure is main-server and pi-server(in RaspberryPi using flask framework
 
 **3) Enter chats that associated with food, water and door opening.**
 
-If you're a registed user, you can do chatting with IoT pet-home system!<br>
-Order to set feed, water or open pet-home door at the IoT-pethome-system chatbot.
+If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
+Order to set feed, water or open pet-home door at the IoT-pet-home-system chatbot.
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_operation.PNG?raw=true)
 
