@@ -85,6 +85,6 @@ and I will finish explaining how to set up the domain address. Next, we will exp
 
 (1) [AWS EC2 setting description(about instance & public IP)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/AWS_EC2_setting.md)<br/>
 (2) **Domain setting description**<br/>
-(3) [How_to_use_SSL_Certificates_and_apply_HTTPS](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/How_to_use_SSL_Certificates_and_apply_HTTPS.md)<br/>
+(3) [How to use SSL Certificates and apply HTTPS](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/How_to_use_SSL_Certificates_and_apply_HTTPS.md)<br/>
 
 ### Go to [main page](https://github.com/kuj0210/IoT-Pet-Home-System).
