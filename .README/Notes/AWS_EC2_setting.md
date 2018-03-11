@@ -110,10 +110,9 @@ if you leave an article in the Issue category.<br/>
 
 ## Notes
 
-1. [PuTTY Download link](#https://www.putty.org/)
-2. [WinSCP Download link](#https://winscp.net/eng/download.php)
+1. [PuTTY Download link](https://www.putty.org/)
+2. [WinSCP Download link](https://winscp.net/eng/download.php)
 
 
-<br/>
 ### Go to [main page](https://github.com/kuj0210/IoT-Pet-Home-System).
 
