@@ -113,6 +113,8 @@ if you leave an article in the Issue category.<br/>
 1. [PuTTY Download link](https://www.putty.org/)
 2. [WinSCP Download link](https://winscp.net/eng/download.php)
 
+[(1)AWS EC2 setting description(about instance&public IP)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/AWS_EC2_setting.md)
+[(2)Domain setting description](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/Domain_setting.md)
 
 ### Go to [main page](https://github.com/kuj0210/IoT-Pet-Home-System).
 
