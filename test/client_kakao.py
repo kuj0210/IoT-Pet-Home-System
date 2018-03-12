@@ -23,6 +23,6 @@ def recvFromServer(response):
 while True:
     print("a")
     #message = input("User >> ")
-    response = attachSendProtocol(message)
-    recvFromServer(response)
+    #response = attachSendProtocol(message)
+    #recvFromServer(response)
     
