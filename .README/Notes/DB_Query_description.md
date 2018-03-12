@@ -109,7 +109,7 @@ After looking at the table, please refer o the server's "RegistUser.py" source c
 insert into homeSystem values ("PiKey","Platform","Email","url");
 ```
 
-The example above is the SQL setence where the tuple is inserted into the homesystem table.<br/>
+The example above is the SQL sentence where the tuple is inserted into the homesystem table.<br/>
 The SQL statement is not used consciously, but only runs if the device is turned on.<br/>
 
 
