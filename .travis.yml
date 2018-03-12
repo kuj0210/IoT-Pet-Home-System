@@ -5,4 +5,4 @@ python:
 install :
   - pip install -r requirements.txt
 script : 
- - cd test && python3 client_kakao.py
+ - cd test && python3 client_travis.py
