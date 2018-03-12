@@ -1,4 +1,4 @@
-**Language**: [English](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README.md/) [Korean](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md/)
+**Language**: [English](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README.md/) [한글](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md/)
 
 # <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/pet_Image.jpg?raw=true" width="64">Pet House System
 [![License: GPL v3](https://img.shields.io/badge/licence-GPL%20v3-yellow.svg)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE)
