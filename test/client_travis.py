@@ -20,8 +20,10 @@ def recvFromServer(response):
     print("Server << " + message)
     return message
 
-while True:
-    print("a")
+
+print("밥줘")
+print("물줘")
+print("줘")
     #message = input("User >> ")
     #response = attachSendProtocol(message)
     #recvFromServer(response)
