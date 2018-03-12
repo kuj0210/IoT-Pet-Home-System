@@ -21,7 +21,8 @@ def recvFromServer(response):
     return message
 
 while True:
-    message = input("User >> ")
+    print("a")
+    #message = input("User >> ")
     response = attachSendProtocol(message)
     recvFromServer(response)
     
