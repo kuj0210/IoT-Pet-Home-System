@@ -1,0 +1,10 @@
+language : python
+python:
+ - 3.6
+ - 3.6.3
+ - 3.7
+
+install :
+ - pip3 install reqeuests
+script : 
+ - cd test && python3 client(kakaoPlatform).py
