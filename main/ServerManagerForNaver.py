@@ -4,16 +4,18 @@ LICENSE : GPL v3 LICENSE
 
 - Description : https://github.com/kuj0210/IoT-Pet-Home-System
 - If you want to contact us, please send mail "beta1360@naver.com"
+
+* ServerManagerForNaver.py
+  - This module is used to process data from the Naver-talk-talk platform.
+  -  This module uses to Server module for managing json data.
+     Specially, This module manage json data that use to send or recieve naver-talk-talk server.
+     ** Json data usually use HTTPS Protocol's body part.
 '''
 #-*-coding: utf-8-*-
 
 from ScreenshotThread import ScreenshotThread
 from ServerUtility import ServerUtility
 from ResponseMessage import Message
-
-# 동사, 명사중 아무거나 만족 : 50
-# 명사 반드시 만족 : 60
-# 모두 만족: 100
 
 mServerUtility = ServerUtility()
 responseMessage = Message()
@@ -25,27 +27,16 @@ mScreenshotThread.start()
 
 
 def parsingPushData(message):
-    """Push data type
-    {
-        "PiKey" : PiKey
-        "message" : {
-            "fromPi" : True|False
-            "sensor" : {
-                "list" : {"water","feed"}
-                "water" : {
-                    "time" : 1
-                }
-                "feed" : {
-                    "time" : 2
-                }
-            }
-            "non-sensor" : {
-                "sendMSG" : "sendMSG"
-            }
-        }
-    }
-    """
-
+    '''
+    1. Arguement
+    - message : data from device push alarm thread.
+        
+    2. Output : the appropriate message to reply client
+        
+    3. Description
+    This function analyze data that receive from device and make reply message.
+    If you don't understand this data, you can check ".API_Doc/pi_push_alarm.json".
+    '''
     sendMSG = "None"
 
     if message["fromPi"] == True:
@@ -70,6 +61,11 @@ def parsingPushData(message):
     return sendMSG
 
 class NaverMessageClass :
+    '''
+    - This class manage naver-talk-talk platform operations.
+    - For more complex operations, check the "ServerUtility.py" module.
+    '''
+        
     def __init__(self):
         self.openMSG = """
                 안녕하세요! IoT 펫홈 시스템입니다.
@@ -90,13 +86,27 @@ class NaverMessageClass :
         self.unregistedUserMSG = "등록되지 않은 유저입니다. 사용자 등록부터 진행해주세요."
 
     def openEvent(self):
+        # Get open_event_message
         return self.openMSG
 
     def leaveEvent(self):
+        # Get leave_event_message
         return self.leaveMSG
 
     def sendEvent(self, user, message, usecase):
-
+        '''
+        1. Arguement
+        - user : To manage user information. (ex) Is registed user?) 
+        - message : Text data from client.
+        - usecase : Criteria to analyze device operation.
+        
+        2. Output : Reply the appropriate message
+        
+        3. Description
+        This function is performed in two steps.
+        - step 1. To analyze natual sentence (from client) and seperate it down into commands to be executed on the device.
+        - step 2. To send the seperated commands to device and recieve reply from the device.
+        '''
         result = usecase.analyzeSentence(message)
         print(result)
 
@@ -128,6 +138,18 @@ class NaverMessageClass :
                 return self.unregistedUserMSG
 
     def manageEvent(self, data, usecase):
+        '''
+        1. Arguement
+        - data : Request's body part from Naver-talk-talk API server.
+        - usecase : Criteria to analyze device operation.
+        
+        2. Output : Reply body data to send client.
+        
+        3. Description
+        This function is performed in two steps.
+        - step 1. To analyze data(from client) and execute the appropriate function.
+        - step 2. To recieve each function's return value and make reply data.
+        '''
         sendMSG = "None"
         user = data["user"]
 
@@ -154,7 +176,16 @@ class NaverMessageClass :
 
         return postBodyMessage
 
-    def sendEventForPush(self,PiKey, message):
+    def sendEventForPush(self, PiKey, message):
+        '''
+        1. Arguement
+        - PiKey : Key to recognize device
+        - message : Text data from push thread.
+
+        2. Description
+        This function send device status message to using device client.
+        The device status message(arg:message) recieve from func::parsingPushData.
+        '''
         mServerUtility.openDB()
         userlist = mServerUtility.getDatabase().getUserlist(PiKey=PiKey)
         mServerUtility.closeDB()
