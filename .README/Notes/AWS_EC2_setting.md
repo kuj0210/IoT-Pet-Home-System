@@ -5,7 +5,7 @@
 - You can have your own way of using what you want to use AWS EC2.
 - But if you want to build a server for testing or simply, use a "free tier".
 - Some countries limit their countries depending on messenger platform servers. <br/>
-  Therefore, you can get to know the area and choose it. (The area we use is Seoul.)
+  Therefore, you must get to know the area and choose it. (The area we use is Seoul.)
   
   <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im01.PNG">
   
