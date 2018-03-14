@@ -40,6 +40,14 @@ class KakaoMessageClass :
 
     def manageRequest(self, user_key, message, usecase):
         '''
+        1. Arguement
+        - user_key : To manage user information. (ex) Is registed user?) 
+        - message : Text data from client.
+        - usecase : Criteria to analyze device operation.
+        
+        2. Output : Reply body data to send client.
+        
+        3. Description 
         This function is performed in three steps.
         - step 1. To analyze natual sentence (from client) and seperate it down into commands to be executed on the device.
         - step 2. To send the seperated commands to device and recieve reply from the device.
