@@ -3,7 +3,7 @@
     "message" : {
        "fromPi" : True|False,
         "sensor" : {
-            "list" : {"water","feed"}
+            "list" : {"water", "feed"}
             "water" : {
                 "time" : 1
             },
