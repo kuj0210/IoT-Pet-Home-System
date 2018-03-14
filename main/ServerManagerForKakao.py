@@ -32,7 +32,10 @@ class KakaoMessageClass :
         self.KAKAO_PLATFORM = "kakao-talk"
 
     def getBaseKeyboard(self):
-        # This function initialize base_kakao_Keyboard_reply.
+        '''
+        1. Output : Kakao-Talk platform's base keyboard type.
+        2. Description : This function initialize base_kakao_Keyboard_reply.
+        '''
         baseKeyboard = {
             "type": "text"
         }
