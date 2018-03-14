@@ -9,7 +9,7 @@
   
   <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im01.PNG">
   
-  <Img01 : Selection(the top right) image : Asia Pacific (Seoul) >
+  <Img01: Selection(the top right) image : Asia Pacific (Seoul) >
   
 - The AWS cloud service has many features that are useful. But we will also explain how to set up a server <br/>
   and see the links below for more details. <br/>
@@ -22,7 +22,7 @@
 
 <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im02.PNG">
 
-  <Img02 : Please click on the spot marked with red.>
+  <Img02: Please click on the spot marked with red.>
 
 - **Second,** Before you create an instance, you will see a window to choose which operating system you will use. <br/>
   You can select the operating system that you want to use here. <br/>
@@ -40,7 +40,7 @@
   
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im04.PNG">
 
-  <Img04 : The screenshot of "instance" category>
+  <Img04: The screenshot of "instance" category>
   
   
 ## 2. Get Elastic IP
@@ -51,7 +51,7 @@
 
   <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im05.PNG">
   
-  <Img05 : The screenshot of "Elastic IP" category">
+  <Img05: The screenshot of "Elastic IP" category">
   
 - Additional creation of elastic IP would likely follow the billing framework set by AWS.
 
@@ -62,7 +62,7 @@
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im06.PNG">
 
-<Img06 : Click this.>
+<Img06: Click this.>
 
 - **Second,** Select the instance ID to use, select the internal IP (private IP),<br/>
   and press the "Connect" button to connect the instance with the elastic IP.
@@ -81,21 +81,21 @@
   
   <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im08.PNG">
   
-  <Img08 : Let's select a security group.>
+  <Img08: Let's select a security group.>
   
 - In the selected security group, click on the item titled "Edit Inbound Rule".
 
  <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im09.PNG">
  <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im10.PNG">
  
- <Img09,10 : Click "Edit Inbound Rule".>
+ <Img09,10: Click "Edit Inbound Rule".>
  
 - The screenshot below was taken as a reference and will default to HTTP and SSH only.<br/>
   Therefore, we can open port 443(using for HTTPS) by clicking on the " Add Rule " button.
   
   <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im11.PNG">
   
-  <Img11 : Description Inbound Rule>
+  <Img11: Description Inbound Rule>
   
   
 ## Finally..
