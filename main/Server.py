@@ -43,6 +43,7 @@ def naver_ServerManager():
 - This function manage the related Naver-talk-talk API 
   and reply to Naver-talk-talk API server.  
 '''
+
     data = request.get_json()
     return jsonify(naverMessage.manageEvent(data=data, usecase=usecase)),200
 
@@ -52,6 +53,7 @@ def kakao_Keyboard():
 - Related Kakao-talk Platform
 - This function initialize and call kakao_talk's keyboard.
 '''
+
     return jsonify(kakaoMessage.getBaseKeyboard()),200
 
 @app.route("/message",methods=["POST"])
@@ -61,6 +63,7 @@ def kakao_Message():
 - This function manage message(text) from Kakao-platform client
   and reply a appropriate message to the client.
 '''
+
     data = request.get_json()
     user_key = data['user_key']
     message = data['content']
@@ -73,6 +76,7 @@ def kakao_AddFriend():
 - This function manage request about adding friend.
 - Send only 200 OK responses, as there is nothing special to manage with the request.
 '''
+
     return "HTTP/1.1 200 OK"
 
 @app.route("/friend/<user_key>", methods=["DELETE"])
@@ -82,6 +86,7 @@ def kakao_DeleteFriend(user_key):
 - This function manage request about deleting friend.
 - Send only 200 OK responses, as there is nothing special to manage with the request.
 '''
+
     return "HTTP/1.1 200 OK"
 
 @app.route("/chat_room/<user_key>",methods=["DELETE"])
@@ -100,6 +105,7 @@ def settingPi():
 - This function initialize the related device.
 - When the device is turned on, it is a function of receiving and processing a request.
 '''
+
     data = request.get_json()
     PiKey = data["PiKey"]
     kakaoUserList = data["userList"]["kakao"]
@@ -114,6 +120,7 @@ def send_file(filename):
 - Only related Kakao-talk Platform
 - This function send the image file:<filename> to client who request this image file.
 '''
+
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename=filename)
 
 @app.route('/push', methods=["POST"])
@@ -122,6 +129,7 @@ def push_alarm():
 - Only related Naver-talk-talk Platform
 - This function is intended to provide alarm services to the user.
 '''
+
     data = request.get_json()
     PiKey = data["PiKey"]
     message = data["message"]
@@ -133,6 +141,7 @@ if __name__ == "__main__":
 It's the main part. After you set up the SSL certificate path, 
 attach it to the flask framework and launch the Web server.
 '''
+
     ssl_cert = '/etc/letsencrypt/live/pethome.ga/fullchain.pem'
     ssl_key =  '/etc/letsencrypt/live/pethome.ga/privkey.pem'
     contextSSL =  (ssl_cert, ssl_key)
