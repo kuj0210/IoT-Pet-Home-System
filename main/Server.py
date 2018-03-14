@@ -22,6 +22,11 @@ naverMessage = NaverMessageClass()
 kakaoMessage = KakaoMessageClass()
 mServerUtility = ServerUtility()
 
+'''
+ Content with the verb or noun : 50
+ It must content with noun : 60
+ All content with verb and noun: 100
+'''
 usecase = UsecaseList()
 usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
 usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
