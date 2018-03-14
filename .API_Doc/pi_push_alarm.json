@@ -1,0 +1,18 @@
+{
+    "PiKey" : PiKey,
+    "message" : {
+       "fromPi" : True|False,
+        "sensor" : {
+            "list" : {"water","feed"}
+            "water" : {
+                "time" : 1
+            },
+            "feed" : {
+                "time" : 2
+            }
+        },
+        "non-sensor" : {
+            "sendMSG" : "sendMSG"
+        }
+    }
+}
