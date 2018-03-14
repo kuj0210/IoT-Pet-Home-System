@@ -48,7 +48,7 @@ class KakaoMessageClass :
         result = usecase.analyzeSentence(message)
         print(result)
 
-        # ------ Step 1 end ------
+        # ------------ Step 1 end ------------
         
         if 'regist' in result:
             self.sendMSG = \
@@ -82,7 +82,7 @@ class KakaoMessageClass :
             else: # elif isRegistedUser is False
                 self.sendMSG = self.NOT_REGISTED
                 
-           # ------ Step 2 end ------
+           # ------------ Step 2 end ------------
 
             postBodyMessage = {
                 'message': {
@@ -92,4 +92,4 @@ class KakaoMessageClass :
             }
             return postBodyMessage
 
-            # ------ Step 3 end ------
+            # ------------ Step 3 end ------------
