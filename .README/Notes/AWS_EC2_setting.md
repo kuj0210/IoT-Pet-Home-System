@@ -56,9 +56,9 @@
 - Additional creation of elastic IP would likely follow the billing framework set by AWS.
 
   
-## 3. Connect instance and elastic IP
+## 3. Connect instance and Elastic IP
 
-- **First,** you must click the elacstic IP and and "connect address".
+- **First,** you must click the elacstic IP  and "connect address".
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/aws_ec2_setting_im06.PNG">
 
