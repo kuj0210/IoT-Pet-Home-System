@@ -208,4 +208,4 @@ delete from homeSystem where PiKey="PiKey";
 
 ## 마치며..
 만약 당신이 더 나은 쿼리문을 생각하고 Contributor를 얻고 싶다면, Pull requests해주시면 감사하겠습니다!
-### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/README_KR.md))로 이동.
+### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md))로 이동.
