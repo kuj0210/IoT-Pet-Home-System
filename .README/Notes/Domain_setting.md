@@ -1,7 +1,7 @@
 # Domain setting description
 
 The manual covers domain address changes, which is a must go process before HTTP is dismissed as HTTPS.<br/>
-It also refers to how to use the "[freenom](https://my.freenom.com/clientarea.php)" site to change the domain address to handle thttps://papago.naver.com/075f625cc4b7ffa359ff6418ebd936b4.gifhe process. <br/>
+It also refers to how to use the "[freenom](https://my.freenom.com/clientarea.php)" site to change the domain address to handle the process. <br/>
 If you have a certified IP, you can go through this process. (See [this description](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/AWS_EC2_setting.md) if you don't have a qualified IP.)
 
 
