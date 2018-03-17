@@ -86,4 +86,4 @@ It also refers to how to use the "[freenom](https://my.freenom.com/clientarea.ph
 (2) **Domain setting description**<br/>
 (3) [How to use SSL Certificates and apply HTTPS](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/How_to_use_SSL_Certificates_and_apply_HTTPS_KR.md)<br/>
 
-###[main page](https://github.com/kuj0210/IoT-Pet-Home-System/README_KR.md)로 이동.
+###[main page](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md)로 이동.
