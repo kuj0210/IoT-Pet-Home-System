@@ -11,7 +11,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img01 : Sign up page>
 
-- You can sign up here, but I'll sign up with my Google account.
+- You can sign up here, but I'll sign in with my Google account.
 - Although there are several conditions and payment methods when signing up as a member, <br/>
   you can choose that part of the service voluntarily.
   
