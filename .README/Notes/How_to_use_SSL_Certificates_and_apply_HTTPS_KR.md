@@ -78,4 +78,4 @@ $ ./crontab -e
 (2) [Domain setting description](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/Domain_setting_KR.md)<br/>
 (3) **How to use SSL Certificates and apply HTTPS**<br/>
 
-### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/README_KR.md) 이동.
+### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md) 이동.
