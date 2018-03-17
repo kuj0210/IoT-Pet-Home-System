@@ -9,7 +9,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img01.PNG">
 
-<img01 : Sign up page>
+<img01: Sign up page>
 
 - You can sign up here, but I'll sign in with my Google account.
 - Although there are several conditions and payment methods when signing up as a member, <br/>
@@ -20,14 +20,14 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img02.PNG">
 
-<img02 : Select "Register a New Domain" category.>
+<img02: Select "Register a New Domain" category.>
 
 - In the upper right corner, the menu " Services " appears. From here, click the "Register a New Domain" category.
 
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img03.PNG">
 
-<img03 : Find your new domain.>
+<img03: Find your new domain.>
 
 - The process is to find out if a domain is available. Just write down the domain address you want.
 - However, because some domains are charged, avoid typing in the end (such as ".com",".net") if possible.
@@ -36,7 +36,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img04.PNG">
 
-<img04 : Free Domains Available>
+<img04: Free Domains Available>
 
 - When you write down your domain, you can see the following available domains.
 - Some domains are free, such as the screenshot above, but you can also use a paid domain if you prefer.
@@ -44,7 +44,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img05.PNG">
 
-<img05 : Click this!>
+<img05: Get it now!>
 
 - If you are interested in a domain, click on " Get it now! " and see the red sign in the screenshot above.
 
@@ -53,7 +53,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img06.PNG">
 
-<img06 : Let's put in the public IP you have.>
+<img06: Let's put in the public IP you have.>
 
 - As with the screenshot above, there is a column for entering the IP address corresponding to the host name<br/>
   and the location for the time period to use.
@@ -64,7 +64,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img07.PNG">
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img08.PNG">
 
-<img07,08 : Confirm and enter details>
+<img07,08: Confirm and enter details>
 
 - Let's see how much it will cost as shown above. (Free in the case above.)
 - Entering your details will finish the domain registration.
@@ -72,7 +72,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img src = "https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/freenom_img09.PNG">
 
-<img09 : Registered your domain>
+<img09: Registered your domain>
 
 - Like the screenshot above, you can check the domain address.
 
