@@ -116,4 +116,4 @@
 (2) [Domain setting description](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/Domain_setting_KR.md)<br/>
 (3) [How_to_use_SSL_Certificates_and_apply_HTTPS](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/How_to_use_SSL_Certificates_and_apply_HTTPS_KR.md)<br/>
 
-### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md).로 이동.
+### [main page](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README_KR.md)로 이동.
