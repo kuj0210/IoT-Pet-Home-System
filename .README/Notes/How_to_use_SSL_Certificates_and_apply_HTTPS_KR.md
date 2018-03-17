@@ -5,7 +5,7 @@
 * 셸(Linux)환경에서 진행하겠습니다.
 
 
-## 1. 설치 Let's Encrypt
+## 1. Let's Encrypt 설치
 
 ```
 $ git clone https://github.com/letsencrypt/letsencrypt
