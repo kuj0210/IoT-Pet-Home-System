@@ -45,7 +45,7 @@ $ ./certbot-auto certonly -a webroot --webroot-path=[path] -d [Your Domain]
 - "fullchain.pem"및"privkey.pem"파일의 경로를 기억해야 합니다. 이는 실제 HTTPS가 이 경로에 적용되기 때문입니다.
 
 
-## 3. Apply HTTPS
+## 3. HTTPS 적용
 
  위에서 설명한 바와 같이, 우리는**Flask**, Python프레임워크를 기반으로 한 HTTPS애플리케이션을 설명할 것입니다.
  
@@ -58,7 +58,7 @@ $ ./certbot-auto certonly -a webroot --webroot-path=[path] -d [Your Domain]
  - HTTPS는 포트 번호 443을 사용하므로 포트 번호를 숫자 443으로 변경합니다.
 
 
-## 4. Renew your SSL Certificate
+## 4. SSL인증서 갱신
 
 ```
 $ ./crontab -e
