@@ -55,8 +55,8 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img06: Let's put in the public IP you have.>
 
-- As with the screenshot above, there is a column for entering the IP address corresponding to the host name<br/>
-  ,and the location for the time period to use.
+- As with the screenshot above, there is a column for entering the IP address corresponding to the host name,<br/>
+  and the location for the time period to use.
 - Usually, a free domain can be used for up to 12 months at no cost.
 - The IP address box must contain your public IP.
 
