@@ -46,7 +46,7 @@ If you have a certified IP, you can go through this process. (See [this descript
 
 <img05 : Click this!>
 
-- If you are interested in a domain, click on " Get it now! " and press the red sign in the screenshot above.
+- If you are interested in a domain, click on " Get it now! " and see the red sign in the screenshot above.
 
 
 ## 3. Regist your IP address
