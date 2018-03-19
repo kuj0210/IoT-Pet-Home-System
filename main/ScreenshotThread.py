@@ -9,6 +9,10 @@ import threading
 import time,requests, json
 
 class ScreenshotThread(threading.Thread):
+'''
+This class is thread class for using to download a image from pi-server.
+And it manage to upload the image in main server and send to user in need of the pictures.
+'''
     def __init__(self):
         self.destination = None
         self.severUtilityReference = None
@@ -18,6 +22,10 @@ class ScreenshotThread(threading.Thread):
         self.screenshotEvent = threading.Event()
 
     def run(self):
+        '''
+        1. Description
+            This function is the main part that it execute thread for receiving image from pi-server.e.
+        '''
         while not self.screenshotEvent.isSet():
             self.severUtilityReference.openDB()
             print("이미지 파일 받는중...")
@@ -39,6 +47,22 @@ class ScreenshotThread(threading.Thread):
             self.screenshotEvent.clear()
 
 
+    '''
+    Description
+    - 1.isScreenshotThreadOnUnlock
+        This function check that event;screenshotEvent is on unlock.
+        (In run func, it check while sentence's condition.)
+        
+    - 2. setScreenshotThreadOperation
+        This function is set up so that the "run func" can execute.
+        
+    - 3. setServerUtilityReference
+        This function set ServerUtility module for using this.
+        
+    - 4. setUserKey
+        This function set the user_key for setting collect destination(reciever).
+    '''
+            
     def isScreenshotThreadOnUnlock(self):
         return self.screenshotEvent.isSet()
 
@@ -52,6 +76,13 @@ class ScreenshotThread(threading.Thread):
         self.destination = user_key
 
     def postImageToUser(self, imagepath):
+        '''
+        1. Arguement
+            - imagepath : Image to send to user.
+        
+        2. Description
+            This function send a image to user who requested to main server.
+        '''
         body_postImage = {
             "event": "send",
             "user": self.destination,
