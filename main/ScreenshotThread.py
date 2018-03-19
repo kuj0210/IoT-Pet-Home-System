@@ -22,10 +22,10 @@ And it manage to upload the image in main server and send to user in need of the
         self.screenshotEvent = threading.Event()
 
     def run(self):
-        '''
-        1. Description
-            This function is the main part that it execute thread for receiving image from pi-server.e.
-        '''
+    '''
+    1. Description
+         This function is the main part that it execute thread for receiving image from pi-server.e.
+    '''
         while not self.screenshotEvent.isSet():
             self.severUtilityReference.openDB()
             print("이미지 파일 받는중...")
@@ -76,13 +76,13 @@ And it manage to upload the image in main server and send to user in need of the
         self.destination = user_key
 
     def postImageToUser(self, imagepath):
-        '''
-        1. Arguement
-            - imagepath : Image to send to user.
+    '''
+    1. Arguement
+        - imagepath : Image to send to user.
         
-        2. Description
-            This function send a image to user who requested to main server.
-        '''
+    2. Description
+        This function send a image to user who requested to main server.
+    '''
         body_postImage = {
             "event": "send",
             "user": self.destination,
