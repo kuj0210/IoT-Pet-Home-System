@@ -117,7 +117,7 @@ class ServerUtility:
     1. Arguement
         - body : The part of sending body to user.
     
-    3. Description
+    2. Description
         The main server send the request to naver-talk-talk API server.
     '''
         header = {"Content-Type": "application/json;charset=UTF-8","Authorization": "1PhwPI9cSo+vMe1BzGWK" }
