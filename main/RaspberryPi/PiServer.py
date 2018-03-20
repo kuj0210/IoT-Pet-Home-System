@@ -19,6 +19,11 @@ app = Flask(__name__, static_folder='image')
 
 @app.route(operationURL, methods=["POST"])
 def getOperationByServer():
+'''
+Description
+    If you recieve a operation list from main-server, this function request the operations to appropriate modules.
+    And this func get the result data from each modules and send it to main-server.
+'''
     data = request.get_json()
     operation = data["operation"]
     postStatusToServer = mPiSetting.makePiData(operation=operation)
@@ -27,6 +32,10 @@ def getOperationByServer():
 
 @app.route(operationCameraUploadURL, methods=['GET'])
 def send_file():
+'''
+Description
+    If main-server request to get imagefile, this function send a imagefile to main-server.
+'''
     filename = mPiSetting.getFilename()
     return send_from_directory(app.static_folder, filename)
 
