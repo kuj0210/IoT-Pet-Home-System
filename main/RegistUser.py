@@ -8,6 +8,10 @@ LICENSE : GPL v3 LICENSE
 import pymysql
 
 class RegistUser:
+'''
+This class is related database(MySQL) and use many MySQL query sentence.
+Addiontionally, this class is included in ServerUtility module.
+'''
     def __init__(self):
         self.conn = None
         self.curs = None
@@ -16,6 +20,12 @@ class RegistUser:
         self.NAVER_TALK = "naver-talk"
 
     def openDatabase(self):
+    '''
+    Description:
+        This function approach in and set available database.
+        If database don't have database and tables, this func create new database and tables.
+        (This func also check them.)
+    '''
         self.conn = pymysql.connect(host="localhost", user="root", password="root", charset="utf8")
         self.curs = self.conn.cursor()
 
