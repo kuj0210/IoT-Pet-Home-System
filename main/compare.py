@@ -1,11 +1,14 @@
-#-*-coding: utf-8-*-
 '''
 Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
 LICENSE : GPL v3 LICENSE
-
 - Description : https://github.com/kuj0210/IoT-Pet-Home-System
 - If you want to contact us, please send mail "beta1360@naver.com"
+
+* compare.py
+    This module is related to analyze message. 
 '''
+
+#-*-coding: utf-8-*-
 import time
 
 from konlpy.tag import Kkma
@@ -15,7 +18,12 @@ GRAVITY_ANY = 40  # if it meet N or V list  think true
 GRAVITY_ALL = 100  # if it meet N or V list  think true
 
 class KeyWord:
+
     def __init__(self,word):
+        '''
+        1. Arguement
+            - word : usecase name which will be returned
+        '''
         self.keyWord=word
         self.n=[]
         self.v=[]
@@ -24,14 +32,22 @@ class KeyWord:
 
     def setNouns(self,list):
         self.n=list
-
     def setVerbs(self,list):
         self.v=list
-
     def setGravity(self,gravity):
         self.gravity=gravity
-
     def isMe(self,sentence,originLIST):
+        '''
+        1. Arguement
+            - sentence : it is parshed by KoNLPy and Collecting noun and verb
+            - originLIST : it is parshed by KoNLPy
+
+        2. Output : self.keyWord
+
+        3. Description
+            if sentence is feat this case, return self.keyWord
+        '''
+
         count =0
         i=0
         flag = -1
@@ -46,7 +62,6 @@ class KeyWord:
                     break
             if count>=GRAVITY_N:
                 break
-
         first = count
         for verb in self.v:
             for j in range(i+1,len(sentence)):
@@ -57,14 +72,18 @@ class KeyWord:
             if count>first:
                 break
 
+
         for AND in self.andList:
             if AND in sentence:
                 index = sentence.index(AND)
                 break
 
+
         if index !=-1 and 'N' in originLIST[index-1][1]and 'N' in originLIST[index+1][1]:
             #print("TRUE")
             flag=True
+
+
 
         if self.gravity<=count:
             if noun in sentence:
@@ -74,10 +93,16 @@ class KeyWord:
             if flag == True and index!=-1:
                 sentence.remove(AND)
 
+
             return True
+
 
         return False
     def _print(self):
+        '''
+        1. Description
+            print self(keyWord,n,v)
+        '''
         print("키워드 명칭: "+self.keyWord)
         print(self.n)
         print(self.v)
@@ -91,13 +116,21 @@ class UsecaseList:
         self.usecase=[]
         self.parsingNVLIST =[]
         self.parsingLIST = []
-
     def getNV(self,sentence):
+        '''
+        1. Arguement
+            - sentence : it is parshed by KoNLPy
+
+        2. Output : [nouns, verbs, ands ]
+
+        3. Description
+            this method return 'and', 'nouns', 'verb' list from sentence
+        '''
         self.parsingNVLIST=[]
         self.parsingLIST=[]
         data =self.kkma.pos(sentence)
+        print(data)
         #print(data)
-
         for list in data:
             if 'N' in list[1] or list[1].count('V')>1 or'C' in list[1]or'JKM' in list[1] :
                 self.parsingNVLIST.append(list[0])
@@ -105,12 +138,24 @@ class UsecaseList:
         print(self.parsingNVLIST)
     ##don't Touch
 
+
     def printList(self):
+        '''
+        1. Description
+            this method print all included keyword
+        '''
         for item in self.usecase:
             item._print()
 
-    # if you call that it return requestList from sentence
+
     def analyzeSentence(self,sentence):
+        '''
+        1. Arguement
+            - sentence : it is sentence which you want to analyze
+        2. Output : [uscases]
+        3. Description
+            This function search his keyword list  and return list that sentence want
+        '''
         request =[]
         self.getNV(sentence)
         for item in self.usecase:
@@ -119,8 +164,18 @@ class UsecaseList:
         print(request)
         return request
 
-    #it can set your UseCase
     def setUsecase(self, name, nList, vList, gravity):
+        '''
+        1. Arguement
+            - name : KeyWord(usecase) name
+            - nList : it is nouns list for Distinguish keyword
+            - vList : it is verbs list for Distinguish keyword
+            - gravity : it is Interest in nouns or verb
+
+        2. Description
+            This function add keyword
+        '''
+
         self.usecase.append(KeyWord(name))
         keyword = self.usecase[len(self.usecase) - 1]
         keyword.setNouns(nList)
