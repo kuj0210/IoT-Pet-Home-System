@@ -40,6 +40,12 @@ Description
     return send_from_directory(app.static_folder, filename)
 
 if __name__ == "__main__":
+'''
+Description
+    1. You turn on this device, it execute this part.
+    2. Send the registed device information to main-server.
+    3. Recieve the response to main-server and if response is "ok", you can use this device.
+'''
     resultByServer = mPiSetting.sendPiSettingData()
 
     if resultByServer == "ok":
