@@ -11,6 +11,10 @@ import requests, json
 import os
 
 class PiPushThread(threading.Thread):
+'''
+This class is related push-alarm service for sending main-server.
+And this class is thread and executed in back-ground.
+'''
     def __init__(self):
         self.waterCounter = 0 # 1 minute == 1 count
         self.feedCounter = 0
@@ -20,6 +24,11 @@ class PiPushThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+    '''
+    Description
+        This function send push-alarm data to main-server. And this is core part in this func.
+        In addition, default alarm setting is 1 hour ( water and feed ).
+    '''
         while True:
             time.sleep(60)
             result = os.getenv("PUSH")
@@ -43,6 +52,11 @@ class PiPushThread(threading.Thread):
     def getPiKey(self, PiKey):
         self.PiKey = PiKey
 
+    '''
+    Description
+        Below 2 functions send json type data to main-server. This data will be push-service.
+        But this function only support in naver-talk-talk platform, now.
+    '''
     def sendFeedPush(self):
         counter = self.feedCounter / 60
 
