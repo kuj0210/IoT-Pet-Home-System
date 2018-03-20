@@ -8,6 +8,10 @@ LICENSE : GPL v3 LICENSE
 import time
 
 class Message :
+'''
+This class manage the messages for using response (Main-Server -> messenger API server).
+Therefore, this class call and make message to send user. 
+'''
     def __init__(self):
         self.PATH = "upload/"
         self.SERVER_URL = "https://pethome.ga:443/download/"
@@ -35,6 +39,19 @@ class Message :
         self.continueCameraMessage = "사진을 찍고있어요."
 
     def regist_userMessage(self, message, user_key, mServerUtility):
+    '''
+    1. Arguement
+        - message : data recieved from user
+        - user_key : user information for searching database and using to query sentence.
+        - mServerUtility : object to use this part.
+    
+    2. Output
+        Result message : a message related "success or fail"
+    
+    3. Description
+        This function make a message related "Is registration success or fail?" to user.
+        If you send a correct type message("[등록]/email/PiKey"), you can recieve result message. 
+    '''
         sendMSG = "None"
 
         try:
@@ -62,6 +79,17 @@ class Message :
         return sendMSG
 
     def inform_userInformation_Message(self, user_key, mServerUtility):
+    '''
+    1. Arguement
+        - user_key : user information for searching database and using to query sentence.
+        - mServerUtility : object to use this part.
+    
+    2. Output
+        Result message : the email related user_key
+        
+    3. Description
+        This function make a message related to inform your email.
+    '''
         mServerUtility.openDB()
         sendMSG = mServerUtility.getDatabase().findUserEmail(platform="kakao-talk", user_key=user_key)
         mServerUtility.openDB()
@@ -69,9 +97,26 @@ class Message :
         return sendMSG
 
     def inform_howToUse_Message(self):
+    #Description : Getter function related howToUse
         return self.HOW_TO_USE
 
     def operation_result_Message(self, getResultByPiServer, ServerUtility, user_key):
+    '''
+    1. Arguement
+        - getResultByPiServer : json type message, executing result, from pi-server
+        - ServerUtility : the object to use this part.
+        - user_key : user information for searching database and using to query sentence.
+    
+    2. Output
+        Result message : response message to send the user.
+        
+    3. Description
+        This function make a message related to inform operation result. In other words, this func transform
+        json type message to plain-text type message. This plain-text feel communication to chat-bot.
+        
+        If you use a kakao-platform chatting and request camera operation, you recieve imagefile path.
+        Because kakao-platform API server don't support to send a sufficient size of image.
+    '''
         sendMSG = "None"
 
         if getResultByPiServer["water"] == "use":
