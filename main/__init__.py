@@ -21,3 +21,8 @@ TEAM = {
     "Dae-seok Ko"
   ]
 }
+
+REPOSITORY = {
+  "url" : "https://github.com/kuj0210/IoT-Pet-Home-System",
+  "contact" : "beta1360@naver.com"
+}
