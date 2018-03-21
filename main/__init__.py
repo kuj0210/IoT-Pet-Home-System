@@ -26,3 +26,12 @@ REPOSITORY = {
   "url" : "https://github.com/kuj0210/IoT-Pet-Home-System",
   "contact" : "beta1360@naver.com"
 }
+
+PROGRAMMING_LANGAUGE = {
+  "language" : "python", 
+  "version" : ["3.6","3.6.3","3.7"]
+}
+
+LANGUAGE = {
+ "language" : ["korean", "english"] 
+}
