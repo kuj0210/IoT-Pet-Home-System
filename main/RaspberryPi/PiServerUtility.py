@@ -29,11 +29,11 @@ class PiSetting:
         self.naverUserList = []
 
     def ReadConfigFile(self):
-    '''
-    Description
-        This function read the config-file that it is saved PiKey and userlist.
-        Usually, this func execute for initializing PiKey and userlist.
-    '''
+        '''
+        Description
+            This function read the config-file that it is saved PiKey and userlist.
+            Usually, this func execute for initializing PiKey and userlist.
+        '''
         fp = open(self.configFile,"r")
 
         # First line is PiKey.
@@ -62,14 +62,14 @@ class PiSetting:
         print(self.naverUserList)
 
     def sendPiSettingData(self):
-    '''
-    1. Output
-        a result sign recieved from main-server
-        
-    2. Description
-        When you turn on this device, this function is executed. This func send PiKey, this device's url 
-        and the registed userlist to main-server. If this request is success, you can recieve "ok" sign.
-    '''
+        '''
+        1. Output
+            a result sign recieved from main-server
+
+        2. Description
+            When you turn on this device, this function is executed. This func send PiKey, this device's url 
+            and the registed userlist to main-server. If this request is success, you can recieve "ok" sign.
+        '''
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 1))
         ipAddress = s.getsockname()[0]
@@ -91,14 +91,14 @@ class PiSetting:
         return result
 
     def device_and_thread__init__(self, PiKey):
-    '''
-    1. Arguement
-        - PiKey : this device's key
-        
-    2. Description
-        When this device turn on, this function is executed. 
-        This func set motors setting and execute thread functions.
-    '''
+        '''
+        1. Arguement
+            - PiKey : this device's key
+
+        2. Description
+            When this device turn on, this function is executed. 
+            This func set motors setting and execute thread functions.
+        '''
         #water_pin = 12
         #feed_pin = 19
         #door_pin = 18
@@ -144,20 +144,20 @@ class PiSetting:
         pushThread.start()
 
     def makePiData(self, operation):
-    '''
-    1. Arguement
-        - operation : To request to appropriate thread
-    
-    2. Output
-        the operation's results
-    
-    3. Description
-        This function set operation to appropriate thread and get result to thread.
-        These result can set three conditions; "unsue","using","use".
-        "unuse" : initialize operation result.
-        "use" : If you can execute this operation, this data will set.
-        "using" : If this operation is using, this data will set.
-    '''
+        '''
+        1. Arguement
+            - operation : To request to appropriate thread
+
+        2. Output
+            the operation's results
+
+        3. Description
+            This function set operation to appropriate thread and get result to thread.
+            These result can set three conditions; "unsue","using","use".
+            "unuse" : initialize operation result.
+            "use" : If you can execute this operation, this data will set.
+            "using" : If this operation is using, this data will set.
+        '''
         postStatusToServer = {
             "camera": "unuse",
             "feed": "unuse",
@@ -199,9 +199,9 @@ class PiSetting:
 
         return postStatusToServer
 
-    '''
-    Below 2 functions, getter function.
-    '''
+        '''
+        Below 2 functions, getter function.
+        '''
     def getPiKey(self):
         return self.PiKey
 
