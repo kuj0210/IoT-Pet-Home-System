@@ -11,10 +11,10 @@ import requests, json
 import os
 
 class PiPushThread(threading.Thread):
-'''
-This class is related push-alarm service for sending main-server.
-And this class is thread and executed in back-ground.
-'''
+    '''
+    This class is related push-alarm service for sending main-server.
+    And this class is thread and executed in back-ground.
+    '''
     def __init__(self):
         self.waterCounter = 0 # 1 minute == 1 count
         self.feedCounter = 0
@@ -24,11 +24,11 @@ And this class is thread and executed in back-ground.
         threading.Thread.__init__(self)
 
     def run(self):
-    '''
-    Description
-        This function send push-alarm data to main-server. And this is core part in this func.
-        In addition, default alarm setting is 1 hour ( water and feed ).
-    '''
+        '''
+        Description
+            This function send push-alarm data to main-server. And this is core part in this func.
+            In addition, default alarm setting is 1 hour ( water and feed ).
+        '''
         while True:
             time.sleep(60)
             result = os.getenv("PUSH")
