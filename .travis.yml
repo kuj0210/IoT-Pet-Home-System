@@ -1,8 +1,16 @@
 language : python
 python:
- - 3.6
+- 3.4
+- 3.5
+- 3.6
+- 3.6.3
+- 3.7
 
 install :
   - pip install -r requirements.txt
 script : 
  - cd test && python3 client_travis.py
+
+branches:
+  only:
+  - master
