@@ -28,7 +28,7 @@ class KeyWord:
         self.n=[]
         self.v=[]
         self.gravity=0
-        self.andList=['와','과','고','이랑']
+        self.andList=['와','과','고','이랑','']
 
     def setNouns(self,list):
         self.n=list
