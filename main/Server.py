@@ -27,15 +27,7 @@ mServerUtility = ServerUtility()
  It must content with noun : 60
  All content with verb and noun: 100
 '''
-usecase = UsecaseList()
-usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
-usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
-usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
-usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
-usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
-usecase.setUsecase("information",["[정보]"],["[정보]"],50)
-usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
-
+TESTusecase = UsecaseList()
 UPLOAD_FOLDER = 'uploaded'
 
 app = Flask(__name__)
@@ -48,6 +40,16 @@ def naver_ServerManager():
     - This function manage the related Naver-talk-talk API 
       and reply to Naver-talk-talk API server.  
     '''
+    usecase = UsecaseList()
+    usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
+    usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
+    usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
+    usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
+    usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
+    usecase.setUsecase("information",["[정보]"],["[정보]"],50)
+    usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
+    
+    
     data = request.get_json()
     return jsonify(naverMessage.manageEvent(data=data, usecase=usecase)),200
 
@@ -66,6 +68,14 @@ def kakao_Message():
     - This function manage message(text) from Kakao-platform client
       and reply a appropriate message to the client.
     '''
+    usecase = UsecaseList()
+    usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
+    usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
+    usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
+    usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
+    usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
+    usecase.setUsecase("information",["[정보]"],["[정보]"],50)
+    usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
     data = request.get_json()
     user_key = data['user_key']
     message = data['content']
