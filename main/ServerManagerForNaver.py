@@ -20,10 +20,10 @@ from ResponseMessage import Message
 mServerUtility = ServerUtility()
 responseMessage = Message()
 
-mScreenshotThread = ScreenshotThread()
-mScreenshotThread.daemon = True
-mScreenshotThread.setServerUtilityReference(mServerUtility)
-mScreenshotThread.start()
+#mScreenshotThread = ScreenshotThread()
+#mScreenshotThread.daemon = True
+#mScreenshotThread.setServerUtilityReference(mServerUtility)
+#mScreenshotThread.start()
 
 
 def parsingPushData(message):
