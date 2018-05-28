@@ -114,27 +114,27 @@ class RegistUser:
         '''
         try:
             with self.conn.cursor() as self.curs:
-                query = "delete from homeSystem where PiKey=%s;"
-                self.curs.execute(query, PiKey)
+                query = "delete from homeSystem where PiKey=\'%s\';" %(PiKey)
+                self.curs.execute(query)
             self.conn.commit()
 
             with self.conn.cursor() as self.curs:
                 for email in kakaoUserList:
-                    query = "insert into homeSystem values (%s, %s, %s, %s);"
-                    self.curs.execute(query, (PiKey, self.KAKAO_TALK, email, url))
+                    query = "insert into homeSystem values (\'%s\', \'%s\', \'%s\', \'%s\');" %(PiKey, self.KAKAO_TALK, email, url)
+                    self.curs.execute(query)
             self.conn.commit()
 
             with self.conn.cursor() as self.curs:
                 for email in naverUserList:
-                    query = "insert into homeSystem values (%s, %s, %s, %s);"
-                    self.curs.execute(query, (PiKey, self.NAVER_TALK, email, url))
+                    query = "insert into homeSystem values (\'%s\', \'%s\', \'%s\', \'%s\');" %(PiKey, self.NAVER_TALK, email, url)
+                    self.curs.execute(query)
             self.conn.commit()
 
         except:
             with self.conn.cursor() as self.curs:
                 for email in naverUserList:
-                    query = "insert into homeSystem values (%s, %s, %s, %s);"
-                    self.curs.execute(query, (PiKey, self.KAKAO_TALK, email, url))
+                    query = "insert into homeSystem values (\'%s\', \'%s\', \'%s\', \'%s\');" %(PiKey, self.KAKAO_TALK, email, url)
+                    self.curs.execute(query)
             self.conn.commit()
 
             with self.conn.cursor() as self.curs:
@@ -179,8 +179,8 @@ class RegistUser:
                         query = "select * from kakaoUser where kakaoUser.email=%s and kakaoUser.PiKey=%s;"
                         self.curs.execute(query, (email,PiKey))
 
-                        query = "insert into kakaoUser values (%s, %s, %s);"
-                        self.curs.execute(query, (user_key, email, PiKey))
+                        query = "insert into kakaoUser values (\'%s\', \'%s\', \'%s\');" %(user_key, email, PiKey)
+                        self.curs.execute(query)
                         self.conn.commit()
                     message = "등록 완료"
                     return message
@@ -190,8 +190,8 @@ class RegistUser:
                     return message
         else: # if platform == "naver-talk":
             with self.conn.cursor() as self.curs:
-                query = "select * from naverUser where naverUser.email = %s;"
-                self.curs.execute(query, email)
+                query = "select * from naverUser where naverUser.email = \'%s\';" %(email)
+                self.curs.execute(query)
                 rows = self.curs.fetchall()
 
                 if len(rows) > 0:
@@ -199,11 +199,11 @@ class RegistUser:
                     return message
                 try:
                     with self.conn.cursor() as self.curs:
-                        query = "select * from naverUser where naverUser.email=%s and naverUser.PiKey=%s;"
-                        self.curs.execute(query, (email, PiKey))
+                        query = "select * from naverUser where naverUser.email=\'%s\' and naverUser.PiKey=\'%s\';" %(email, PiKey)
+                        self.curs.execute(query)
 
-                        query = "insert into naverUser values (%s, %s, %s);"
-                        self.curs.execute(query, (user_key, email, PiKey))
+                        query = "insert into naverUser values (\'%s\', \'%s\', \'%s\');" %(user_key, email, PiKey)
+                        self.curs.execute(query)
                         self.conn.commit()
                     message = "등록 완료"
                     return message
@@ -228,14 +228,12 @@ class RegistUser:
         '''
         if platform == "kakao-talk":
             with self.conn.cursor() as self.curs:
-                query = "select url,kakaoUser.PiKey from kakaoUser join homeSystem \
-                        on kakaoUser.Email=homeSystem.Email where kakaoUser.user_key=%s;"
-                self.curs.execute(query, user_key)
+                query = "select url,kakaoUser.PiKey from kakaoUser join homeSystem on kakaoUser.Email=homeSystem.Email where kakaoUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
         else:  # if platform == "naver-talk":
             with self.conn.cursor() as self.curs:
-                query = "select url,naverUser.PiKey from naverUser join homeSystem \
-                        on naverUser.Email=homeSystem.Email where naverUser.user_key=%s;"
-                self.curs.execute(query, user_key)
+                query = "select url,naverUser.PiKey from naverUser join homeSystem on naverUser.Email=homeSystem.Email where naverUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
 
         rows = self.curs.fetchall()
         url = rows[0][0]
@@ -257,16 +255,16 @@ class RegistUser:
         '''
         if platform == "kakao-talk":
             with self.conn.cursor() as self.curs:
-                query = "select email from kakaoUser where kakaoUser.user_key=%s;"
-                self.curs.execute(query, user_key)
+                query = "select email from kakaoUser where kakaoUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
                 rows = self.curs.fetchall()
                 if len(rows) > 0: return True
                 else : return False
 
         else: # if platform == "naver-talk":
             with self.conn.cursor() as self.curs:
-                query = "select email from naverUser where naverUser.user_key=%s;"
-                self.curs.execute(query, user_key)
+                query = "select email from naverUser where naverUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
                 rows = self.curs.fetchall()
                 if len(rows) > 0:
                     return True
@@ -288,8 +286,8 @@ class RegistUser:
         '''
         if platform == "kakao-talk":
             with self.conn.cursor() as self.curs:
-                query = "select email from kakaoUser where kakaoUser.user_key=%s;"
-                self.curs.execute(query,user_key)
+                query = "select email from kakaoUser where kakaoUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
                 rows = self.curs.fetchall()
                 if len(rows) > 0:
                     message = "회원님의 E-mail은 아래와 같습니다\n %s" % (rows[0])
@@ -299,11 +297,11 @@ class RegistUser:
 
         else: # if platform == "naver-talk":
             with self.conn.cursor() as self.curs:
-                query = "select email from naverUser where naverUser.user_key=%s;"
-                self.curs.execute(query,user_key)
+                query = "select email from naverUser where naverUser.user_key=\'%s\';" %(user_key)
+                self.curs.execute(query)
                 rows = self.curs.fetchall()
                 if len(rows) > 0:
-                    message = "회원님의 E-mail은 아래와 같습니다\n %s" % (rows[0])
+                    message = "회원님의 E-mail은 아래와 같습니다\n \'%s\'" % (rows[0])
                     return message
                 else:
                     return "등록되지 않은 유저입니다. 등록부터 진행해주세요."
@@ -325,9 +323,8 @@ class RegistUser:
         '''
     
         with self.conn.cursor() as self.curs:
-            query = "select naverUser.user_key from naverUser join homeSystem " \
-                    "on naverUser.Email=homeSystem.Email where homeSystem.PiKey=%s;"
-            self.curs.execute(query, PiKey)
+            query = "select naverUser.user_key from naverUser join homeSystem on naverUser.Email=homeSystem.Email where homeSystem.PiKey=\'%s\';" %(PiKey)
+            self.curs.execute(query)
             userlist = []
             rows = self.curs.fetchall()
             
@@ -335,4 +332,3 @@ class RegistUser:
                 userlist.append(row)
 
             return userlist
-        
