@@ -42,8 +42,7 @@ create table request(
 
 select * from naverUser;
 select * from homeSystem;
-insert naverUser value("kEa7lN2aHtb7oXa6EIb1KA","SR0003","beta1360@naver.com","woojin");
-insert naverUser value("u9-NF6yuZ8H8TAgj1uzqnQ","SR0002","on_11@naver.com","DDakGGi_GGongGGi");
+
 insert naverUser value("testertester123f","SR0003","beta1360sh@gmail.com","seok");
 insert naverUser value("3213123tester123f","SR0003","beta1360sh@gmail.com","seok");
 insert homeSystem value("SR0001",1);
