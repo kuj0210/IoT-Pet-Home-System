@@ -1,155 +1,138 @@
-'''
-Copyright (c) IoT-Pet-Home-system team : Woo-jin Kim, Keon-hee Lee, Dae-seok Ko
-LICENSE : GPL v3 LICENSE
-
-- Description : https://github.com/kuj0210/IoT-Pet-Home-System
-- If you want to contact us, please send mail "beta1360@naver.com"
-
-* Server.py
-  - Core Modules That Work with Server.
-  - Perform the role of the main server by running this module
-'''
-
 #-*-coding: utf-8-*-
+import os
+from datetime import datetime
 
-from ServerManagerForKakao import KakaoMessageClass
-from ServerManagerForNaver import NaverMessageClass
-from flask import Flask,request,jsonify,send_from_directory
-from compare import UsecaseList
-from ServerUtility import ServerUtility
+from flask import Flask,request,jsonify,send_from_directory, render_template
+from flask_sslify import SSLify
 
-naverMessage = NaverMessageClass()
-kakaoMessage = KakaoMessageClass()
-mServerUtility = ServerUtility()
+from db.Register import *
+from memo.cache import Cache
+from nl import usecase_finder
+from api.handler import Handler
+from api import sender, util, payload
+from auth.signup import *
 
-'''
- Content with the verb or noun : 50
- It must content with noun : 60
- All content with verb and noun: 100
-'''
-TESTusecase = UsecaseList()
+THusecaseFinder = usecase_finder.UsecaseFinder()
 UPLOAD_FOLDER = 'uploaded'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+sslfy =SSLify(app, permanent=True)
+Memo = Cache()
 
 @app.route("/",methods=["POST"])
-def naver_ServerManager():
-    '''
-    - Related Naver-talk-talk Platform
-    - This function manage the related Naver-talk-talk API 
-      and reply to Naver-talk-talk API server.  
-    '''
-    usecase = UsecaseList()
-    usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
-    usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
-    usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
-    usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
-    usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
-    usecase.setUsecase("information",["[정보]"],["[정보]"],50)
-    usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
-    
-    
-    data = request.get_json()
-    return jsonify(naverMessage.manageEvent(data=data, usecase=usecase)),200
+def naver_Servermain():
+   
+    # make manager
+    Manager = Handler()
+    # get data from naver  talk talk
+    dataFromMessenger =request.get_json()# get json data from naver talk talk
+    infomationFromNaverTalk=Manager.getDataFromNaverTalk(dataFromMessenger) # it is process for data sorting
+    postBodyMessage = Manager.eventHandler(infomationFromNaverTalk) # process event
 
-@app.route("/keyboard",methods =["GET"])
-def kakao_Keyboard():
-    '''
-    - Related Kakao-talk Platform
-    - This function initialize and call kakao_talk's keyboard.
-    '''
-    return jsonify(kakaoMessage.getBaseKeyboard()),200
+    if postBodyMessage == "ECHO":
+      return
+    return jsonify(postBodyMessage), 200
 
-@app.route("/message",methods=["POST"])
-def kakao_Message():
-    '''
-    - Related Kakao-talk Platform
-    - This function manage message(text) from Kakao-platform client
-      and reply a appropriate message to the client.
-    '''
-    usecase = UsecaseList()
-    usecase.setUsecase("water", ["마실", "음료", "물"], ["배식", "급여", "주다", "먹"], 60)
-    usecase.setUsecase("feed", ["밥", "먹", "사료", "간식", "식사","식"], ["배식", "급여", "주다", "먹"], 60)
-    usecase.setUsecase("door", ["문", "입구"], ["열", "오픈", "개방"], 50)
-    usecase.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보", "알", "보내"], 60)
-    usecase.setUsecase("regist", ["[등록]"],["[등록]"], 50)
-    usecase.setUsecase("information",["[정보]"],["[정보]"],50)
-    usecase.setUsecase("howToUse",["[사용법]","[도우미]","[도움말]"],["[사용법]","[도우미]","[도움말]"],50)
-    data = request.get_json()
-    user_key = data['user_key']
-    message = data['content']
-    return jsonify(kakaoMessage.manageRequest(user_key=user_key, message=message, usecase=usecase)), 200
+@app.route("/bootUp",methods=["POST"])
+def bootUpMobile():
+    # make manager
+    reg = Register()
+    dataFromMessenger =request.get_json()# get json data from naver talk talk
+    SR=dataFromMessenger['textContent']['text']
 
-@app.route("/friend",methods=["POST"])
-def kakao_AddFriend():
-    '''
-    - Related Kakao-talk Platform
-    - This function manage request about adding friend.
-    - Send only 200 OK responses, as there is nothing special to manage with the request.
-    '''
-    return "HTTP/1.1 200 OK"
+    UK=reg.getUserFromSerial(SR)
+    print(UK)
+    PCNT = reg.getPetCountFromSerial(SR)
+    UK=str(PCNT)+'\n'+UK
+    #UK.insert(0, PCNT)
+    return UK 
 
-@app.route("/friend/<user_key>", methods=["DELETE"])
-def kakao_DeleteFriend(user_key):
-    '''
-    - Related Kakao-talk Platform
-    - This function manage request about deleting friend.
-    - Send only 200 OK responses, as there is nothing special to manage with the request.
-    '''
-    return "HTTP/1.1 200 OK"
+@app.route("/RQST",methods=["POST"])
+def passRequest():
+    reg = Register()
+    dataFromMessenger =request.get_json()# ge/home/test"t json data from naver talk talk
+    SR=dataFromMessenger['textContent']['text']
+    rq=reg.fetchRequest(SR)
+    if rq == False:
+        return "NO"
+    return rq
+ 
+@app.route("/push",methods=["POST"])
+def pushResult():
+    nM=Handler()
+    dataFromMessenger =request.get_json()# get json data from naver talk talk
+    user =msg=dataFromMessenger['user']
+    msg=dataFromMessenger['textContent']['text']
+    #DB에서 펫홈이름 얻기
+    # 펫홈이름에서 알려드립니다 + msg를 아래의 푸쉬함수에 넣음
+    sender.sendPush(util.PUSH_URL,user,msg)
+    return "True"
 
-@app.route("/chat_room/<user_key>",methods=["DELETE"])
-def kakao_chat_roomOut():
-    '''
-    - Related Kakao-talk Platform
-    - This function manage request about joining chatting room.
-    - Send only 200 OK responses, as there is nothing special to manage with the request.
-    '''
-    return "HTTP/1.1 200 OK"
+ 
+@app.route("/<user>/image",methods=["POST",'GET'])
+def image(user):
+    nM=Handler()
+    file =request.files['file'] #파일받기
+    filename=file.filename # 이름얻기
+    SR=filename.split(".")[0] #시리얼번호 추출
+    now = datetime.now()# 시간얻기
+    f =filename.split(".") #파싱
+    sndF =f[0] +'_%s-%s-%s-%s-%s-%s.' % ( now.year, now.month, now.day,now.hour,now.minute,now.second )+f[1]
+    # 파일이름 완성
 
-@app.route("/pi_regist", methods=["POST"])
-def settingPi():
-    '''
-    - Related to control Raspberry-Pi
-    - This function initialize the related device.
-    - When the device is turned on, it is a function of receiving and processing a request.
-    '''
-    data = request.get_json()
-    PiKey = data["PiKey"]
-    kakaoUserList = data["userList"]["kakao"]
-    naverUserList = data["userList"]["naver"]
-    url = data["url"]
+    # 이전에 저장한것 삭제
+    res = Memo.dememorization(f[0])
+    if res !=False:
+        os.remove(res)
+    #파일저장
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'],sndF))
+    sender.sendIMAG(user,util.IMAGE_URL +sndF)
 
-    return jsonify(mServerUtility.updatePiData(PiKey, kakaoUserList, naverUserList, url)), 200
+    #방금 저장한 파일 기억
+    Memo.memorization(f[0],os.path.join(app.config['UPLOAD_FOLDER'],sndF))
+    return "TRUE"
 
+#파일전송
 @app.route('/download/<filename>', methods=['GET'])
 def send_file(filename):
-    '''
-    - Only related Kakao-talk Platform
-    - This function send the image file:<filename> to client who request this image file.
-    '''
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename=filename)
 
-@app.route('/push', methods=["POST"])
-def push_alarm():
-    '''
-    - Only related Naver-talk-talk Platform
-    - This function is intended to provide alarm services to the user.
-    '''
-    data = request.get_json()
-    PiKey = data["PiKey"]
-    message = data["message"]
-    naverMessage.sendEventForPush(PiKey, message)
-    return "HTTPS/1.1 200 OK"
+#로그인
+@app.route('/signup/<temp_user_key>', methods=['GET','POST'])
+def sign_up(temp_user_key):
+    if request.method == 'GET':
+        return render_template('regist.html')
+
+    else: # request.method == 'POST':
+        user_key, is_registed = sigup(temp_user_key=temp_user_key, form=request.form)
+        if is_registed:
+            #msg = payload.getPostPushMessage(user=user_key, text=util.SUCESS_TO_REGIST)
+            #sender.sendPush(url=util.PUSH_URL, user=user_key, msg=msg)
+            return render_template("regist_success.html"), 200
+        else:
+            #msg = payload.getPostPushMessage(user=user_key, text=util.FAIL_TO_REGIST_USER)
+            #sender.sendPush(url=util.PUSH_URL, user=user_key, msg=msg)
+            return render_template("regist_fail.html"), 200
+
+@app.errorhandler(404)
+def page_not_found(error):
+    app.logger.error(error)
+    return render_template("error404.html"), 404
+
+@app.errorhandler(405)
+def not_allow_method(error):
+    app.logger.error(error)
+    return render_template("error405.html"), 405
 
 if __name__ == "__main__":
-    '''
-    It's the main part. After you set up the SSL certificate path, 
-    attach it to the flask framework and launch the Web server.
-    '''
-    ssl_cert = '/etc/letsencrypt/live/pethome.ga/fullchain.pem'
-    ssl_key =  '/etc/letsencrypt/live/pethome.ga/privkey.pem'
+    ## www 키
+    #ssl_cert = '/etc/letsencrypt/live/www.kit-iot-system.tk/fullchain.pem'
+    #ssl_key =  '/etc/letsencrypt/live/www.kit-iot-system.tk/privkey.pem'
+    #일반키
+    ssl_cert = '/etc/letsencrypt/live/kit-iot-system.tk/fullchain.pem'
+    ssl_key =  '/etc/letsencrypt/live/kit-iot-system.tk/privkey.pem'
     contextSSL =  (ssl_cert, ssl_key)
+    #user ="u9-NF6yuZ8H8TAgj1uzqnQ"
     app.run(host='0.0.0.0', port=443, debug = True, ssl_context = contextSSL)
-
+    
