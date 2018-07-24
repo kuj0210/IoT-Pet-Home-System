@@ -1,5 +1,9 @@
 import time
 from push import *
+from DoorOperation import DoorOperation
+from FeedOperation import FeedOperation
+
+
 
 class MobileSystem:
     def __init__(self):
@@ -65,7 +69,7 @@ class MobileSystem:
                     continue
                 else:
                     print(list)
-                    #str =""
+                    str =""
                     while(len(list)>0):
                         item = list.pop(0)
                         user = item.pop(0)
@@ -77,14 +81,17 @@ class MobileSystem:
 
                         if 'open'in item:
                             print("문요청")
-                            #str+=문요청완료\n
+
+                            str+="문요청완료\n"
                         if 'feed'in item:
                             print("밥요청")
-                            # str+=밥요청완료\n
+
+                            str+="밥요청완료\n"
                         if 'camera' in item:
                             print("카메라요청")
                             self.Push.observerList[Push.VI].insertRQ(user, "비디오스레드::사진기능완료")  # 사진기능 요청
-                    # self.mPush.insertMSG(user, str) 일반 메세지 푸쉬 발생법
+                        print(str)
+                        self.Push.insertMSG(user, str) #일반 메세지 푸쉬 발생법
 
             except:
                 print("runMobile 리퀘스트 전송 에러")
@@ -93,4 +100,3 @@ class MobileSystem:
 if __name__ =="__main__":
     MS=MobileSystem()
     MS.runMobile()
-
