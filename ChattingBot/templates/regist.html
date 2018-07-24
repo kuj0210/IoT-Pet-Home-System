@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -6,10 +5,16 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/regist.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
     <script type="text/javascript" src="{{ url_for('static',filename='js/regist.js') }}" charset="utf-8"></script>
+    <script type="text/javascript">
+    function get_url(){
+        var cur_url = window.location;
+        document.getElementById("regist_user").action = cur_url;
+    }
+    </script>
 </head>
-<body>
+<body onload="get_url();">
     <main>사용자 등록</main>
-    <form id="regist_user" method="POST" onsubmit="return checkRegist()">
+    <form id="regist_user" method="POST" onsubmit="return checkRegist()" action="/signup">
         <fieldset>
             <legend>기본 정보</legend>
             <ol>
