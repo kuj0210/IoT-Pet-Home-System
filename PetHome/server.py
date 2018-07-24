@@ -4,12 +4,13 @@ from DoorOperation import DoorOperation
 from FeedOperation import FeedOperation
 
 
-
 class MobileSystem:
     def __init__(self):
         self.T = Translator()
         self.Push = Push()
         self.CONFIG = "configPI.txt"
+        self.door = DoorOperation()
+        self.feed = FeedOperation()
         #시스템 정보
 
         #값 초기화
@@ -34,7 +35,7 @@ class MobileSystem:
         except:
             print("파일 입출력 에러")
             return False
-        return False
+
     def bootUp(self):
         res=self.T.sendMsg(self.T.BOOT_URL,"NO_USER",Translator.SERIAL)
         item =self.parshResponseByNL(res)
@@ -81,11 +82,12 @@ class MobileSystem:
 
                         if 'open'in item:
                             print("문요청")
-
+                            self.door.start()
                             str+="문요청완료\n"
+
                         if 'feed'in item:
                             print("밥요청")
-
+                            self.feed.run()
                             str+="밥요청완료\n"
                         if 'camera' in item:
                             print("카메라요청")
