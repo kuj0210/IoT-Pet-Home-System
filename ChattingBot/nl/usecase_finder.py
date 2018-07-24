@@ -46,9 +46,8 @@ class UsecaseFinder:
 
     ##don't Touch
     def setUserSetting(self):
-        self.setUsecase("info", ["온도", "습도", "먼지", "공기", "방", "상황"], ["주", '주고', "알려주"], util.GRAVITY_ALL)
-        self.setUsecase("music", ["동요", "노래"], ["재생", "틀", "들려주"], util.GRAVITY_ALL)
-        self.setUsecase("voice", ["목", "소리", "목소리", "음성", "엄마", "아빠", "부모", "가족"], ["재생", "들려주"], util.GRAVITY_ALL)
+        self.setUsecase("feed", ["먹이","사료","먹을 것","밥"], ["주","줘","급여","배식","먹"], util.GRAVITY_N)
+        self.setUsecase("open", ["문","입구"], ["열","오픈","개방"], util.GRAVITY_N)
         self.setUsecase("camera", ["사진", "상황", "모습", "얼굴", "현황"], ["보여주", "찍", "알려주"], util.GRAVITY_ALL)
         self.setUsecase("regist", ["등록"], ["등록"], util.GRAVITY_ANY)
         self.setUsecase("howToUse", ["사용법", '도우미', "도움말"], ["사용법", '도우미', "도움말"], util.GRAVITY_ANY)

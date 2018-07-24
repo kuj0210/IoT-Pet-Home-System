@@ -52,7 +52,7 @@ class Handler:
         elif "regist" in requestlist:
             id = self.IDI.getTempID(user)
             if self.regist.insertTempID(user, id) == False:
-                return exception.REGISTERD_USER+"레지스터 등록에서 보냄"
+                return exception.REGISTERD_USER
             return util.REGIST_URL+id
 
         else :
