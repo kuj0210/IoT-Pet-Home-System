@@ -107,11 +107,11 @@ def sign_up(temp_user_key):
     else: # request.method == 'POST':
         user_key, is_registed = sigup(temp_user_key=temp_user_key, form=request.form)
         if is_registed:
-            msg = payload.getPostPushMessage(user=user_key, text=util.SUCESS_TO_REGIST)
+            #msg = payload.getPostPushMessage(user=user_key, text=util.SUCESS_TO_REGIST)
             #sender.sendPush(url=util.PUSH_URL, user=user_key, msg=msg)
             return render_template("regist_success.html"), 200
         else:
-            msg = payload.getPostPushMessage(user=user_key, text=util.FAIL_TO_REGIST_USER)
+            #msg = payload.getPostPushMessage(user=user_key, text=util.FAIL_TO_REGIST_USER)
             #sender.sendPush(url=util.PUSH_URL, user=user_key, msg=msg)
             return render_template("regist_fail.html"), 200
 

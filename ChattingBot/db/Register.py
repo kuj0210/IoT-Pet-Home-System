@@ -95,7 +95,6 @@ class Register:
 	def checkRegistedUser(self, user_key):
 		self.curs = self.conn.cursor()
 		try:
-			print(select.userKeyByUserKey(user_key))
 			self.curs.execute(select.userKeyByUserKey(user_key))
 			rows = self.curs.fetchall()
 
@@ -110,9 +109,12 @@ class Register:
 	def checkRegistedSerial(self, serial):
 		self.curs = self.conn.cursor()
 		try:
+			print(serial)
 			self.curs.execute(select.serialBySerial(serial))
 			rows = self.curs.fetchall()
-			if len(rows) > 0:
+			print(rows)
+			print(len(rows))
+			if (len(rows)) > 0:
 				return True
 			else :
 				return False
@@ -123,7 +125,7 @@ class Register:
 		self.curs = self.conn.cursor()
 		try:
 			self.curs.execute(select.tempinfoByTempId(tempID))
-			if len(self.curs.fetchall) > 0:
+			if len(self.curs.fetchall()) > 0:
 				return True
 			else:
 				return False
@@ -136,6 +138,7 @@ class Register:
 
 		if self.checkRegistedUser(user_key) == True:
 			return exception.REGISTERD_USER
+
 		try:
 			if self.checkRegistedSerial(serial) == False:
 				return exception.NO_REGISTERD_SERIAL
@@ -223,21 +226,26 @@ class Register:
 		self.curs = self.conn.cursor()
 
 		try:
+			print("1");
 			self.curs.execute(select.userSerialByUserKey(user_key))
-			rows = self.curs.fetchall()[0][0]
+			rows = self.curs.fetchall()
 			if len(rows) <= 0:
 				return False
 
 			serial = rows[0][0]
-
+			print("2 "+ serial);
 			if self.checkRegistedSerial(serial=serial) == False:
+				print("check 거름");
 				return False
 
-			self.curs.execute(update.petCountBySerial(serial=serial, petCount=petCount))
+			print(update.petCountBySerial(petCount=int(petCount), serial=serial))
+			self.curs.execute(update.petCountBySerial(petCount=int(petCount), serial=serial))
 			self.conn.commit()
+			print("3");
 			self.closeDB()
 			return True
 		except:
+			print("updatePetCount 예외");
 			self.closeDB()
 			return False
 
