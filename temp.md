@@ -149,7 +149,7 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 
   [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
  
- ### Modules Installation
+ ### Installation of the modules
  
   **1) Server side**
   - Install MySQL.
