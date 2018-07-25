@@ -229,4 +229,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   sudo pip3 install numpy
   sudo pip3 install imutils
   ```
-
+  - Install openCV-python
+  ```
+  sudo pip3 install opencv-python
+  ```
