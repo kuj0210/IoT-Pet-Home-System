@@ -93,35 +93,35 @@ sudo apt-get upgrade
 
 - Vi::optFlow()
 
-Detection of Moving Objects in an Image Using the Dense Optical Flow of OpenCV
+   Detection of Moving Objects in an Image Using the Dense Optical Flow of OpenCV
 
 - Vi::getCenterOfContour()
 
-Use the optflow () to retrieve the center point of the contour by acquiring the contour in the detected image.
+   Use the optflow () to retrieve the center point of the contour by acquiring the contour in the detected image.
 
 - Vi::capture()
 
-Creates an image file in png format with model name.
+   Creates an image file in png format with model name.
 
 - Vi::signalHandler()
 
-Safe shutdown function to be performed on signal
+   Safe shutdown function to be performed on signal
 
 - Vi::register_all_signal()
 
-Performs a signalHandler on all signals.
+   Performs a signalHandler on all signals.
 
 - Vi::modeFinder()
 
-Sorts the values in the list in descending order by frequency and returns a new list containing the frequencies.
+   Sorts the values in the list in descending order by frequency and returns a new list containing the frequencies.
 
 - Vi::areaDetection()
 
-Function to find pet in any of the segmented areas in the image
+   Function to find pet in any of the segmented areas in the image
 
 - Vi::petTracking()
 
-Using the above functions, periodically observe the movements of animals and give an alarm if they are not visible for a given time.
+   Using the above functions, periodically observe the movements of animals and give an alarm if they are not visible for a given time.
 
 ### Translator.py
 
@@ -140,10 +140,10 @@ Using the above functions, periodically observe the movements of animals and giv
 
 ### FeedOperation.py
 
-The class that drives the feed motor
+   The class that drives the feed motor
 
 ### DoorOpeartion.py
 
-The class that drives the door motor
+   The class that drives the door motor
 
 
