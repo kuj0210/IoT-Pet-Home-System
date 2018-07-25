@@ -48,7 +48,7 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 ## **Requirement**
  ### H/W
- - Raspnerry Pi 3 module B (used in Pi Server)
+ - Raspberry Pi 3 module B (used in Pi Server)
  - 2 servo-motors(for meal,door) and PiCamera
  - Computer or Notebook(used to chat-bot API Server)
  - Smart Phone for using chat-bot(used in client)
