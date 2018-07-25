@@ -1,7 +1,7 @@
 # IoT-Pet-Home-System : ChattingBot Server
 
  This server is main part of this system. For example, it not only recieve and send payload related to Naver-talktalk 
-messenger API from client, but also analyze nature language(Korean), receive device's requests and send the device's works.
+messenger API from client, but also analyze nature language(Korean), receive pet-home's requests and send the pet-home's works.
 
 
 ## Requirement
@@ -62,23 +62,22 @@ $ sudo python3 Server.py
 
 ## Introduce Internal Modules
 
-- **api** : To handle NaverTalkTalk API payload.
-- **auth** : Management authentication related to sign up and issue temp ID for registration step. 
-- **db** : To handle database and data related to this system.
-- **memo** : To handle cache related a images from devices.
-- **nl** : To analyze Nature Language and pick main keyword for operating each devices or replying to user.
-- **reply** : Management of reply messages to send user.
-- **static & template** : To manage html template, script source codes(Javascript), css and favicon. 
+- **api** : This module handle NaverTalkTalk(Web application messenger used by this system) API payload.
+- **auth** : This module manage authentication related to sign up and issue temporary ID for registration step. 
+- **db** : This module handle database and data related to this system.
+- **memo** : This module memorize cache related a images recieving from pet-homes and if this cache isn't unecessary, this module delete it.
+- **nl** : This module analyze Nature Language(Korean) and pick main keyword for operating each pet-homes or replying to user.
+- **reply** : This module manage of reply messages to send user.
+- **static & template** : This module manage html template, script source codes(Javascript), css and favicon. Specially, this system refer about user registration form.
 - **test** : You can test this system, to use this module.
 - **Server.py** : Main part of this system. It recieve and send payloads with HTTPS to client.
 
-## Membership Management and DB Explanation
+## DB Explanation and Membership Management
 
- This system's database is based on 1 database and 5 tables.
+### DB Explanation
 
-### SystemData (database)
-
-This database include the 5 tables. Below tables is them.
+This system include 1 database and 5 tables. Below tables is them. <br/>
+Main database is ```SystemData``` and this database include below 5 tables.
 
 - **naverUser**
 
@@ -108,7 +107,7 @@ addr varchar(100) primary key,
 serial VARCHAR(50)
   ```
   
- This table is used to temporarily manage cache related image what is sent to devices. Therefore, this system write device's serial
+ This table is used to temporarily manage cache related image what is sent to pet-homes. Therefore, this system write pet-home's serial
  related on sending image and cache's path(relate path).
  
  - **homeSystem**
@@ -118,7 +117,7 @@ serial varchar(50) primary key,
 petCount int default 1
  ```
 
- This table is used to manage device's information. Specially serial is very important to use or search other data.
+ This table is used to manage pet-home's information. Specially serial is very important to use or search other data.
  
  - **request**
  
@@ -129,8 +128,21 @@ request varchar(50),
 FOREIGN KEY (serial) REFERENCES homeSystem (serial)
  ```
  
- This table is used to manage device's request list. If a user(registed user) request any operation(s), this server will save it.
-After a device request to its works in database, server will send this list and delete this tuple. This tuple is device's works.
+ This table is used to manage pet-home's request list. If a user(registed user) request any operation(s), this server will save it.
+After a pet-home request to its works in database, server will send this list and delete this tuple. This tuple is pet-home's works.
+
+
+## Membership Management
+
+The step of user registration is below steps.
+
+1. User must write a keyword;```등록``` in messager app(NaverTalkTalk).
+2. A user-Key of user writting keyword ```등록``` and temporary ID that created by IDissuance module is registed in TempID table.
+3. This server send a link ```https://url/signup/<temporary-ID>```that created by auth module and reply module.
+4. If the user click this link, user registration form will be shown. User will fill this form.
+5. If the user send form, this server check this user's temporary ID and start the step of registration.
+6. In step of registration, this server delete ```TempID``` tuple that exist the temporary ID.
+7. In next step, this server add the data of registration form in ```naverUser``` table and ```homeSystem``` table.
 
 
 ## Note
