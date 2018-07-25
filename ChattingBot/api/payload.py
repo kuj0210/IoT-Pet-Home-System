@@ -5,7 +5,7 @@ def getImageBox(user, url):
 
         "compositeContent": {
             "compositeList": [{
-                "title": "모빌사진",
+                "title": "펫홈사진",
                 "description": "요청하신 사진입니다",
                 "image": {
                     "imageUrl": url
