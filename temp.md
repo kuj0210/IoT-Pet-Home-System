@@ -249,10 +249,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   sudo apt-get install python-dev
   sudo apt-get install python-rpi.gpio
   ```
-   
-  - Install flask, requests modules.
+  - Install flask, requests, numpy, imutils modules.
   ```
   sudo pip3 install flask
   sudo pip3 install requests
+  sudo pip3 install numpy
+  sudo pip3 install imutils
   ```
 
