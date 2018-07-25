@@ -28,7 +28,7 @@
   * [Water Motor](#water-motor)
   * [Door Motor](#door-motor)
 * [Notes](#notes)
-* [Promotion(#promotion)
+* [Promotion](#promotion)
 * [LICENSE](#license)
 
 ## Introduction
