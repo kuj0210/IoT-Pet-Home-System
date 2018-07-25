@@ -62,15 +62,32 @@ $ sudo python3 Server.py
 
 ## Introduce Internal Modules
 
-- **api** : To handle NaverTalkTalk API payload.
-- **auth** : Management authentication related to sign up and issue temp ID for registration step. 
-- **db** : To handle database and data related to this system.
-- **memo** : To handle cache related a images from devices.
-- **nl** : To analyze Nature Language and pick main keyword for operating each devices or replying to user.
-- **reply** : Management of reply messages to send user.
-- **static & template** : To manage html template, script source codes(Javascript), css and favicon. 
-- **test** : You can test this system, to use this module.
-- **Server.py** : Main part of this system. It recieve and send payloads with HTTPS to client.
+### api:
+To handle NaverTalkTalk API payload.
+
+### auth:
+Management authentication related to sign up and issue temp ID for registration step. 
+
+### db:
+To handle database and data related to this system.
+
+### memo:
+To handle cache related a images from devices.
+
+### nl:
+To analyze Nature Language and pick main keyword for operating each devices or replying to user.
+
+### reply:
+Management of reply messages to send user.
+
+### static & template: 
+To manage html template, script source codes(Javascript), css and favicon. 
+
+### test:
+You can test this system, to use this module.
+
+### Server.py: 
+Main part of this system. It recieve and send payloads with HTTPS to client.
 
 ## Membership Management and DB Explanation
 
@@ -80,7 +97,7 @@ $ sudo python3 Server.py
 
 This database include the 5 tables. Below tables is them.
 
-- naverUser
+- **naverUser**
 
 ```sql
 user_key varchar(50) primary key,
@@ -91,7 +108,7 @@ petName varchar(50)
 
  This table is used to manage user data related to regist this system. UserKey and Serial is used to search another keys or tuples.
  
- - TempID
+ - **TempID**
  
  ```sql
 user_key varchar(50) primary key,
@@ -101,7 +118,7 @@ ID varchar(50) primary key
   This table is used to temporarily manage user_key. But user related on this table isn't this system's user, accordingly this user's 
   information isn't registed in naverUser table. If you regist in this system, this table's tuple will be deleted.
   
-  - OldImageList
+  - **OldImageList**
   
   ```sql
 addr varchar(100) primary key,
@@ -111,7 +128,7 @@ serial VARCHAR(50)
  This table is used to temporarily manage cache related image what is sent to devices. Therefore, this system write device's serial
  related on sending image and cache's path(relate path).
  
- - homeSystem
+ - **homeSystem**
  
  ```sql
 serial varchar(50) primary key,
@@ -120,7 +137,7 @@ petCount int default 1
 
  This table is used to manage device's information. Specially serial is very important to use or search other data.
  
- - request
+ - **request**
  
  ```sql
 serial varchar(50),
