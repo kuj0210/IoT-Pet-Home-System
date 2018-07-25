@@ -62,32 +62,15 @@ $ sudo python3 Server.py
 
 ## Introduce Internal Modules
 
-### api:
-To handle NaverTalkTalk API payload.
-
-### auth:
-Management authentication related to sign up and issue temp ID for registration step. 
-
-### db:
-To handle database and data related to this system.
-
-### memo:
-To handle cache related a images from devices.
-
-### nl:
-To analyze Nature Language and pick main keyword for operating each devices or replying to user.
-
-### reply:
-Management of reply messages to send user.
-
-### static & template: 
-To manage html template, script source codes(Javascript), css and favicon. 
-
-### test:
-You can test this system, to use this module.
-
-### Server.py: 
-Main part of this system. It recieve and send payloads with HTTPS to client.
+- **api** : To handle NaverTalkTalk API payload.
+- **auth** : Management authentication related to sign up and issue temp ID for registration step. 
+- **db** : To handle database and data related to this system.
+- **memo** : To handle cache related a images from devices.
+- **nl** : To analyze Nature Language and pick main keyword for operating each devices or replying to user.
+- **reply** : Management of reply messages to send user.
+- **static & template** : To manage html template, script source codes(Javascript), css and favicon. 
+- **test** : You can test this system, to use this module.
+- **Server.py** : Main part of this system. It recieve and send payloads with HTTPS to client.
 
 ## Membership Management and DB Explanation
 
