@@ -147,9 +147,9 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 
  ## **Notes**
 
- ### [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
+  [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
  
- ### Install modules
+ ### Modules Installation
  
   **1) Server side**
   - Install MySQL.
@@ -218,7 +218,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 <br><br>
 
-## **Settings & Installation**
+## **Settings**
 
 ### **Settings** 
 
@@ -226,37 +226,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  - Main server is in AWS.(This server manage chat-bot API.)
  - PiServer is in RaspberryPi (This server manage RaspberryPi)
  - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
- 
-### **Installation**
- 
- **1) Server side**
-  - Install MySQL.
-  ```
-  sudo apt-get update
-  sudo apt-get install mysql-server
-  ```
-  
-  - Install python3 modules; requests, flask, pymysql 
-  ```
-  sudo pip3 install requests
-  sudo pip3 install flask
-  sudo pip3 install pymsql
-  ```
-   
- **2) PiServer side**
-  - Install GPIO modules.
-  ```
-  sudo apt-get install python-dev
-  sudo apt-get install python-rpi.gpio
-  ```
-  - Install flask, requests, numpy, imutils modules.
-  ```
-  sudo pip3 install flask
-  sudo pip3 install requests
-  sudo pip3 install numpy
-  sudo pip3 install imutils
-  ```
-  - Install openCV-python
-  ```
-  sudo pip3 install opencv-python
-  ```
