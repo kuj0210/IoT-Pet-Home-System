@@ -50,4 +50,100 @@ sudo apt-get upgrade
 - Brown wired: connects to GND pin(one of pin 6, 9, 14, 20, 25, 30, 34, 39)
 
 
+## **Class Description**
+
+### server.py
+
+ - MobileSystem::parshResponseByNL()
+ 
+ - MobileSystem::parshResponseBySP()
+ 
+ - MobileSystem::loadSerail()
+ 
+ - MobileSystem::bootUp()
+ 
+ - MobileSystem::getRequest()
+ 
+ - MobileSystem::runMobile()
+ 
+ 
+### push.py
+ 
+ - setUpObserverList()
+ 
+ - setUpThread()
+ 
+ - insertMSG()
+ 
+ - getMSG()
+ 
+ - startTh()
+ 
+### observer.py
+
+- Observer::reSet()
+
+- Observer::run()
+
+- Observer::insertRQ()
+
+- Observer::popRQ()
+
+### Vi.py
+
+- Vi::optFlow()
+
+Detection of Moving Objects in an Image Using the Dense Optical Flow of OpenCV
+
+- Vi::getCenterOfContour()
+
+Use the optflow () to retrieve the center point of the contour by acquiring the contour in the detected image.
+
+- Vi::capture()
+
+Creates an image file in png format with model name.
+
+- Vi::signalHandler()
+
+Safe shutdown function to be performed on signal
+
+- Vi::register_all_signal()
+
+Performs a signalHandler on all signals.
+
+- Vi::modeFinder()
+
+Sorts the values in the list in descending order by frequency and returns a new list containing the frequencies.
+
+- Vi::areaDetection()
+
+Function to find pet in any of the segmented areas in the image
+
+- Vi::petTracking()
+
+Using the above functions, periodically observe the movements of animals and give an alarm if they are not visible for a given time.
+
+### Translator.py
+
+- Translator::getIMAG_URL()
+
+- Translator::getPostBodyMessage()
+
+- Translator::sendMsg()
+
+- Translator::pushToUser()
+
+- Translator::pushToAllUser()
+
+- Translator::pushImage()
+
+
+### FeedOperation.py
+
+The class that drives the feed motor
+
+### DoorOpeartion.py
+
+The class that drives the door motor
+
 
