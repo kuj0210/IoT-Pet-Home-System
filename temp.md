@@ -146,13 +146,44 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
      
 
  ## **Notes**
- 
- - Installation method of Rasbian<br>
-   https://www.raspberrypi.org/documentation/installation/installing-images/
 
- - [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
+ ### [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
  
+ ### Install modules
+ 
+  **1) Server side**
+  - Install MySQL.
+  ```
+  sudo apt-get update
+  sudo apt-get install mysql-server
+  ```
+  
+  - Install python3 modules; requests, flask, pymysql 
+  ```
+  sudo pip3 install requests
+  sudo pip3 install flask
+  sudo pip3 install pymsql
+  ```
+   
+ **2) PiServer side**
+  - Install GPIO modules.
+  ```
+  sudo apt-get install python-dev
+  sudo apt-get install python-rpi.gpio
+  ```
+  - Install flask, requests, numpy, imutils modules.
+  ```
+  sudo pip3 install flask
+  sudo pip3 install requests
+  sudo pip3 install numpy
+  sudo pip3 install imutils
+  ```
+  - Install openCV-python
+  ```
+  sudo pip3 install opencv-python
+  ```
 
+ 
  ## **Promotion**
  
   - In issue#36 :: Reference PPT and video(참고용 PPT 및 동영상)<br>
