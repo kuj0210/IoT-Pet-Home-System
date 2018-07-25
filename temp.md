@@ -25,7 +25,6 @@
 * [How to use](#how-to-use)
 * [How to connect motor wires](#how-to-connect-motor-wires)
   * [Food Motor](#food-motor)
-  * [Water Motor](#water-motor)
   * [Door Motor](#door-motor)
 * [Notes](#notes)
 * [Promotion](#promotion)
@@ -44,7 +43,7 @@ It's very simple to use because it uses a messenger. If you are in an environmen
  - Using communication with flask server
  - Using 2 flask servers.(Main Server(in aws), PiServer(in raspberryPi))
  - You can check the status of your pet with PiCamera
- - You can manage meal and to give water to your pet(s).
+ - You can manage meal for your pet(s).
 
 
 ## **Requirement**
@@ -55,53 +54,17 @@ It's very simple to use because it uses a messenger. If you are in an environmen
  - Smart Phone for using chat-bot(used in client)
  
  ### S/W
- - python 3.x
+ - python 3.x version
  - opencv-python 3.4.1.14
- - Required package: pymysql, requests, numpy, Flask, imutils
+ - Raspbian
+ - Required package: requests, Flask, pymysql, numpy, imutils
 
-## **Settings & Installation**
-
-### **Settings** 
-
- - Using 2 static ip address.
- - Main server is in AWS.(This server manage chat-bot API.)
- - PiServer is in RaspberryPi (This server manage RaspberryPi)
- - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
- 
-### **Installation**
- 
- **1) Server side**
-  - Install MySQL.
-  ```
-  sudo apt-get update
-  sudo apt-get install mysql-server
-  ```
-  
-  - Install python3 modules; requests, flask, pymysql 
-  ```
-  sudo pip3 install requests
-  sudo pip3 install flask
-  sudo pip3 install pymsql
-  ```
-   
- **2) PiServer side**
-  - Install GPIO modules.
-  ```
-  sudo apt-get install python-dev
-  sudo apt-get install python-rpi.gpio
-  ```
-   
-  - Install flask, requests modules.
-  ```
-  sudo pip3 install flask
-  sudo pip3 install requests
-  ```
 
 ## **Pet House Structure**
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Pet_House_Structure.png?raw=true)
 
-Three motors are operated by messenger, and manage feeds, water and door.<br>
+Three motors are operated by messenger, and manage feeds and door.<br>
 And you can see the pet directly through the Pi Camera.
 
 
@@ -164,10 +127,10 @@ This structure is main-server and pi-server(in RaspberryPi using flask framework
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_regist.PNG?raw=true)
 
 
-**3) Enter chats that associated with food, water and door opening.**
+**3) Enter chats that associated with food, door opening.**
 
 If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
-Order to set feed, water or open pet-home door at the IoT-pet-home-system chatbot.
+Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_operation.PNG?raw=true)
 
@@ -180,9 +143,9 @@ Order to set feed, water or open pet-home door at the IoT-pet-home-system chatbo
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_etc.PNG?raw=true)
 
 
-**5) If you forget to feed or set water to your pet, chatbot's push service support you!**
+**5) If you forget to feed your pet, chatbot's push service support you!**
 
-- If you don't set feed or water to your pet, push alarm inform to you once an hour.
+- If you don't set feed your pet, push alarm inform to you once an hour.
 - But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_push.PNG?raw=true)
@@ -246,3 +209,50 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
+
+
+
+##
+##
+##
+##
+<br><br>
+
+## **Settings & Installation**
+
+### **Settings** 
+
+ - Using 2 static ip address.
+ - Main server is in AWS.(This server manage chat-bot API.)
+ - PiServer is in RaspberryPi (This server manage RaspberryPi)
+ - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
+ 
+### **Installation**
+ 
+ **1) Server side**
+  - Install MySQL.
+  ```
+  sudo apt-get update
+  sudo apt-get install mysql-server
+  ```
+  
+  - Install python3 modules; requests, flask, pymysql 
+  ```
+  sudo pip3 install requests
+  sudo pip3 install flask
+  sudo pip3 install pymsql
+  ```
+   
+ **2) PiServer side**
+  - Install GPIO modules.
+  ```
+  sudo apt-get install python-dev
+  sudo apt-get install python-rpi.gpio
+  ```
+   
+  - Install flask, requests modules.
+  ```
+  sudo pip3 install flask
+  sudo pip3 install requests
+  ```
+
