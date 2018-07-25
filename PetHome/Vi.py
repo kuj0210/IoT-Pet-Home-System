@@ -32,7 +32,7 @@ class Vi(Observer):
 
         self.previousTime = time.localtime(0) # 이전 PUSH시간
         self.currentTime = time.localtime() # 현재시간
-        self.intervalTime = 1 # 이전 PUSH시간과 다음PUSH시간의 간격 (분 단위)
+        self.intervalTime = 60 # 이전 PUSH시간과 다음PUSH시간의 간격 (분 단위)
         self.gapTime = self.intervalTime + 1 # 이전 PUSH시간과 현재시간의 차이 (분 단위)
 
         for i in range(0, self.petCount):
