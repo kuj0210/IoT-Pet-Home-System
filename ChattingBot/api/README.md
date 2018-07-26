@@ -46,7 +46,8 @@ def getImageBox(user, url)
 ```
 
   - **input**: user(string), url(string)
-  - **output**: Message to use sending NaverTalkTalk API Server(dictionary)
+  - **output**: Message(using **image reply**) to use sending NaverTalkTalk API Server(dictionary)
+                
 ```json
 {
     "event": "send",
@@ -62,36 +63,65 @@ def getImageBox(user, url)
     }
 }
 ```
-  
-```python
-def getUpdateBox(url)
-```
-
-  - **input**:
-  - **output**:
 
 ```python
 def getPostBodyMessage(user, text)
 ```
 
-  - **input**:
-  - **output**:
+  - **input**: user(string), text(string)
+  - **output**: Message(using **text reply**) to use sending NaverTalkTalk API Server(dictionary)
+                
+```json
+{
+    "event": "send",
+    "user": user,
+    "textContent": {
+        "text": text
+    },
+    "options": {
+        "notification": "true"
+    }
+}
+```
 
 ```python
 def getPostPushMessage(user, text)
 ```
 
-  - **input**:
-  - **output**:
-
-```python
-def ImageJson(user, URL)
+  - **input**: user(string), text(string)
+  - **output**: Message(using **push**) to use sending NaverTalkTalk API Server(dictionary)
+  
+```json
+{    
+    "event": "send",
+    "user": user,
+    "textContent": {
+        "text": text
+    }
+}
 ```
 
-  - **input**:
-  - **output**:
-  
-  
+
 ## Module sender
 
+```python
+def sendPush(url, user, msg)
+```
+  
+  - **input**: url(string), user(string), msg(string)
+  - **discription**: This function make request to NaverTalkTalk API Server for sending **push message** to user. 
+  Therefore ```user```(user_key) must be required, ``url`` is NaverTalkTalk API Server, ```msg``` is push message's text part.
+
+```python
+def sendIMAG(user, URL)
+```
+  
+  - **input**: user(string), URL(string)
+  - **discription**: This function make request to NaverTalkTalk API Server for sending **image message** to user.
+   Therefore ```user```(user_key) must be required, ``URL`` is NaverTalkTalk API Server.
+
+
 ## Module util
+
+ This module handle many data to relate to API utility. This module include NaverTalkTalk API server's url, this system's url,
+ utility data and function. 
