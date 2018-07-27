@@ -1,4 +1,5 @@
-# IoT-Pet-Home-System : ChattingBot Server
+
+# <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot%20image.jpg?raw=true" width="64">IoT-Pet-Home-System : ChattingBot Server
 
  This server is main part of this system. For example, it not only recieve and send payload related to Naver-talktalk 
 messenger API from client, but also analyze nature language(Korean), receive pet-home's requests and send the pet-home's works.
