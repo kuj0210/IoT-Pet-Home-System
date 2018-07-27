@@ -149,7 +149,6 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 
   [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
  
- ### 
  
  ### Installation of the modules
  
@@ -185,6 +184,11 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
   sudo pip3 install opencv-python
   ```
 
+ ### README by version
+ 
+ [README - 1.0.2 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README(1.0.2).md)
+ 
+ [README(KR) - 1.0.2 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README_KR(1.0.2).md)
  
  ## **Promotion**
  
@@ -211,20 +215,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
-
-
-
-##
-##
-##
-##
-<br><br>
-
-## **Settings**
-
-### **Settings** 
-
- - Using 2 static ip address.
- - Main server is in AWS.(This server manage chat-bot API.)
- - PiServer is in RaspberryPi (This server manage RaspberryPi)
- - Using python 3.x version. Because Hangul generate error with uni-code/utf8.
