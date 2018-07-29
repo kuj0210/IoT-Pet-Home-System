@@ -52,97 +52,145 @@ sudo apt-get upgrade
 
 ## **Class Description**
 
-### server.py
+### Module server
 
- - MobileSystem::parshResponseByNL()
+```python
+def parshResponseByNL(self, res)
+```
  
- - MobileSystem::parshResponseBySP()
- 
- - MobileSystem::loadSerail()
- 
- - MobileSystem::bootUp()
- 
- - MobileSystem::getRequest()
- 
- - MobileSystem::runMobile()
- 
- 
-### push.py
- 
- - setUpObserverList()
- 
- - setUpThread()
- 
- - insertMSG()
- 
- - getMSG()
- 
- - startTh()
- 
-### observer.py
+```python
+def parshResponseBySP(self, res)
+```
 
-- Observer::reSet()
+```python
+def loadSerail(self)
+ ```
+ 
+```python
+def bootUp(self)
+ ```
+ 
+```python
+def getRequest(self, wating)
+```
+ 
+```python
+def runMobile(self)
+```
+ 
+ 
+### Module push
+```python
+def setUpObserverList(self)
+```
+ 
+```python
+def setUpThread(self)
+```
+ 
+```python
+def insertMSG(self, user, str)
+```
+ 
+```python
+def getMSG(self)
+```
+ 
+```python
+def startTh(self)
+```
 
-- Observer::run()
+### Module observer
+```python
+def reSet(self, push)
+```
 
-- Observer::insertRQ()
+```python
+def run(self, push)
+```
 
-- Observer::popRQ()
+```python
+def insertRQ(self, user, msg)
+```
 
-### Vi.py
+```python
+def popRQ(self)
+```
 
-- Vi::optFlow()
+### Module Vi
+
+```python
+def optFlow(self, fra,e. prvs. hsv)
+```
 
    Detection of Moving Objects in an Image Using the Dense Optical Flow of OpenCV
 
-- Vi::getCenterOfContour()
+```python
+def getCenterOfContour(self, image)
+```
 
    Use the optflow () to retrieve the center point of the contour by acquiring the contour in the detected image.
-
-- Vi::capture()
-
+   
+```python
+def capture(self)
+```
    Creates an image file in png format with model name.
 
-- Vi::signalHandler()
-
+```python
+def signalHandler(self, signum, frame)
+```
    Safe shutdown function to be performed on signal
-
-- Vi::register_all_signal()
-
+   
+```python
+def register_all_signal(self)
+```
    Performs a signalHandler on all signals.
-
-- Vi::modeFinder()
-
+   
+```python
+def modeFinder(self, list)
+```
    Sorts the values in the list in descending order by frequency and returns a new list containing the frequencies.
-
-- Vi::areaDetection()
-
+   
+```python
+def areaDetection(self, x, y)
+```
    Function to find pet in any of the segmented areas in the image
-
-- Vi::petTracking()
-
+   
+```python
+def petTracking(self)
+```
    Using the above functions, periodically observe the movements of animals and give an alarm if they are not visible for a given time.
 
-### Translator.py
+### Module Translator
+```python
+def getIMAG_URL(self, user)
+```
 
-- Translator::getIMAG_URL()
+```python
+def getPostBodyMessage(self, user, text)
+```
 
-- Translator::getPostBodyMessage()
+```python
+def sendMsg(self, url, user, msg)
+```
 
-- Translator::sendMsg()
+```python
+def pushToUser(self, user, msg)
+```
 
-- Translator::pushToUser()
+```python
+def pushToAllUser(self, msg)
+```
 
-- Translator::pushToAllUser()
+```python
+def pushImage(self, user, path)
+```
 
-- Translator::pushImage()
-
-
-### FeedOperation.py
+### Module FeedOperation
 
    The class that drives the feed motor
 
-### DoorOpeartion.py
+### Module DoorOpeartion
 
    The class that drives the door motor
 
