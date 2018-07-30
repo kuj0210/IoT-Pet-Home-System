@@ -20,7 +20,6 @@
 * [Client & Server Structure](#client--server-structure)
   * [Full server structure](#full-server-structure)
   * [Client & Main server structure](#client--main-server-structure)
-  * [Main server & Pi-server structure](#main-server--pi-server-structure)
 * [How to use](#how-to-use)
 * [Notes](#notes)
 * [Promotion](#promotion)
@@ -79,29 +78,23 @@ And you can see the pet directly through the Pi Camera.
 
 ### **Full server structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Client&Server_Structure.png?raw=true)
+![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Full_server_structure.png?raw=true)
 
 
 - Client: The client represents a user using messanger application.
 - Server(Main Server): This server is main of full structure. It manage chatbot and commands for controlling PiServer.
 - PiServer(RaspberryPi): This server manage to control motors, camera and push thread.
 
+ The blue arrows represent the main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
+
 
 ### **Client & Main server structure**
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Structure_client&mainserver.png?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Client&main_server_structure.png?raw=true)
 
 
  Client will order various commands. (regist user, control to pet-home etc) And the main-server get this commands. Before main-server get this commands, messages go to API server and API server give the data to main-server.(data:json type) After main-server get this type's data, it'll parse this data and make operation list for ordering to PiServer. The main-server send operation list to PiServer and make reply-message for sending to user.<br>
  But if a user don't register to server or don't registered in PiServer's userlist, this user can't use this chatbot. Main-server use database for managing user-data and registed Pi-servers. Below inform main-server and pi-server structure.
-
-
-### **Main server & Pi-server structure**
-
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Structure_mainserver&piserver.png?raw=true)
-
-
-This structure is main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
 
 
 ## **How to use**
