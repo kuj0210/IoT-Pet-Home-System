@@ -34,11 +34,10 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 
 ## **Features**
- - Usage through Messenger
- - Raspberry Pi with chat-bot based System
- - Using communication with flask server
- - Using 2 flask servers.(Main Server(in aws), PiServer(in raspberryPi))
- - You can check the status of your pet with PiCamera
+ - Usage through Messenger.
+ - Raspberry Pi with chat-bot based System.
+ - Using communication with chat-bot server(based on flask).
+ - You can check the status of your pet with PiCamera.
  - You can manage meal for your pet(s).
 
 
@@ -46,13 +45,14 @@ It's very simple to use because it uses a messenger. If you are in an environmen
  ### H/W
  - Raspberry Pi 3 module B (used in Pi Server)
  - 2 servo-motors(for meal,door) and PiCamera
- - Computer or Notebook(used to chat-bot API Server)
- - Smart Phone for using chat-bot(used in client)
+ - Server with public IP(used to chat-bot API Server) and HTTPS.
+ - Smart-Phone or web for using chat-bot(used in client)
  
  ### S/W
  - python 3.x version
+ - Open-jdk and g++
  - opencv-python 3.4.1.14
- - Raspbian
+ - Raspbian OS(for pethome)
  - Required package: requests, Flask, pymysql, numpy, imutils
 
 
