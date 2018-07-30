@@ -203,7 +203,7 @@ def pushImage(self, user, path)
 
  ## **LICENSE**
  
- PetHome is licensed under [BSD 3-Clause License](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/PetHome/LICENSE).
+ IoT-Pet-Home-System's pet-home is licensed under [BSD 3-Clause License](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/PetHome/LICENSE).
  
  ```
 Copyright (c) 2018-present, kuj0210, KeonHeeLee, seok8418
