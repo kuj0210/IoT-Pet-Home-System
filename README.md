@@ -81,8 +81,8 @@ And you can see the pet directly through the Pi Camera.
 ![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Full_server_structure.png?raw=true)
 
 
-- Client: The client represents a user using messanger application.
-- Server(Main Server): This server is main of full structure. It manage chatbot and commands for controlling PiServer.
+- User: User represents a user using messanger application.
+- Chatting Server(Main Server): This server is main of full structure. It manage chatbot and commands for controlling PiServer.
 - PiServer(RaspberryPi): This server manage to control motors, camera and push thread.
 
  The blue arrows represent the main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
