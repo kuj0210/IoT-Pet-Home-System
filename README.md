@@ -107,26 +107,42 @@ And you can see the pet directly through the Pi Camera.
  - kakao-talk platform: @guineapighome (IoT 펫홈 관리 시스템)<br> 
  - naver-talktalk platform: IoT 펫홈 시스템
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_first.PNG?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/How_to_use.png?raw=true)
 
 
-**2) Enter chat in the format “[등록]/e-mail/Product-Key”**
+**2) Enter chat in the format “등록”**
 
- Check your device's product-key, and regist your email and product-key to chatbot-server.<br>
- If you don't regist, chatbot-server don't support your command. 
+ When you enter this command, it sends the registration url
  
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_regist.PNG?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/get_regist_url.png?raw=true)
+
+**3) Click url and fill in the text box.
+
+Check your device's product-key and enter the product key, E-mail adress, pet home nickname, and then the number of pets.<br>
+Then press the button below to register.
+
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/get_regist_url.png?raw=true)
 
 
-**3) Enter chats that associated with food, door opening.**
+**4) Enter chats that associated with food, door opening, Taking pictures.**
 
 If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
-Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
+Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_operation.PNG?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/request.png?raw=true)
 
+Ask Chatbot to take pictures.
 
-**4) If you don't know how to use or need to remind your account, please enter the command below.**
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/capture_request.png?raw=true)
+
+**5) Enter chats that associated with camera.**
+
+If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
+Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
+
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/request.png?raw=true)
+
+**6) If you don't know how to use or need to remind your account, please enter the command below.**
 
 - "[사용법]" : This command will inform how to use this chatbot.<br>
 - "[정보]" : This command will inform your account that you registed at this chatbot-server.
@@ -134,13 +150,23 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_etc.PNG?raw=true)
 
 
-**5) If you forget to feed your pet, chatbot's push service support you!**
+**7) If you forget to feed your pet, chatbot's push service support you!**
 
 - If you don't set feed your pet, push alarm inform to you once an hour.
 - But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_push.PNG?raw=true)
-     
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/chatbot_push.png?raw=true)
+    
+    
+**8) If you forget to feed your pet, chatbot's push service support you!**
+
+- If you don't set feed your pet, push alarm inform to you once an hour.
+- But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
+
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/chatbot_push.png?raw=true)
+
+
+
 
  ## **Notes**
 
@@ -183,9 +209,9 @@ Order to set feed,  open pet-home door at the IoT-pet-home-system chatbot.
 
  ### README by version
  
- [README - 1.0.2 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README(1.0.2).md)
+ [README - 1.0.0 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README(1.0.0).md)
  
- [README(KR) - 1.0.2 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README_KR(1.0.2).md)
+ [README(KR) - 1.0.0 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README_KR(1.0.0).md)
  
  ## **Promotion**
  
