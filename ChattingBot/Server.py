@@ -61,11 +61,12 @@ def passRequest():
 @app.route("/push",methods=["POST"])
 def pushResult():
     nM=Handler()
+    regist = Register()
     dataFromMessenger =request.get_json()# get json data from naver talk talk
     user =msg=dataFromMessenger['user']
     msg=dataFromMessenger['textContent']['text']
-    #DB에서 펫홈이름 얻기
-    # 펫홈이름에서 알려드립니다 + msg를 아래의 푸쉬함수에 넣음
+    pet_name = regist.getPetName(user)
+    msg = pet_name + "에서 알려드립니다." + msg
     sender.sendPush(util.PUSH_URL,user,msg)
     return "True"
 
@@ -101,11 +102,13 @@ def send_file(filename):
 #로그인
 @app.route('/signup/<temp_user_key>', methods=['GET','POST'])
 def sign_up(temp_user_key):
+    regist = Register()
     if request.method == 'GET':
         return render_template('regist.html')
 
     else: # request.method == 'POST':
         user_key, is_registed = sigup(temp_user_key=temp_user_key, form=request.form)
+        res = regist.insertUserRequest(user_key, "UPDATE")
         if is_registed:
             #msg = payload.getPostPushMessage(user=user_key, text=util.SUCESS_TO_REGIST)
             #sender.sendPush(url=util.PUSH_URL, user=user_key, msg=msg)

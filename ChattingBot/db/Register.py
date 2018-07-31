@@ -132,6 +132,19 @@ class Register:
 		except:
 			return False
 
+	def getPetName(self, user_key):
+		self.openDB()
+		self.curs = self.conn.cursor()
+		
+		try:
+			self.curs.execute(select.petNameByUserKey(user_key))
+			rows = self.curs.fetchone()
+			self.closeDB()
+			return " ".join(rows)
+		except:
+			self.closeDB()
+			return exception.FAIL_TO_SELECT
+
 	def insertUserData(self, user_key, serial, email, petname):
 		self.openDB()
 		self.curs = self.conn.cursor()
