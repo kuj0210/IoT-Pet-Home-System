@@ -112,11 +112,11 @@ And you can see the pet directly through the Pi Camera.
 
 **2) Enter chat in the format “등록”**
 
- When you enter this command, it sends the registration url
+ When you enter this command, it sends the registration url.
  
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/get_regist_url.png?raw=true)
 
-**3) Click url and fill in the text box.
+**3) Click url and fill in the text box.**
 
 Check your device's product-key and enter the product key, E-mail adress, pet home nickname, and then the number of pets.<br>
 Then press the button below to register.
@@ -135,14 +135,7 @@ Ask Chatbot to take pictures.
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/capture_request.png?raw=true)
 
-**5) Enter chats that associated with camera.**
-
-If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
-Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
-
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/request.png?raw=true)
-
-**6) If you don't know how to use or need to remind your account, please enter the command below.**
+**5) If you don't know how to use or need to remind your account, please enter the command below.**
 
 - "[사용법]" : This command will inform how to use this chatbot.<br>
 - "[정보]" : This command will inform your account that you registed at this chatbot-server.
@@ -150,7 +143,7 @@ Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_etc.PNG?raw=true)
 
 
-**7) If you forget to feed your pet, chatbot's push service support you!**
+**6) If you forget to feed your pet, chatbot's push service support you!**
 
 - If you don't set feed your pet, push alarm inform to you once an hour.
 - But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
@@ -158,12 +151,11 @@ Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/chatbot_push.png?raw=true)
     
     
-**8) If you forget to feed your pet, chatbot's push service support you!**
+**7) If you want to stop a talktalk-friend, you can stop anytime.**
 
-- If you don't set feed your pet, push alarm inform to you once an hour.
-- But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
+- All information you entered at the time of registration will be deleted and the following message will be sent to you.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/chatbot_push.png?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/cancle_message.png?raw=true)
 
 
 
