@@ -18,15 +18,18 @@ class MobileSystem:
             exit()
         self.bootUp()
         print("프로그램 안전부팅 완료")
+
     def parshResponseByNL(self,res):
         res =res.split("\n")
         res.pop()
         for i in range(len(res)):
             res[i]=res[i].strip()
         return res
+
     def parshResponseBySP(self,res):
         res =res.split(" ")
         return res
+
     def loadSerail(self):
         try:
             with open(self.CONFIG, "r") as f:
@@ -43,6 +46,7 @@ class MobileSystem:
         petCNT = item.pop(0)
         Translator.userList=item
         Translator.Count = int(petCNT)
+
     def getRequest(self,wating):
         time.sleep(wating)
         res = self.T.sendMsg(self.T.RQST_URL,"NO_USER",Translator.SERIAL)
@@ -55,6 +59,7 @@ class MobileSystem:
             atom.pop(0)
             list.append(atom)
         return list
+
     def runMobile(self):
         try:
             print("프로그램 시작합니다.")

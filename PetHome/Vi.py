@@ -8,8 +8,6 @@ from collections import Counter
 import time
 
 class Vi(Observer):
-
-
     def __init__(self, Push):
         self.reSet(Push)
         self.width = 0
@@ -77,7 +75,8 @@ class Vi(Observer):
 
             self.currentTime = time.localtime() #현재시간 갱신
             if self.previousTime != time.localtime(0):
-                self.gapTime = (self.currentTime.tm_hour - self.previousTime.tm_hour) * 60 + (self.currentTime.tm_min - self.previousTime.tm_min)
+                self.gapTime = (self.currentTime.tm_hour - self.previousTime.tm_hour) * 60\
+                               + (self.currentTime.tm_min - self.previousTime.tm_min)
 
 
 
@@ -99,7 +98,8 @@ class Vi(Observer):
                     for i in range(0, self.petCount):
                         print (self.nestAreaFrequency, self.modes)
                         #print(self.gapTime)
-                        if abs(self.nestAreaFrequency[i]-self.modes[i][1]) > self.termTimer / 4: #주석 분모 상수 여러 영상들로 테스트해서 조절 필요
+                        if abs(self.nestAreaFrequency[i]-self.modes[i][1]) > self.termTimer / 4:
+                            #주석 분모 상수 여러 영상들로 테스트해서 조절 필요
                             self.wrongPetCount += 1
                     if self.wrongPetCount != 0:
                         if self.gapTime >= self.intervalTime:

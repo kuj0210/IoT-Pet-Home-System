@@ -1,7 +1,7 @@
 import pymysql
 from .query import create, delete, insert, select, update, util
-from reply import reply
-from reply import exception
+from ChattingBot.reply import reply
+from ChattingBot.reply import exception
 
 class Register:
 	def __init__(self):
@@ -239,26 +239,21 @@ class Register:
 		self.curs = self.conn.cursor()
 
 		try:
-			print("1");
 			self.curs.execute(select.userSerialByUserKey(user_key))
 			rows = self.curs.fetchall()
 			if len(rows) <= 0:
 				return False
 
 			serial = rows[0][0]
-			print("2 "+ serial);
 			if self.checkRegistedSerial(serial=serial) == False:
-				print("check 거름");
 				return False
 
 			print(update.petCountBySerial(petCount=int(petCount), serial=serial))
 			self.curs.execute(update.petCountBySerial(petCount=int(petCount), serial=serial))
 			self.conn.commit()
-			print("3");
 			self.closeDB()
 			return True
 		except:
-			print("updatePetCount 예외");
 			self.closeDB()
 			return False
 
@@ -274,7 +269,6 @@ class Register:
 				return False
 			return rows[0][0]
 		except:
-			print("getSerialFromUser error")
 			return  exception.SELECT_FROM_CHECKING_SERIAL
 
 	def getUserFromSerial(self, serial):
@@ -282,7 +276,6 @@ class Register:
 		self.curs = self.conn.cursor()
 
 		if self.checkRegistedSerial(serial) == False:
-			print("시리얼조회실패")
 			self.closeDB()
 			return exception.NO_REGISTERD_SERIAL
 		try:
@@ -303,7 +296,6 @@ class Register:
 		self.openDB()
 		self.curs = self.conn.cursor()
 		if self.checkRegistedSerial(serial) == False:
-			print("시리얼조회실패")
 			self.closeDB()
 			return exception.NO_REGISTERD_SERIAL
 		try:

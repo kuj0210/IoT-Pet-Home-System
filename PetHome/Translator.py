@@ -8,9 +8,10 @@ class Translator():
     SERIAL=""
     Name=""
     Count =0
+
     def __init__(self):
         # URL 관리
-        self.SERVER_URL = "https://kit-iot-system.tk:443/"
+        self.SERVER_URL = "https://kit-iot-system.tk/"
         self.PUSH_URL = self.SERVER_URL+"push"
         self.BOOT_URL = self.SERVER_URL + "bootUp"
         self.RQST_URL = self.SERVER_URL + "RQST"
@@ -20,6 +21,7 @@ class Translator():
 
     def getIMAG_URL(self,user):
         return self.SERVER_URL+user+"/image"
+
     def getPostBodyMessage(self,user,text):
         postBodyMessage = {
             "event": "send",
@@ -32,15 +34,19 @@ class Translator():
             }
         }
         return postBodyMessage
+
     def sendMsg(self,url,user,msg):
         res = requests.post(url=url, headers=self.Send_Header, data=json.dumps(self.getPostBodyMessage(user,msg)))
         return str(res.__dict__['_content'], encoding='utf-8')
+
     def pushToUser(self,user,msg):
         self.sendMsg(self.PUSH_URL,user,msg)
+
     def pushToAllUser(self,msg):
         #print("전유저푸쉬")
         for user in Translator.userList:
             self.pushToUser(user,msg)
+
     def pushImage(self, user, path):
         print(user)
         print(path)

@@ -1,5 +1,5 @@
-from db.Register import Register
-from reply import exception
+from ChattingBot.db.Register import Register
+from ChattingBot.reply import exception
 
 def sigup(temp_user_key, form):
     register = Register()
