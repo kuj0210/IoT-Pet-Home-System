@@ -121,7 +121,7 @@ And you can see the pet directly through the Pi Camera.
 Check your device's product-key and enter the product key, E-mail adress, pet home nickname, and then the number of pets.<br>
 Then press the button below to register.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/get_regist_url.png?raw=true)
+![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/regist_form.png?raw=true)
 
 
 **4) Enter chats that associated with food, door opening, Taking pictures.**
