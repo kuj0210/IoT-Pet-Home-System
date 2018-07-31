@@ -1,9 +1,0 @@
-test-server
-__kakao__
-beta1360@naver.com
-on_11@naver.com
-seok8418@nate.com
-__naver__
-beta1360@naver.com
-on_11@naver.com
-seok8418@nate.com

@@ -1,8 +1,8 @@
-from db import Register
-from nl import usecase_finder
-from reply import reply, exception
+from ChattingBot.db import Register
+from ChattingBot.nl import usecase_finder
+from ChattingBot.reply import reply, exception
 
-from auth import IDissuance
+from ChattingBot.auth import IDissuance
 from . import util, payload
 
 class Handler:

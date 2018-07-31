@@ -27,6 +27,7 @@ class Observer(object):
         self.sem_using.acquire()
         self.mRQList.append(Request(user,msg))
         self.sem_using.release()
+
     def popRQ(self):
         self.sem_using.acquire()
         if len(self.mRQList)==0:

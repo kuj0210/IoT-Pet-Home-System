@@ -39,6 +39,7 @@ class Push():
     def startTh(self):
         for th in self.thList:
             th.start()
+
     def run(self):
         self.startTh()
         cunt= 0

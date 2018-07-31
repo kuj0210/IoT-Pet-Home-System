@@ -4,7 +4,7 @@ NO_REGISTERD_SERIAL = "잘못된 시리얼번호입니다."
 DONT_REGIST = "유저등록에러"
 DEL_REGISTERD_USER = "등록정보 삭제 에러"
 NO_REGISTERD_USER = "미등록된 유저입니다"
-FAIL_TO_SELECT = "유저 조회 에러입니다"
+FAIL_TO_SELECT = "[유저 조회 에러]"
 
 SELECT_FROM_CHECKING_SERIAL = "시리얼 확인중 알 수 없는 에러가 발생 했습니다"
 SELECT_FROM_CHECKING_USER = "유저 확인중 알 수 없는 에러가 발생 했습니다"
