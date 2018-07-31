@@ -79,6 +79,7 @@ class MobileSystem:
                         if 'UPDATE' in item:
                             print("유저변동발생!")
                             self.bootUp()
+                            continue
 
                         if 'open'in item:
                             print("문요청")
