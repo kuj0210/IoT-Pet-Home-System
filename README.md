@@ -66,13 +66,9 @@ And you can see the pet directly through the Pi Camera.
 
 ## **Motor operation structure** 
 
-| **Door(open)** | **Door(close)** |
+| **Door(open)** | **Door(close)** | **Food** |
 | :----: | :----: |
-|![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_open.png?raw=true) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_close.png?raw=true) <br> When the motor stops, the door is closed by the resilience of the weight. |
-| **Food** | - |
-| ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_food.png?raw=true) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  | - |
-
-
+|![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_open.png?raw=true) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_close.png?raw=true) <br> When the motor stops, the door is closed by the resilience of the weight. | ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_food.png?raw=true) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  |
 
 
 ## **Client & Server Structure**
@@ -135,10 +131,9 @@ Ask Chatbot to take pictures.
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/capture_request.png?raw=true)
 
-**5) If you don't know how to use or need to remind your account, please enter the command below.**
+**5) If you don't know how to use, please enter the command below.**
 
 - "[사용법]" : This command will inform how to use this chatbot.<br>
-- "[정보]" : This command will inform your account that you registed at this chatbot-server.
 
 ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_etc.PNG?raw=true)
 
