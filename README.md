@@ -1,7 +1,6 @@
-- **Language**: [English](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/README.md/) <br>
-- Go To **[IoT-Pet-Home-Project](https://github.com/IoT-Pet-Home-System)**
+- Go To **[IoT-Pet-Home-System-Project](https://github.com/IoT-Pet-Home-System)**
 
-# <img src="https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/pet_Image.jpg?raw=true" width="64">Pet House System
+# <img src="./docs/repo/pet_Image.jpg?raw=true" width="64">Pet House System
 [![License: GPL v3](https://img.shields.io/badge/licence-GPL%20v3-yellow.svg)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE)
 <img src="https://img.shields.io/badge/python-%3E%3D3-brightgreen.svg">
 <img src="https://img.shields.io/badge/release-v1.0.2-blue.svg">
@@ -9,7 +8,6 @@
 [![HitCount](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System.svg)](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System)
 [![Build Status](https://travis-ci.org/kuj0210/IoT-Pet-Home-System.svg?branch=master)](https://travis-ci.org/kuj0210/IoT-Pet-Home-System)
 ### Pet House System is a tool that enables you to manage pets through Messenger.
-
 
 
 ## Index
@@ -58,7 +56,7 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 ## **Pet House Structure**
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Pet_House_Structure.png?raw=true)
+![](./docs/image/pethome/Pet_House_Structure.png?raw=true)
 
 Three motors are operated by messenger, and manage feeds and door.<br>
 And you can see the pet directly through the Pi Camera.
@@ -67,15 +65,16 @@ And you can see the pet directly through the Pi Camera.
 ## **Motor operation structure** 
 
 | **Door(open)** | **Door(close)** | **Food** |
-| :----: | :----: |
-|![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_open.png?raw=true) <br> Open the door by pulling the thread by the rotation of the motor | ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_close.png?raw=true) <br> When the motor stops, the door is closed by the resilience of the weight. | ![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/motor_food.png?raw=true) <br> Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance  |
+|----------------|-----------------|----------|
+|<img src="./docs/image/motor/motor_open.png?raw=true" width="235">|<img src="./docs/image/motor/motor_close.png?raw=true" width="235">| <img src="./docs/image/motor/motor_food.png?raw=true" width="235">|
+|Open the door by pulling the thread by the rotation of the motor| When the motor stops, the door is closed by the resilience of the weight.| Rotate and restore the motor for a short time, and feed the prey by opening and closing the entrance|
 
 
 ## **Client & Server Structure**
 
 ### **Full server structure**
 
-![](https://github.com/kuj0210/opensourceproject/blob/master/.README/Full_server_structure.png?raw=true)
+![](./docs/image/structure/Full_server_structure.png?raw=true)
 
 
 - User: User represents a user using messanger application.
@@ -88,7 +87,7 @@ And you can see the pet directly through the Pi Camera.
 
 ### **Client & Main server structure**
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Client&main_server_structure.png?raw=true)
+![](./docs/image/structure/Client&main_server_structure.png?raw=true)
 
 
  Client will order various commands. (regist user, control to pet-home etc) And the main-server get this commands. Before main-server get this commands, messages go to API server and API server give the data to main-server.(data:json type) After main-server get this type's data, it'll parse this data and make operation list for ordering to PiServer. The main-server send operation list to PiServer and make reply-message for sending to user.<br>
@@ -97,108 +96,107 @@ And you can see the pet directly through the Pi Camera.
 
 ## **How to use**
 
-
 **1) Add Official account of Messanger(IoT Pet House System)**
 
- - kakao-talk platform: @guineapighome (IoT 펫홈 관리 시스템)<br> 
- - naver-talktalk platform: IoT 펫홈 시스템
+ - **naver-talktalk platform**: IoT 펫홈 시스템
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/How_to_use.png?raw=true)
+![](./docs/how_to_use/image/How_to_use.png?raw=true)
 
 
-**2) Enter chat in the format “등록”**
+**2) Enter chat in the format "등록"**
 
- When you enter this command, it sends the registration url.
+ - When you enter this command, it sends the registration url.
  
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/get_regist_url.png?raw=true)
+![](./docs/how_to_use/image/get_regist_url.png?raw=true)
 
-**3) Click url and fill in the text box.**
 
-Check your device's product-key and enter the product key, E-mail adress, pet home nickname, and then the number of pets.<br>
-Then press the button below to register.
+**3) Click url and fill in the User-Registration form.**
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/regist_form.png?raw=true)
+ - Check your ```pet-home's serial-key``` and enter the ```serial-key```, ```E-mail adress```, ```pet-home nickname```
+ and ```the number of pets``` into below form. And then press the button;```submit``` below to regist.
+
+![](./docs/how_to_use/image/regist_form.png?raw=true)
 
 
 **4) Enter chats that associated with food, door opening, Taking pictures.**
 
-If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
-Order to set feed, open pet-home door at the IoT-pet-home-system chatbot.
+ - If you're a registed user, you can do chatting with IoT-pet-home-system!<br>
+Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system chatbot.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/request.png?raw=true)
+![](./docs/how_to_use/image/request.png?raw=true)
 
-Ask Chatbot to take pictures.
+<br>
+ - Ask Chatbot to ```take picture```.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/capture_request.png?raw=true)
+![](./docs/how_to_use/image/capture_request.png?raw=true)
+
 
 **5) If you don't know how to use, please enter the command below.**
 
-- "[사용법]" : This command will inform how to use this chatbot.<br>
+ - "[사용법]" : This command will inform how to use this chatbot.<br>
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/chatbot_etc.PNG?raw=true)
+![](./docs/how_to_use/image/chatbot_etc.PNG?raw=true)
 
 
 **6) If you forget to feed your pet, chatbot's push service support you!**
 
-- If you don't set feed your pet, push alarm inform to you once an hour.
-- But this service only support at naver-talk-talk platform. (Kakao-talk platform don't support it.)
+ - If you don't set feed your pet, push alarm inform to you once an hour.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/chatbot_push.png?raw=true)
+![](./docs/how_to_use/image/chatbot_push.png?raw=true)
     
     
 **7) If you want to stop a talktalk-friend, you can stop anytime.**
 
 - All information you entered at the time of registration will be deleted and the following message will be sent to you.
 
-![](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/How_to_use/cancle_message.png?raw=true)
-
+![](./docs/how_to_use/image/cancle_message.png?raw=true)
 
 
 
  ## **Notes**
-
-  [DB Query description (MySQL)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/Notes/DB_Query_description.md)
  
- 
- ### Installation of the modules
+ ### Installation of the Systems.
  
   **1) Server side**
-  - Install MySQL.
-  ```
-  sudo apt-get update
-  sudo apt-get install mysql-server
+  - Install ```MySQL``` and ```compiler```s.
+  ```bash
+  $ sudo apt-get update
+  $ sudo apt-get install mysql-server
+  $ sudo apt-get install g++ openjdk-7-jdk
   ```
   
-  - Install python3 modules; requests, flask, pymysql 
-  ```
-  sudo pip3 install requests
-  sudo pip3 install flask
-  sudo pip3 install pymsql
+  - Install python3 packages; ```requests```, ```flask```, ```pymysql``` , ```KoNLPy```
+  ```bash
+  $ pip3 install requests
+  $ pip3 install flask
+  $ pip3 install pymsql
+  $ pip3 install konlpy
   ```
    
- **2) PiServer side**
+ **2) Pet-Home side**
   - Install GPIO modules.
+  ```bash
+  $ sudo apt-get install python-dev
+  $ sudo apt-get install python-rpi.gpio
   ```
-  sudo apt-get install python-dev
-  sudo apt-get install python-rpi.gpio
-  ```
-  - Install flask, requests, numpy, imutils modules.
-  ```
-  sudo pip3 install flask
-  sudo pip3 install requests
-  sudo pip3 install numpy
-  sudo pip3 install imutils
+ 
+  - Install python3 packages; ```flask```, ```requests```, ```numpy```, ```imutils```
+  ```bash
+  $ pip3 install flask
+  $ pip3 install requests
+  $ pip3 install numpy
+  $ pip3 install imutils
   ```
   - Install openCV-python
-  ```
-  sudo pip3 install opencv-python
+  ```bash
+  $ pip3 install opencv-python
   ```
 
  ### README by version
  
- [README - 1.0.0 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README(1.0.0).md)
+ [README - 1.0.0 version](./docs/before/README(1.0.0).md)
  
- [README(KR) - 1.0.0 version](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/.README/README_KR(1.0.0).md)
+ [README(KR) - 1.0.0 version](./docs/before/README_KR(1.0.0).md)
  
  ## **Promotion**
  
@@ -209,7 +207,7 @@ Ask Chatbot to take pictures.
  
 ### Main-server (ChattingBot)
 
-IoT-Pet-Home-System's main-server is licensed under [the GNU GENERAL PUBLIC LICENSE v3](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/ChattingBot/LICENSE).
+IoT-Pet-Home-System's main-server is licensed under [the GNU GENERAL PUBLIC LICENSE v3](./license/license-ChattingBot.txt).
  
  ```
  Copyright (C) 2017-present, kuj0210, KeonHeeLee, seok8418
