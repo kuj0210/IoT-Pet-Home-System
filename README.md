@@ -7,7 +7,7 @@
 [![CONTRIBUTORS](https://img.shields.io/badge/contributors-4-green.svg?style=flat-square)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/CONTRIBUTERS.md)
 [![HitCount](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System.svg)](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System)
 [![Build Status](https://travis-ci.org/kuj0210/IoT-Pet-Home-System.svg?branch=master)](https://travis-ci.org/kuj0210/IoT-Pet-Home-System)
-### Pet House System is a tool that enables you to manage pets through Messenger.
+<br><h4>IoT-Pet-Home-System is a system that can communicate through pet-homes and chatting-bot. 
 
 
 ## Index
@@ -41,8 +41,8 @@ It's very simple to use because it uses a messenger. If you are in an environmen
 
 ## **Requirement**
  ### H/W
- - Raspberry Pi 3 module B (used in Pi Server)
- - 2 servo-motors(for meal,door) and PiCamera
+ - Raspberry Pi 3 module-B (used in Pet-home-System)
+ - 2 servo-motors(for feed, door) and PiCamera
  - Server with public IP(used to chat-bot API Server) and HTTPS.
  - Smart-Phone or web for using chat-bot(used in client)
  
@@ -51,8 +51,10 @@ It's very simple to use because it uses a messenger. If you are in an environmen
  - Open-jdk and g++
  - opencv-python 3.4.1.14
  - Raspbian OS(for pethome)
- - Required package: requests, Flask, pymysql, numpy, imutils
-
+ - Required package: requests, Flask, pymysql, numpy, imutils, konlpy
+ 
+## Others
+ - Must regist to **Naver-talktalk Partner**.
 
 ## **Pet House Structure**
 
@@ -76,22 +78,28 @@ And you can see the pet directly through the Pi Camera.
 
 ![](./docs/image/structure/Full_server_structure.png?raw=true)
 
+- **User <-> Chatting-Bot**
 
-- User: User represents a user using messanger application.
-- Chatting Server(Main Server): This server is main of full structure. It manage chatbot and commands for controlling PiServer.
-- PiServer(RaspberryPi): This server manage to control motors, camera and push thread.
+1. Users who use Naver-TalkTalk send messages to chatbots using Naver-talkTalk web application.
+2. Naver-TalkTalk API Server sends messages from users as JSON type to a chatting-bot server.
+3. The Chatting-Bot Server compares and analyzes the data stored in the DB with this data. Process the data and send the appropriate response to the user.
+4.The Naver-TalkTalk API server processes the message to a user, which is readable by the user, and then presents the result to the user.
 
- 
- The right part represent the main-server and pi-server(in RaspberryPi using flask framework) structure. Before the Pi-server open flask server, this server send user and this device's information(registed userlist and PiKey) to main server. If this communication come into existence(communication success), the pi-server is ready to get data from main-server. The main server send operation list to pi-server by user's order. Pi-Server parse these, order to each of motor or pi-camera for implement of user's commands. And then, after implement of user's commands, pi-server send result-data to main-server. The main-server parse this data, make the appropriate reply and finally send json type data to API server. (This json data will become reply message; it is shown reply message to user.)
+- **Chatting-Bot <-> Pet-Home**
+
+1. Pet-Home constantly asks the chatting-bot server if there are any requests from the user.
+2. The chatting-Bot server checks the DB when a request is received from Pet-Home and sends it to Pet Home if requested by the user.
+3. Pet-Home, which is requested, performs this tasks.
 
 
 ### **Client & Main server structure**
 
 ![](./docs/image/structure/Client&main_server_structure.png?raw=true)
 
-
- Client will order various commands. (regist user, control to pet-home etc) And the main-server get this commands. Before main-server get this commands, messages go to API server and API server give the data to main-server.(data:json type) After main-server get this type's data, it'll parse this data and make operation list for ordering to PiServer. The main-server send operation list to PiServer and make reply-message for sending to user.<br>
- But if a user don't register to server or don't registered in PiServer's userlist, this user can't use this chatbot. Main-server use database for managing user-data and registed Pi-servers. Below inform main-server and pi-server structure.
+1. Users send requests to Pet Home through the Navertalk web application. Naver-TalkTalk API server then recognizes this and sends data to chatting-bot server.
+2. Chatting-Bot Server obtain data(request) and a user-key from Naver-TalkTalk. Save the user-key and data(request).
+3. After that, look at the user-key that Pet-Home registered for and see what requests it had. Then take the request and do the corresponding work.
+4. When Pet-Home has finished all the requests of its registered user, it sends a push notification to the user.
 
 
 ## **How to use**
@@ -126,7 +134,8 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
 ![](./docs/how_to_use/image/request.png?raw=true)
 
 <br>
- - Ask Chatbot to ```take picture```.
+
+- Ask Chatbot to ```take picture```.
 
 ![](./docs/how_to_use/image/capture_request.png?raw=true)
 
@@ -135,8 +144,7 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
 
  - "[사용법]" : This command will inform how to use this chatbot.<br>
 
-![](./docs/how_to_use/image/chatbot_etc.PNG?raw=true)
-
+![](./docs/before/image/naver_talktalk/chatbot_etc.PNG?raw=true)
 
 **6) If you forget to feed your pet, chatbot's push service support you!**
 
@@ -149,7 +157,7 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
 
 - All information you entered at the time of registration will be deleted and the following message will be sent to you.
 
-![](./docs/how_to_use/image/cancle_message.png?raw=true)
+![](./docs/how_to_use/image/cancle_friend.png?raw=true)   ![](./docs/how_to_use/image/cancle_message.png?raw=true)
 
 
 
@@ -171,6 +179,13 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
   $ pip3 install flask
   $ pip3 install pymsql
   $ pip3 install konlpy
+  ```
+  
+  - Clone repository and Setting configurations
+  ```bash
+  $ cd src
+  $ sudo chmod +0777 setting.sh
+  $ ./setting.sh
   ```
    
  **2) Pet-Home side**
@@ -194,9 +209,8 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
 
  ### README by version
  
- [README - 1.0.0 version](./docs/before/README(1.0.0).md)
- 
- [README(KR) - 1.0.0 version](./docs/before/README_KR(1.0.0).md)
+ - [README - 1.0.2 version](./docs/before/README(1.0.0).md)
+ - [README(KR) - 1.0.2 version](./docs/before/README_KR(1.0.0).md)
  
  ## **Promotion**
  
@@ -207,7 +221,7 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
  
 ### Main-server (ChattingBot)
 
-IoT-Pet-Home-System's main-server is licensed under [the GNU GENERAL PUBLIC LICENSE v3](./license/license-ChattingBot.txt).
+IoT-Pet-Home-System's main-server is licensed under [the GNU GENERAL PUBLIC LICENSE v3](https://www.gnu.org/licenses/gpl-3.0.html).
  
  ```
  Copyright (C) 2017-present, kuj0210, KeonHeeLee, seok8418
