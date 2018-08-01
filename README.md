@@ -195,9 +195,8 @@ Order to ```set feed```, ```open pet-home's door``` at the IoT-pet-home-system c
   $ sudo apt-get install python-rpi.gpio
   ```
  
-  - Install python3 packages; ```flask```, ```requests```, ```numpy```, ```imutils```
+  - Install python3 packages; ```requests```, ```numpy```, ```imutils```
   ```bash
-  $ pip3 install flask
   $ pip3 install requests
   $ pip3 install numpy
   $ pip3 install imutils
