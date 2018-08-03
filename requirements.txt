@@ -1,5 +1,11 @@
 Flask==0.12.2
 requests==2.9.1
-pip==9.0.1
+pip==18.0
 PyMySQL==0.8.0
 KoNLPy==0.4.4
+overalls==0.1.1
+JPype1-py3>=0.5.5.2
+numpy==1.15.0
+imutils==0.4.6
+overalls==0.1.1
+opencv-python==3.4.2.17
