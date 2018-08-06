@@ -3,7 +3,7 @@
 # <img src="./docs/repo/pet_Image.jpg?raw=true" width="64">Pet House System
 [![License: GPL v3](https://img.shields.io/badge/licence-GPL%20v3-yellow.svg)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE)
 <img src="https://img.shields.io/badge/python-%3E%3D3-brightgreen.svg">
-<img src="https://img.shields.io/badge/release-v1.0.2-blue.svg">
+<img src="https://img.shields.io/badge/release-v2.0.0-blue.svg">
 [![CONTRIBUTORS](https://img.shields.io/badge/contributors-4-green.svg?style=flat-square)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/CONTRIBUTERS.md)
 [![HitCount](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System.svg)](http://hits.dwyl.io/kuj0210/IoT-Pet-Home-System)
 [![Build Status](https://travis-ci.org/kuj0210/IoT-Pet-Home-System.svg?branch=master)](https://travis-ci.org/kuj0210/IoT-Pet-Home-System)
