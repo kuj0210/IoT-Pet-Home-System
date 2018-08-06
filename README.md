@@ -1,4 +1,4 @@
-- Go To **[IoT-Pet-Home-System-Project](https://github.com/IoT-Pet-Home-System)**
+
 
 # <img src="./docs/repo/pet_Image.jpg?raw=true" width="64">Pet House System
 [![License: GPL v3](https://img.shields.io/badge/licence-GPL%20v3-yellow.svg)](https://github.com/kuj0210/IoT-Pet-Home-System/blob/master/LICENSE)
@@ -9,6 +9,8 @@
 [![Build Status](https://travis-ci.org/kuj0210/IoT-Pet-Home-System.svg?branch=master)](https://travis-ci.org/kuj0210/IoT-Pet-Home-System)
 <br><h4>IoT-Pet-Home-System is a system that can communicate through pet-homes and chatting-bot. 
 
+# How To Get Source Code ?
+- Go To **[IoT-Pet-Home-System-Project](https://github.com/IoT-Pet-Home-System)**
 
 ## Index
 * [Introduction](#introduction)
